@@ -5,7 +5,8 @@
 import {lang} from './text.mjs?v=studio-20261015-1';
 
 const TZ='Asia/Bangkok';
-const locale=()=>lang()==='th'?'th-TH-u-ca-gregory':'en-GB';
+// Thai staff read dates in the Buddhist year (th-TH's own calendar); English in the Gregorian one
+const locale=()=>lang()==='th'?'th-TH':'en-GB';
 
 const moneyFormat=new Map();
 function money(value,fractions){
