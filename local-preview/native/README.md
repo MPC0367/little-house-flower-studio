@@ -1,0 +1,23 @@
+# Little House Flower local macOS app
+
+Install Node >=22.13 and the Xcode command-line tools on macOS 14 or newer. Run `npm ci --ignore-scripts` from the workspace, then build with `node scripts/build-admin-app.mjs`. The output is `output/macos/Little House Flower.app`. Open that bundle in Finder, or use `open "output/macos/Little House Flower.app"` when ready to review it. The compiled app is machine-specific and is excluded from Git.
+
+The app opens `http://127.0.0.1:5174/#today` in its own AppKit window with WKWebView. There is no browser address bar. Normal launches use a persistent WebKit store for this app's local sign-in, separate from Safari. The server still controls session expiry. The existing original Little House Flower logo is resized into the app icon without changing its artwork.
+
+On launch, the app checks the local health endpoint. If unavailable, it runs `scripts/preview.mjs start` with the Node executable used to build the app, then checks readiness. Closing the app never stops the preview server or deletes data. A failed connection displays the available startup diagnostics and a Retry button. Workspace, Node and entry URL are stored in `Contents/Resources/LocalConfiguration.plist`; rebuild after moving the workspace or changing the Node installation.
+
+The main web view only permits the configured loopback origin. Deliberately clicked web, email and phone links open through macOS in the user's default browser or handler. Automatic navigation away from the local origin is blocked. JavaScript dialogs use native sheets. Cmd-R reloads, Cmd-[ and Cmd-] navigate history, and Cmd-P prints. Printing captures the current document before temporary message-card markup is removed, loads a script-disabled snapshot and opens the native print dialog. Blank document windows requested by the local app are supported.
+
+Reload, closing the main window and Quit check `window.LHFStudioHasUnsavedChanges()` before proceeding. When an order draft is dirty, a native sheet offers Keep editing or Discard changes. A missing function means there are no reported edits; a page that cannot answer within 1.5 seconds instead gets a cautionary choice, so native actions cannot wait forever or silently discard an unknown draft.
+
+This is an ad-hoc signed local build for the current Mac architecture, requiring macOS 14 or newer and the configured Node installation. It is not notarized, independently packaged with the server, or intended for distribution. It creates no login item, changes no system setting, publishes nothing, and exposes no native shell-execution bridge to web content. The local preview's own authentication, demo role choices and data remain unchanged.
+
+Build verification covers Swift compilation, plist syntax, icon packaging and code-signature integrity. Native smoke checks on this Mac verify the actual window, demo sign-in and all five routes; a cold launch also verified local server startup. Native print sheets and manual keyboard interaction remain manual checks.
+
+## Native smoke test
+
+After building, run `open -n "output/macos/Little House Flower.app" --args --smoke-test` with the regular app closed. This explicit launch argument enables a bounded 25-second native check in an isolated, nonpersistent WebKit store; its QA sign-in cannot become the normal app's sign-in. It signs into the local demo as read-only only if a sign-in form is present, visits Today, Orders, Calendar, Earnings and Settings through their navigation links, and checks each loaded heading, document title, five-item navigation, native-app flag and captured JavaScript errors. It does not click order, payment, simulator or print controls.
+
+The actual Today WKWebView is captured to `docs/studio-app-qa/native-window.png`. Results are written to `docs/studio-app-qa/native-smoke.json`, first as `running` and then `passed` or `failed`, so an earlier success cannot be mistaken for a new run. The app quits when finished or timed out; the local preview server continues running. This mode adds no JavaScript-accessible native execution capability. Native print sheets, deliberate external links and manual keyboard interaction still need manual checking.
+
+The earlier first QA build used the normal store. To clear only that app's loopback staff sign-in once, launch `open -n "output/macos/Little House Flower.app" --args --clear-test-session`. This flag deletes only cookies named `lhf_staff` for `127.0.0.1` in the app's persistent store before loading the studio. It preserves every other cookie, browser store, local record and server process. Later normal launches need no flag.

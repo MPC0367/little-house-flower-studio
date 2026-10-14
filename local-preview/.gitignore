@@ -1,0 +1,15 @@
+/node_modules/
+/data/
+/output/
+/native/build/
+/test-results/
+/playwright-report/
+/customer/img/compositions/
+/customer/img/generated/
+/docs/*-qa/
+/docs/screenshots/
+/docs/pdf-review/
+/docs/browser-results*.json
+.env*
+!.env.example
+.DS_Store

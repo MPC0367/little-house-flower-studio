@@ -1,0 +1,6 @@
+import {webkit} from '@playwright/test';import fs from 'node:fs';
+const b=await webkit.launch();const p=await b.newPage({viewport:{width:1440,height:1000}});const errors=[];p.on('pageerror',e=>errors.push(e.message));p.on('console',e=>{if(e.type()==='error')errors.push(e.text());});
+await p.goto('http://127.0.0.1:5173/?lang=en');await p.waitForTimeout(2000);console.log('home',await p.locator('h1').allTextContents(),errors);await p.screenshot({path:'docs/screenshots/customer-home-desktop.png',fullPage:true});
+for(const route of ['/custom','/flowers','/flowers/white-rose']){await p.goto('http://127.0.0.1:5173/?lang=en#'+route);await p.waitForTimeout(900);console.log(route,await p.locator('h1').allTextContents(),errors);await p.screenshot({path:'docs/screenshots/'+route.replaceAll('/','-')+'.png',fullPage:true});}
+await p.goto('http://127.0.0.1:5174');await p.getByRole('button',{name:'Enter local workspace'}).click();await p.waitForTimeout(800);console.log('admin',await p.locator('h1').allTextContents(),errors);await p.screenshot({path:'docs/screenshots/admin-orders-desktop.png',fullPage:true});await b.close();
+fs.writeFileSync('docs/initial-browser-errors.json',JSON.stringify(errors,null,2));

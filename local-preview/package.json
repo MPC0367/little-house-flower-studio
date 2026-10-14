@@ -1,0 +1,26 @@
+{
+  "name": "little-house-flower-local-upgrade",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "node server/main.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "preview:start": "node scripts/preview.mjs start",
+    "preview:stop": "node scripts/preview.mjs stop",
+    "test:browser": "playwright test",
+    "build": "node scripts/build-customer.mjs",
+    "test:password": "playwright test --config tests/password.config.mjs",
+    "share:start": "node scripts/share-preview.mjs start",
+    "share:stop": "node scripts/share-preview.mjs stop",
+    "share:status": "node scripts/share-preview.mjs status"
+  },
+  "engines": {
+    "node": ">=22.13"
+  },
+  "dependencies": {
+    "sharp": "0.35.5"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0"
+  }
+}

@@ -1,0 +1,16 @@
+/* Supplied 16:9 film and matching poster remain uncropped at every viewport size. */
+.lhf-logo-intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:#f6f5f3;color:#2f1c15;isolation:isolate;opacity:1;transition:opacity 180ms ease}
+.lhf-logo-intro.is-dismissing{opacity:0;pointer-events:none}
+.lhf-logo-stage{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;overflow:hidden}
+.lhf-logo-stage>video,.lhf-logo-stage>img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+.lhf-logo-stage>[hidden]{display:none}
+.lhf-logo-text-fallback{font-family:var(--f-display,Georgia,serif);font-size:clamp(24px,5vw,54px);text-align:center;padding:24px}
+.lhf-logo-intro:focus{outline:none}
+/* The supplied film includes its own visible percentage. Announce actual page readiness separately. */
+.lhf-logo-progress,.lhf-logo-sr{position:absolute;width:1px;height:1px;padding:0;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.lhf-logo-progress-label{position:absolute;bottom:calc(24px + env(safe-area-inset-bottom));left:calc(24px + env(safe-area-inset-left));font-size:11px;letter-spacing:.04em;color:#624636;background:#f6f5f3;padding:4px 0}
+.lhf-logo-error{margin:0 auto;padding:24px;max-width:650px;color:#2f1c15;background:#f6f5f3;font:16px/1.7 system-ui,sans-serif}
+.lhf-logo-error a,.lhf-logo-error button{font:inherit;color:inherit;min-height:44px;display:inline-flex;align-items:center;margin-right:16px}
+.lhf-logo-error button{background:none;border:1px solid #624636;padding:8px 16px;cursor:pointer}
+@media(max-width:600px){.lhf-logo-progress-label{left:calc(16px + env(safe-area-inset-left));bottom:calc(16px + env(safe-area-inset-bottom));font-size:11px}}
+@media(prefers-reduced-motion:reduce){.lhf-logo-intro{transition:none}}

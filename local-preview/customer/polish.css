@@ -1,0 +1,62 @@
+/* Small, shared usability refinements; the original editorial layout is retained. */
+:root{--text-secondary:#5b4a42;--state-error:#9b1622;--state-success:#4d604c;--focus-boundary:#5e6e5c}
+/* Text and actionable boundaries are stronger; decorative rules retain the paper palette. */
+:root{--ink-3:#75665e;--control-boundary:#796e65}
+.btn-line,.chip:not([aria-pressed=true]):not(.is-on),.radio-card:not(.is-on),.counter,.upload-drop,.cal-nav button:not(:disabled),.window:not(.is-on):not(:disabled),.close-x,.lang-switch,.seg,.socials a,.mini-card,.starters button,.choice:not([aria-pressed=true]),.recipe-card,.finish-swatches button:not(:disabled){border-color:var(--control-boundary)}
+.lang-switch button+button{border-left-color:var(--control-boundary)}
+.lang-switch button[aria-pressed=true]{box-shadow:inset 0 -3px var(--ink)}
+.radio-card.is-on .mark{background:var(--ink);border-color:var(--ink)}
+.wrap-dark .chip:not([aria-pressed=true]):not(.is-on){border-color:#a9a39a}
+.nav-main a{min-height:44px;display:inline-flex;align-items:center}
+.menu-word,.icon-btn,.close-x,.header-cta,.heart-badge,.entry-foot .thumbs a,.socials a,.viewer-side .acts .btn{min-width:44px;min-height:44px}
+.menu-sheet nav a[aria-current=page]{text-decoration:underline;text-underline-offset:.25em;text-decoration-thickness:1px}
+.active-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.active-filters[hidden]{display:none}
+.filter-chip{max-width:100%;white-space:normal;overflow-wrap:anywhere;gap:7px;text-align:left}
+.empty-actions{margin:16px 0;display:flex;justify-content:center}
+.pcard-body{flex:1;display:flex;flex-direction:column;gap:6px}
+.pcard-foot{margin-top:auto}
+.pcard-name{padding-top:.08em;padding-bottom:.08em}
+.pcard-meaning{margin-bottom:8px}
+.pcard-price,.ledger-price,.count-line{font-variant-numeric:tabular-nums}
+.occ-card .t{margin:0;font-weight:inherit}
+:lang(th) .pcard-name,:lang(th) .occ-card .t,:lang(th) .entry-th{line-height:1.65;letter-spacing:0;text-transform:none}
+:lang(th) .pcard-meaning{line-height:1.85;padding-top:.1em;padding-bottom:.1em}
+.pic[data-media-state=loading]{background:var(--paper-2,#eeeae2)}
+.pic[data-media-state=loading]::after{content:'';position:absolute;bottom:12px;left:12px;width:28px;height:3px;background:#5e6e5c;opacity:.65;pointer-events:none}
+.pic[data-media-state=unavailable] .lq{visibility:hidden}
+.pic[data-media-state=unavailable] .pic-fallback{z-index:1;background:var(--paper-2,#eeeae2);color:var(--ink,#2f1c15);min-height:100px}
+.meaning-counter{text-align:right;font-variant-numeric:tabular-nums}
+.meaning-empty{padding:16px;border-left:2px solid var(--euca,#5e6e5c);background:var(--paper-2,#eeeae2);margin:14px 0}
+.meaning-empty[hidden]{display:none}
+.meaning-empty .btn{margin-top:12px}
+.viewer-mobile-controls{display:none}
+.viewer-retry{position:absolute;top:16px;left:50%;transform:translateX(-50%);background:#f6f3ee;color:#2f1c15;z-index:4}
+.viewer-side .cap-toggle{color:#eeeae2}
+.viewer-media .pic-fallback{padding:24px;text-align:center}
+.viewer-media .pic-fallback a{min-height:44px;display:inline-flex;align-items:center}
+.rv-wait{transform:translateY(6px);transition-duration:320ms}
+@media(max-width:899px){
+ .viewer{grid-template-rows:auto minmax(0,1fr) auto}
+ .viewer-bottom{display:flex;padding:8px 12px calc(8px + env(safe-area-inset-bottom));background:#1b1a1a}
+ .viewer-mobile-controls{display:flex;justify-content:space-between;align-items:center;width:100%;gap:8px}
+ .viewer-mobile-controls button{display:inline-flex;align-items:center;gap:5px;min-height:44px;padding:6px;color:#f6f3ee;font:inherit}
+ .viewer-position{font-size:12px;color:#eeeae2}
+ .viewer-keyboard-hint{display:none}
+ .viewer-side{max-height:42%}
+ .viewer-side .acts .btn{font-size:13px}
+ .mtile .lab{line-height:1.65}
+}
+@media(max-width:400px){
+ .header-right{gap:5px}
+ .header-in{gap:6px}
+ .lang-switch button{padding-inline:5px}
+ .menu-word{font-size:13px;padding-inline:0}
+}
+@media(max-height:500px) and (max-width:899px){
+ .viewer-top{padding-block:6px}
+ .viewer-side{max-height:55%;padding-block:12px}
+ .viewer-bottom{padding-block:3px}
+}
+@media(prefers-reduced-motion:reduce){.rv-wait{opacity:1;transform:none;transition:none}.pcard:hover{transform:none}}
+@media(prefers-reduced-motion:reduce){.pic .lq,.pic .hi{transition:none!important}}

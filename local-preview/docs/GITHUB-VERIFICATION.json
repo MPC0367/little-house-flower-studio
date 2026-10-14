@@ -1,0 +1,25 @@
+{
+  "verifiedOn": "2026-10-14",
+  "environment": {
+    "node": "v26.8.1",
+    "browser": "Playwright WebKit",
+    "platform": "macOS"
+  },
+  "build": "passed",
+  "unitTests": {
+    "passed": 58,
+    "failed": 0
+  },
+  "browserTests": {
+    "expected": 122,
+    "unexpected": 0,
+    "flaky": 0,
+    "skipped": 0
+  },
+  "dependencyAudit": {
+    "vulnerabilities": 0,
+    "sharp": "0.35.5"
+  },
+  "nativeMacBuild": "Swift compilation, plist validation and local code-signature verification passed; not launched during this upload verification",
+  "scope": "Local-only source package; isolated synthetic test data; no live order writes; published root unchanged"
+}

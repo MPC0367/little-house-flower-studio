@@ -1,0 +1,39 @@
+export const VERSION='local-2026-10-13-v1';
+export const styles=[['bouquet','ช่อดอกไม้','Bouquet','white_rose'],['basket','กระเช้าหรือแจกัน','Basket or vase','flowers_basket'],['box','กล่องดอกไม้','Flower box','box_congrats'],['money','ช่อธนบัตร','Money bouquet','hl_moneybouquet'],['wreath','พวงหรีด','Wreath','wreath'],['wedding','งานแต่งงาน','Bridal / wedding','hl_wedding'],['garland','พวงมาลัย','Garland','garland']];
+export const containers={bouquet:['paper','foam'],basket:['wicker','vase'],box:['hatbox'],money:['paper'],wreath:['wreath-frame'],wedding:['hand-tied'],garland:['garland-thread']};
+export const materials={paper:['กระดาษ','Paper'],foam:['โฟม','Layered foam'],wicker:['ตะกร้าหวาย','Wicker basket'],vase:['แจกัน','Vase'],hatbox:['กล่อง','Hat box'],'wreath-frame':['โครงพวงหรีด','Wreath frame'],'hand-tied':['ช่อผูกมือ','Hand-tied'],'garland-thread':['พวงมาลัยร้อยมือ','Hand-threaded']};
+export const finishes=[['white','ขาว','White','#fffdf8'],['cream','ครีม','Cream','#e8ddc8'],['pink','ชมพู','Pink','#f4a9b1'],['black','ดำ','Black','#302721'],['blue','ฟ้า','Blue','#a8c8d9'],['natural','ธรรมชาติ','Natural','#b08b60']];
+export const finishFor=(container)=>container==='wicker'?['natural']:['wreath-frame','garland-thread'].includes(container)?['natural','white']:container==='hand-tied'?['white','cream','pink']:['white','cream','pink','black','blue'];
+export const palettes=[['florist','ให้ร้านแนะนำ','Florist’s choice'],['white-green','ขาวและเขียว','White & green'],['pink-white','ชมพูและขาว','Pink & white'],['red','แดง','Red'],['yellow-white','เหลืองและขาว','Yellow & white'],['blue-white','ฟ้าและขาว','Blue & white']];
+export const flowerColors={rose_white:['white'],rose_red:['red'],rose_pink:['pink'],eucalyptus:['green'],sunflower:['yellow'],jasmine:['white'],soap_rose:['pink','white'],lily:['white','pink'],lisianthus:['white','pink'],babys_breath:['white']};
+export const statusLabels={new:'New / awaiting confirmation',confirmed:'Confirmed / not started',preparing:'In progress',ready:'Ready',out:'Out for delivery',done:'Completed',cancelled:'Cancelled',review:'Needs review'};
+export const nextStatuses=(s,fulfil)=>({new:['confirmed','cancelled'],confirmed:['preparing','cancelled'],preparing:['ready','cancelled'],ready:fulfil==='pickup'?['done','cancelled']:['out','cancelled'],out:['done'],done:[],cancelled:[],review:['new','cancelled']}[s]||[]);
+export function validateConfig(c,flowerIds){
+ const errors=[];if(!styles.some(s=>s[0]===c.style)) errors.push('Choose an arrangement style.');
+ if(!containers[c.style]?.includes(c.container))errors.push('Choose a compatible container.');
+ if(!finishFor(c.container).includes(c.finish))errors.push('This finish is not available for that container.');
+ if(!Array.isArray(c.flowers)||c.flowers.length>3||new Set(c.flowers).size!==c.flowers.length||c.flowers.some(f=>!flowerIds.includes(f)))errors.push('Choose up to three supported flowers.');
+ if(!palettes.some(p=>p[0]===c.palette))errors.push('Choose a supported palette.');
+ if(!['reference','smaller','larger'].includes(c.size))errors.push('Choose a size reference.');
+ if(!['cream','pink','burgundy','florist'].includes(c.ribbon))errors.push('Choose a ribbon.');
+ if(c.palette==='red'&&c.flowers?.some(f=>['rose_white','rose_pink'].includes(f)))errors.push('Red palette conflicts with the selected rose colour.');
+ if(c.palette==='white-green'&&c.flowers?.some(f=>['rose_red','rose_pink','sunflower'].includes(f)))errors.push('White and green palette conflicts with the selected flowers.');
+ return errors;
+}
+export function visualConfig(c){return {version:VERSION,style:c.style,container:c.container,finish:c.finish,palette:c.palette,flowers:[...(c.flowers||[])].sort(),ribbon:c.ribbon,size:c.size,sourceProduct:c.sourceProduct||null,unchanged:!!c.unchanged,recipe:'florist-composed',promptVersion:1,modelVersion:'unconnected'};}
+export function originalConfig(p){
+ const style=styles.some(s=>s[0]===p.category)?p.category:'bouquet';
+ const overrides={'white-rose':{container:'foam',finish:'white',ribbon:'cream'},'red-black':{finish:'black',ribbon:'burgundy'},'red-crown':{finish:'black',ribbon:'florist'},'single-rose':{finish:'white',ribbon:'burgundy'},'kitty':{finish:'pink',ribbon:'pink'},'box-congratulations':{finish:'blue',ribbon:'florist'}};
+ const container=containers[style][0];return {style,container,finish:finishFor(container)[0],palette:'florist',flowers:(p.flowers||[]).filter(f=>f!=='banknotes').slice(0,3),ribbon:'florist',size:'reference',sourceProduct:p.id,unchanged:true,...(overrides[p.id]||{})};
+}
+
+// Colour indicators are evidence-aware; unverified seasonal shades are not promises.
+export const colorSwatches={white:['ขาว','White','#fffdf8'],red:['แดง','Red','#a72233'],pink:['ชมพู','Pink','#edacbe'],green:['เขียวธรรมชาติ','Natural green','#617966'],yellow:['เหลือง','Yellow','#e7bd47'],blue:['ฟ้า','Blue','#9fc5d9'],seasonal:['สีตามฤดูกาล — ให้ร้านยืนยัน','Seasonal colour — florist confirmation','#ccc1b6']};
+export const flowerEvidence={
+ rose_white:{colors:['white'],image:'white_rose'},rose_red:{colors:['red'],image:'red_black'},rose_pink:{colors:['pink'],image:'kitty'},lily:{colors:['white','pink'],image:'lily_lisianthus'},lisianthus:{colors:['white','pink'],image:'lily_lisianthus'},carnation:{colors:['seasonal'],image:'wreath'},stock:{colors:['seasonal']},gerbera:{colors:['white','seasonal'],image:'box_congrats'},babys_breath:{colors:['white'],image:'flowers_basket'},eucalyptus:{colors:['green'],image:'red_black'},sunflower:{colors:['yellow'],image:'basket_boxset'},chamomile:{colors:['white'],image:'basket_boxset'},wax_flower:{colors:['seasonal'],image:'red_black'},jasmine:{colors:['white'],image:'mothers_garlands'},hydrangea:{colors:['blue','seasonal'],image:'mothers_blue'},pompon:{colors:['white','seasonal'],image:'wreath'},soap_rose:{colors:['pink','white']},forget_me_not:{colors:['seasonal']}
+};
+export const sizeLabels={reference:['ใกล้เคียงแบบอ้างอิง','Similar to reference'],smaller:['เล็กกว่าแบบอ้างอิง — ให้ร้านยืนยัน','Smaller than reference — confirm with florist'],larger:['ใหญ่กว่าแบบอ้างอิง — ให้ร้านยืนยัน','Larger than reference — confirm with florist']};
+export const ribbonLabels={cream:['ครีม','Cream'],pink:['ชมพู','Pink'],burgundy:['แดงไวน์','Burgundy'],florist:['ให้ร้านเลือก','Florist’s choice']};
+export const styleNotes={money:['ระบุมูลค่าธนบัตรแยกจากค่าดอกไม้และค่าจัด ร้านยืนยันวันรับ','Banknote face value is separate from flowers and arrangement fees. Confirm the date with the florist.'],wreath:['ระบุวัด ศาลา เวลา และข้อความป้ายในหมายเหตุ ร้านยืนยันรายละเอียด','Add temple, sala, ceremony time and banner wording to your notes. The florist confirms the details.'],wedding:['แจ้งวันงานและภาพอ้างอิง คิวและขนาดต้องให้ร้านยืนยัน','Share the wedding date and reference. Availability and size need florist confirmation.'],garland:['รูปแบบการร้อยและดอกไม้ตามฤดูกาลต้องให้ร้านยืนยัน','Threading style and seasonal flower availability need florist confirmation.']};
+export function priceBudget(estimate,budget){if(estimate?.low==null||!budget)return 'unknown';if(estimate.low>budget)return 'over';if(estimate.high>=budget*.9)return 'near';return 'within';}
+export function configSummary(c,lang='en',flowerNames={}){const n=lang==='th'?1:2,a=lang==='th'?0:1;return [[lang==='th'?'รูปแบบ':'Style',styles.find(s=>s[0]===c.style)?.[n]], [lang==='th'?'ดอกไม้':'Flowers',(c.flowers||[]).map(f=>flowerNames[f]?.[lang]||f).join(', ')||(lang==='th'?'ให้ร้านเลือกดอกไม้':'Florist’s choice')],[lang==='th'?'โทนดอกไม้':'Palette',palettes.find(p=>p[0]===c.palette)?.[n]],[lang==='th'?'ภาชนะ':'Container',materials[c.container]?.[a]],[lang==='th'?'สีห่อหรือภาชนะ':'Finish',finishes.find(f=>f[0]===c.finish)?.[n]],[lang==='th'?'ริบบิ้น':'Ribbon',ribbonLabels[c.ribbon]?.[a]],[lang==='th'?'ขนาด':'Size',sizeLabels[c.size]?.[a]]];}

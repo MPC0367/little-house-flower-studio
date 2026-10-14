@@ -1,0 +1,61 @@
+import {test,expect} from '@playwright/test';
+
+const admin='http://127.0.0.1:5474';
+const passwordA='Synthetic-first-password-2026';
+const passwordB='Synthetic-second-password-2026';
+const headers={Origin:admin,'X-CSRF':'local-preview'};
+
+test('owner sets and rotates a bilingual password; stale demo sessions and role bypasses cannot read orders',async({page,browser})=>{
+  const errors=[];page.on('pageerror',e=>errors.push(e.message));
+  const stale=await browser.newContext();
+  try{
+    expect((await stale.request.post(admin+'/api/admin/login',{headers,data:{role:'read-only'}})).ok()).toBe(true);
+    await page.goto(admin+'/#settings');
+    await page.getByRole('button',{name:'Enter local workspace →',exact:true}).click();
+    const panel=page.locator('#password-settings');
+    await expect(panel.getByRole('heading',{name:'Password protection'})).toBeVisible();
+    const before=await (await page.request.get(admin+'/api/admin/orders')).json();
+    await panel.getByLabel('New password',{exact:true}).fill(passwordA);
+    await panel.getByLabel('Confirm new password',{exact:true}).fill(passwordB);
+    await panel.getByRole('button',{name:'Set password',exact:true}).click();
+    await expect(panel.getByRole('alert')).toHaveText('The new passwords do not match.');
+    await panel.getByLabel('Confirm new password',{exact:true}).fill(passwordA);
+    await panel.getByRole('button',{name:'Set password',exact:true}).click();
+    await expect(panel.getByRole('status')).toHaveText('Password saved. Other staff sessions have been signed out.');
+    expect((await stale.request.get(admin+'/api/admin/orders')).status()).toBe(401);
+    expect((await stale.request.post(admin+'/api/admin/login',{headers,data:{role:'owner'}})).status()).toBe(401);
+    await panel.getByLabel('Current password',{exact:true}).fill(passwordA);
+    await page.locator('[data-admin-language="th"]').first().click();
+    await expect(panel.getByRole('heading',{name:'รหัสผ่านเข้าใช้งาน'})).toBeVisible();
+    await expect(panel.getByLabel('รหัสผ่านปัจจุบัน',{exact:true})).toHaveValue(passwordA);
+    await expect(page.locator('html')).toHaveAttribute('lang','th');
+    expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1)).toBe(true);
+    await page.locator('[data-admin-language="en"]').first().click();
+    await panel.getByLabel('Current password',{exact:true}).fill('Synthetic-wrong-password');
+    await panel.getByLabel('New password',{exact:true}).fill(passwordB);
+    await panel.getByLabel('Confirm new password',{exact:true}).fill(passwordB);
+    await panel.getByRole('button',{name:'Change password',exact:true}).click();
+    await expect(panel.getByRole('alert')).toHaveText('Incorrect current password. Please try again.');
+    await panel.getByLabel('Current password',{exact:true}).fill(passwordA);
+    await panel.getByRole('button',{name:'Change password',exact:true}).click();
+    await expect(panel.getByRole('status')).toHaveText('Password saved. Other staff sessions have been signed out.');
+    await page.reload();
+    await expect(page.locator('#password-settings')).toBeVisible();
+    await page.getByLabel('Studio account',{exact:true}).click();
+    await page.getByRole('button',{name:'Sign out',exact:true}).click();
+    await expect(page.getByLabel('Workspace password',{exact:true})).toBeVisible();
+    await expect(page.getByLabel('Demo role',{exact:true})).toHaveCount(0);
+    await page.locator('[data-admin-language="th"]').first().click();
+    await page.getByLabel('รหัสผ่านระบบจัดการร้าน',{exact:true}).fill(passwordA);
+    await page.locator('.login button[type=submit]').click();
+    await expect(page.locator('.login [role=alert]')).toHaveText('รหัสผ่านไม่ถูกต้อง กรุณาลองอีกครั้ง');
+    await page.getByLabel('รหัสผ่านระบบจัดการร้าน',{exact:true}).fill(passwordB);
+    await page.locator('.login button[type=submit]').click();
+    await expect(page.locator('#password-settings')).toBeVisible();
+    const after=await (await page.request.get(admin+'/api/admin/orders')).json();
+    expect(after.orders).toEqual(before.orders);
+    const local=await page.evaluate(()=>JSON.stringify({...localStorage}));
+    expect(local).not.toContain(passwordA);expect(local).not.toContain(passwordB);
+    expect(errors).toEqual([]);
+  }finally{await stale.close();}
+});

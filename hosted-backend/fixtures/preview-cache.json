@@ -1,0 +1,370 @@
+[
+  {
+    "key": "b99149c38e184e6529f64d120de4a894c1de85edc0078b10d5ff58a0395a4dd1",
+    "config": {
+      "palette": "florist",
+      "flowers": [],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "bouquet",
+      "container": "paper",
+      "finish": "cream"
+    },
+    "asset": {
+      "id": "concept-florist-bouquet-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/florist-bouquet-1200.webp",
+      "srcset": "/img/concepts/florist-bouquet-640.webp 640w, /img/concepts/florist-bouquet-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "02f3a9b6f57bbe980baaa581f0606c1d73d4c3389829b1a58e0ce08a6faaeab3",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Style, flower species, palette, container, finish and ribbon visually checked against the recipe."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. A florist-choice bouquet with soft pink and white roses, white lisianthus, and a little natural green foliage; layered cream paper wrapping, cream satin bow. A modest everyday gift bouquet similar in scale to shop reference; no giant luxury size.",
+      "reference": "hr_p10_redblack_990__1200.webp",
+      "originalSource": "assets/concepts/florist-bouquet-original.png",
+      "sourceHash": "02f3a9b6f57bbe980baaa581f0606c1d73d4c3389829b1a58e0ce08a6faaeab3",
+      "correction": null,
+      "floristApproval": "pending"
+    }
+  },
+  {
+    "key": "769bff9187d653aff7b5d40173fe2f295a7cba932f6dc4759c08f1a708823f85",
+    "config": {
+      "palette": "red",
+      "flowers": [
+        "rose_red",
+        "eucalyptus"
+      ],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "bouquet",
+      "container": "paper",
+      "finish": "cream"
+    },
+    "asset": {
+      "id": "concept-red-roses-cream-v1",
+      "version": "local-2026-10-13-v1",
+      "url": "/img/concept-red-roses-cream-1200.webp",
+      "srcset": "/img/concept-red-roses-cream-640.webp 640w, /img/concept-red-roses-cream-1200.webp 1200w",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "qa": "Assistant visually checked: red roses, green eucalyptus, cream paper and ribbon; florist approval pending"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "generatedAt": "2026-10-13",
+      "reference": "hr_p10_redblack_990__1200.webp",
+      "sourceHash": "e4a2f7d40069dcd2a2087ff52b4067b1072821bc037944734828e5872f6eec4a"
+    }
+  },
+  {
+    "key": "1f3ec507d2176102a44593c616d2a3a0c2874df1ec4253597e15203b83e32d59",
+    "config": {
+      "palette": "blue-white",
+      "flowers": [
+        "hydrangea",
+        "rose_white",
+        "eucalyptus"
+      ],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "box",
+      "container": "hatbox",
+      "finish": "blue"
+    },
+    "asset": {
+      "id": "concept-blue-white-box-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/blue-white-box-1200.webp",
+      "srcset": "/img/concepts/blue-white-box-640.webp 640w, /img/concepts/blue-white-box-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "061d7fcd15b4398546a62372c59141b602342a99c346ca60513aa884da1fc0d3",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Style, flower species, palette, container, finish and ribbon visually checked against the recipe."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. A round pale blue hat box arrangement. Only blue hydrangea, white roses, and green eucalyptus; balanced rounded mixed floral dome, pale blue solid box without lettering, cream satin ribbon bow on the box. No lily, gerbera, carnation, extra decorative sign or other flowers.",
+      "reference": "hr_p11_box_congrats_1490__1200.webp",
+      "originalSource": "assets/concepts/blue-white-box-original.png",
+      "sourceHash": "061d7fcd15b4398546a62372c59141b602342a99c346ca60513aa884da1fc0d3",
+      "correction": null,
+      "floristApproval": "pending"
+    }
+  },
+  {
+    "key": "3c49e4446c9d62267e21c2ad486e59856031c4ba48a84f7c2c17bbc23163c974",
+    "config": {
+      "palette": "white-green",
+      "flowers": [
+        "rose_white",
+        "babys_breath",
+        "eucalyptus"
+      ],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "basket",
+      "container": "wicker",
+      "finish": "natural"
+    },
+    "asset": {
+      "id": "concept-white-green-basket-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/white-green-basket-1200.webp",
+      "srcset": "/img/concepts/white-green-basket-640.webp 640w, /img/concepts/white-green-basket-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "4f8c88c1728aee82382d73229a7653138e5394014087e9086d73f60b1e8e789e",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Style, flower species, palette, container, finish and ribbon visually checked against the recipe."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. A natural woven wicker basket with arched handle. Exactly white roses, tiny white baby’s breath and green eucalyptus foliage. Cream satin ribbon attached unobtrusively to handle. Balanced low rounded lush composition in natural brown wicker. No colored flowers, no carnations, no text plate.",
+      "reference": "hr_p03b_vase_basket_2025_b__1200-crop.webp",
+      "originalSource": "assets/concepts/white-green-basket-original.png",
+      "sourceHash": "4f8c88c1728aee82382d73229a7653138e5394014087e9086d73f60b1e8e789e",
+      "correction": null,
+      "floristApproval": "pending"
+    }
+  },
+  {
+    "key": "f314bfa07ccb5a2cc9e8f474105d906ee6099cb14f04fe28289e781d77659ef5",
+    "config": {
+      "palette": "white-green",
+      "flowers": [
+        "rose_white",
+        "lisianthus",
+        "eucalyptus"
+      ],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "wedding",
+      "container": "hand-tied",
+      "finish": "cream"
+    },
+    "asset": {
+      "id": "concept-bridal-white-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/bridal-white-1200.webp",
+      "srcset": "/img/concepts/bridal-white-640.webp 640w, /img/concepts/bridal-white-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "3218ea54a82d82eb6f48ab7f35473abc692455f95dcdaca298d077f3d3b90376",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Style, flower species, palette, container, finish and ribbon visually checked against the recipe."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. A small elegant bridal hand-tied bouquet consisting only of white roses, white lisianthus and green eucalyptus. Natural stems visible and bound in cream satin ribbon with tails. No paper wrapping, no vase, no box, no other flower species. Positioned upright on the table as a floristry product still life.",
+      "reference": "hr_p10_redblack_990__1200.webp",
+      "originalSource": "assets/concepts/bridal-white-original.png",
+      "sourceHash": "3218ea54a82d82eb6f48ab7f35473abc692455f95dcdaca298d077f3d3b90376",
+      "correction": null,
+      "floristApproval": "pending"
+    }
+  },
+  {
+    "key": "5c17063378b0a26ece9c7de8b87fef2ffc7d052d93b9523bc69a8161bf7ae129",
+    "config": {
+      "palette": "white-green",
+      "flowers": [
+        "jasmine"
+      ],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "garland",
+      "container": "garland-thread",
+      "finish": "white"
+    },
+    "asset": {
+      "id": "concept-jasmine-garland-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/jasmine-garland-1200.webp",
+      "srcset": "/img/concepts/jasmine-garland-640.webp 640w, /img/concepts/jasmine-garland-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "d44fbb7b28a8682d6b92309079c36452d290b33606be7db7ebd2dfc1f5cabf08",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Style, flower species, palette, container, finish and ribbon visually checked against the recipe."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. One traditional Thai hand-threaded jasmine garland made entirely of small natural ivory-white jasmine buds, one closed oval loop with two graceful hanging jasmine tassels. Small cream satin bow at the base of loop. White/cream natural palette. On a minimal discreet neutral support. No blue flowers or other flowers, no gift box, no multiple garlands or advertising.",
+      "reference": "hr_p01a_mothersday_2026__1200.webp",
+      "originalSource": "assets/concepts/jasmine-garland-original.png",
+      "sourceHash": "d44fbb7b28a8682d6b92309079c36452d290b33606be7db7ebd2dfc1f5cabf08",
+      "correction": null,
+      "floristApproval": "pending"
+    }
+  },
+  {
+    "key": "19a04dfb8736921123971e5e4e4601941351a4850396df0fdd9bfff831ade772",
+    "config": {
+      "palette": "pink-white",
+      "flowers": [
+        "rose_pink",
+        "carnation",
+        "pompon"
+      ],
+      "ribbon": "cream",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "wreath",
+      "container": "wreath-frame",
+      "finish": "natural"
+    },
+    "asset": {
+      "id": "concept-pastel-wreath-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/pastel-wreath-1200.webp",
+      "srcset": "/img/concepts/pastel-wreath-640.webp 640w, /img/concepts/pastel-wreath-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "b2e0fc347e8befe7a9a8b488c039cb67603b302aec6f1d89e7a88ab32a9bc1be",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Style, flower species, palette, container, finish and ribbon visually checked against the recipe."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. One Thai fresh-flower sympathy wreath on an oval natural supporting frame with a cream ribbon. Flowers: soft pink roses, blush pink carnations and dense white pompon chrysanthemums. No other flower species. Full oval shape, believable flower heads and stems, no printed banner, no writing, no memorial personal information. A respectful pastel pink and white arrangement standing upright.",
+      "reference": "fb_post_wreath_541__640.webp",
+      "originalSource": "assets/concepts/pastel-wreath-original.png",
+      "sourceHash": "b2e0fc347e8befe7a9a8b488c039cb67603b302aec6f1d89e7a88ab32a9bc1be",
+      "correction": null,
+      "floristApproval": "pending"
+    }
+  },
+  {
+    "key": "998654de13d7951e0aeb1c964d91bb2ec1cc9ae393d9d8ee975b4f22023be828",
+    "config": {
+      "palette": "red",
+      "flowers": [
+        "rose_red",
+        "eucalyptus"
+      ],
+      "ribbon": "burgundy",
+      "size": "reference",
+      "sourceProduct": null,
+      "unchanged": false,
+      "style": "money",
+      "container": "paper",
+      "finish": "cream"
+    },
+    "asset": {
+      "id": "concept-money-rose-v1",
+      "version": "local-2026-10-13-v1",
+      "role": "concept",
+      "kind": "concept",
+      "label": "AI concept based on your selections",
+      "url": "/img/concepts/money-rose-1200.webp",
+      "srcset": "/img/concepts/money-rose-640.webp 640w, /img/concepts/money-rose-1200.webp 1200w",
+      "mime": "image/webp",
+      "width": 1254,
+      "height": 1254,
+      "contentHash": "dbf4cc324269e2d05e5e425d8f663e59aea1f83896d4481abbb6adce94e30cdd",
+      "qa": {
+        "matchesConfiguration": true,
+        "reviewedBy": "Codex visual review",
+        "floristApproval": "pending",
+        "notes": "Removed unintended white filler in a correction; selected red roses and eucalyptus remain. Banknotes are illustrative, not denominated currency."
+      },
+      "createdAt": "2026-10-14T00:00:00.000Z"
+    },
+    "provenance": {
+      "tool": "Built-in image_gen",
+      "model": "tool-managed",
+      "promptVersion": 1,
+      "prompt": "Use case: product-mockup. Create ONE photorealistic florist arrangement concept for Little House Flower local customizer. The attached image is a reference for florist craft, realistic density and material treatment, not an edit target or layout to duplicate. Show only the arrangement fully in frame, centered square composition with generous 12% margin, neutral warm ivory studio wall and table, soft natural light, accurate natural petal texture, plausible scale. No people, hands, text, letters, logos, prices, watermark, shop labels or extra containers. This is an illustrative concept and must depict exactly the following visual configuration. A small consultation concept for a Thai money bouquet: red roses, a few natural green eucalyptus stems and a fan of stylized folded pale beige blank paper banknotes with no denomination or readable currency markings, layered cream paper bouquet wrap and burgundy satin bow. The folded notes are illustrative placeholders, not authentic currency. Whole bouquet fully visible, no extra species, no crown.",
+      "reference": "hr_p10_redblack_990__1200.webp",
+      "originalSource": "assets/concepts/money-rose-original.png",
+      "sourceHash": "dbf4cc324269e2d05e5e425d8f663e59aea1f83896d4481abbb6adce94e30cdd",
+      "correction": "Removed white filler flowers not selected in the recipe.",
+      "floristApproval": "pending"
+    }
+  }
+]

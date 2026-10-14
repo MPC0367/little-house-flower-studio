@@ -1,0 +1,34 @@
+{
+  "id": "/little-house-flower-studio/",
+  "name": "Little House Flower · The Studio",
+  "short_name": "LH Studio",
+  "description": "Orders, handover dates and payments for Little House Flower.",
+  "start_url": "/little-house-flower-studio/#today",
+  "scope": "/little-house-flower-studio/",
+  "display": "standalone",
+  "display_override": [
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#f6f3ee",
+  "theme_color": "#f6f3ee",
+  "lang": "en",
+  "categories": [
+    "business",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "/little-house-flower-studio/icons/app-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/little-house-flower-studio/icons/app-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}

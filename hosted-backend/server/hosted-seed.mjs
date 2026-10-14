@@ -1,0 +1,13 @@
+import {catalog,images,legacy} from './domain.mjs';
+import {seedExtendedDemo} from './demo-fixtures.mjs';
+import conceptFixtures from '../fixtures/preview-cache.json' with {type:'json'};
+const now=()=>new Date().toISOString(),id=()=>crypto.randomUUID();
+export function seedHosted(db){
+ const putOrder=o=>db.put('orders',o.id,{...o,syncState:'synced'});
+function seed(){if(db.get('meta','seeded'))return;const today=legacy.time.today();const sample=[['white-rose','new','pickup',0],['box-congratulations','confirmed','delivery',1],['single-rose','preparing','pickup',0],['red-black','ready','delivery',0],['kitty','out','delivery',0],['lily-lisianthus','done','pickup',-2],['box-congratulations','cancelled','delivery',-1],['white-rose','review','pickup',-1]];for(let i=0;i<sample.length;i++){const [pid,status,fulfil,days]=sample[i],p=catalog.find(x=>x.id===pid)||catalog[0];const o={id:'demo-'+i,ref:'DEMO-'+String(i+1).padStart(3,'0'),createdAt:now(),date:legacy.util.addDays(today,days),windowId:fulfil==='pickup'?'p2':'d2',windowLabel:'10:00–12:00',fulfil,status,customer:{name:'Demo customer '+(i+1),phone:'0800000000',line:''},recipient:{name:'Demo recipient',phone:'0800000000'},address:fulfil==='delivery'?{line:'Sample address — local fixture',district:'เมืองนนทบุรี',province:'nonthaburi'}:null,items:[{productId:p.id,name:p.name.en,qty:1,unit:p.price||0,line:p.price||0,kind:p.price?'firm':'quote',image:images[p.image]?.src||null}],type:'product',card:{message:'A little happiness, just for you.'},notes:'Synthetic record for local review.',confirmedTotal:i===0||i===7?null:(p.price||1490)*100,revision:1,syncState:'pending',demo:true,historyIncomplete:i===7};putOrder(o);}
+ const pay=[['demo-1','receipt',50000,0],['demo-1','receipt',99000,0],['demo-1','refund',20000,0],['demo-2','receipt',25000,0],['demo-5','receipt',179000,-2],['demo-6','receipt',30000,-1],['demo-6','refund',30000,-1]];for(const [orderId,type,amount,days]of pay){const p={id:id(),orderId,type,amount,occurredAt:legacy.util.addDays(today,days)+'T05:00:00Z',actor:'demo seed',method:'bank_transfer',externalReference:'Synthetic fixture'};db.put('payments',p.id,p);}
+ for(let m=1;m<=8;m++){const p={id:id(),orderId:'historical-demo',type:'receipt',amount:(12000+m*900)*100,occurredAt:`2026-${String(m).padStart(2,'0')}-15T05:00:00Z`,actor:'demo seed',method:'sample',externalReference:'Synthetic monthly demonstration'};db.put('payments',p.id,p);}db.put('payments','prior-year',{id:'prior-year',orderId:'historical-demo',type:'receipt',amount:149000,occurredAt:'2025-12-15T05:00:00Z',actor:'demo seed',method:'sample'});db.put('meta','seeded',{at:now()});}
+seed();
+seedExtendedDemo(db,putOrder,conceptFixtures);
+db.put('meta','hosted-demo',{synthetic:true,createdAt:now()});
+}
