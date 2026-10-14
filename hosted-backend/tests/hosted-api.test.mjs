@@ -99,7 +99,7 @@ test('parallel internal sessions retry CAS safely and failed authentication thro
 
 test('private raster upload requires consent and ownership, and deletion persists',async()=>{
   const {request,blobs}=fixture(),guest=await request('/api/session',{method:'POST',body:{}}),other=await request('/api/session',{method:'POST',body:{}});
-  const png=Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO/aXioAAAAASUVORK5CYII=','base64'));
+  const png=Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=','base64'));
   assert.equal((await request('/api/uploads',{method:'POST',cookie:guest.cookie,raw:png})).status,422);
   const uploaded=await request('/api/uploads',{method:'POST',cookie:guest.cookie,raw:png,headers:{'X-Upload-Consent':'yes','Content-Type':'image/png'}});assert.equal(uploaded.status,201,JSON.stringify(uploaded.value));
   assert.equal((await request(uploaded.value.url,{cookie:other.cookie})).status,404);
@@ -240,7 +240,7 @@ test('public preview retains origin/CSRF checks, customer upload ownership and d
   assert.equal((await loadHostedJournal(env)).get('meta','staff-password').authVersion,before);
   const first=await request('/api/session',{...anonymous,method:'POST',body:{}}),second=await request('/api/session',{...anonymous,method:'POST',body:{}});
   const owner={...anonymous,headers:{'X-LHF-Customer-Session':sessionHeader('Customer',first)}};
-  const png=Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO/aXioAAAAASUVORK5CYII=','base64'));
+  const png=Uint8Array.from(Buffer.from('iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAwMCAO+ip1sAAAAASUVORK5CYII=','base64'));
   assert.equal((await request('/api/uploads',{...anonymous,method:'POST',raw:png,headers:{'X-Upload-Consent':'yes'}})).status,401);
   assert.equal((await request('/api/uploads',{...owner,method:'POST',raw:png})).status,422);
   const uploaded=await request('/api/uploads',{...owner,method:'POST',raw:png,headers:{...owner.headers,'X-Upload-Consent':'yes','Content-Type':'image/png'}});assert.equal(uploaded.status,201,JSON.stringify(uploaded.value));

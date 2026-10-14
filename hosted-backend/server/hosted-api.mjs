@@ -6,7 +6,7 @@ import {productDesignSnapshot} from './product-design.mjs';
 import {priceCheck} from './price-check.mjs';
 import {filterOrders,compactOrder,patchOrder,recordPayment,reportRevenue} from './staff-service.mjs';
 import {HostedPreviewService,getHostedPreviewAsset} from './hosted-preview.mjs';
-import {imageMetadata} from './hosted-images.mjs';
+import {cleanImage} from './hosted-images.mjs';
 import {uploadHostedSiteAsset} from './hosted-site-upload.mjs';
 import {permittedApiOrigin,preflight,withApiCors} from './hosted-cors.mjs';
 import {session,issueSession,exposeExistingSession,secureAttribute} from './hosted-sessions.mjs';
@@ -57,9 +57,23 @@ async function readBytes(request,limit=300000){
 async function readJSON(request,limit){try{return JSON.parse(new TextDecoder().decode(await readBytes(request,limit))||'{}');}catch(error){if(error.status)throw error;throw authError('Invalid request body',400);}}
 function requireStaff(db,request,publicPreview=false){if(publicPreview)return {id:'public-preview',kind:'admin',role:'owner',publicPreview:true};const s=session(db,request,'admin');if(!s)throw authError('Staff sign-in required',401);return s;}
 const requireCustomer=(db,request)=>{const s=session(db,request,'customer');if(!s)throw authError('Session required',401);return s;};
-function synchronization(db){return {lastSync:now(),lastSave:db.get('meta','last-save')?.at||db.get('meta','hosted-demo')?.createdAt,pending:0,deadLetters:0,error:null,mode:'Hosted demonstration data · Google disconnected',conflicts:db.all('conflicts').length};}
-function saveOrder(db,order){db.put('orders',order.id,{...order,syncState:'synced'});db.put('meta','last-save',{at:now()});}
+// nothing is replicated anywhere in this demo: there is no "last sync" to report, only the last save
+function synchronization(db){return {lastSync:null,lastSave:db.get('meta','last-save')?.at||db.get('meta','hosted-demo')?.createdAt,pending:0,deadLetters:0,error:null,mode:'Hosted demonstration data · Google disconnected',conflicts:db.all('conflicts').length};}
+function saveOrder(db,order){db.put('orders',order.id,{...order,syncState:'saved'});db.put('meta','last-save',{at:now()});}
 function acknowledgment(order){const receipt={};for(const key of ['id','ref','type','date','windowId','windowLabel','fulfil','items','custom','subtotal','quoteOnly','hasQuote','priceFrom','createdAt','lang','customer','recipient','address','card','anonymous','colourNote'])if(Object.hasOwn(order,key))receipt[key]=order[key];return {ok:true,id:order.id,ref:order.ref,windowId:order.windowId,windowLabel:order.windowLabel,revision:order.revision,syncState:order.syncState,receipt};}
+/* Reference photos chosen but never booked are removed after 36 hours, like the browser draft they came from.
+   This host has no scheduler, so it is done whenever someone uploads or books. */
+const UNUSED_UPLOAD_MS=36*3600000;
+function sweepUnusedUploads(db,env,afterCommit,at=Date.now()){
+  for(const asset of db.all('assets').filter(a=>a.role==='reference'&&!a.orderId&&at-Date.parse(a.createdAt)>UNUSED_UPLOAD_MS).slice(0,25)){db.remove('assets',asset.id);afterCommit.push(()=>env.BUCKET.delete(asset.key));}
+}
+/* only the fields a booking has; anything else a request carries is dropped, never stored */
+const text=v=>typeof v==='string'?v:v==null?'':String(v);
+const bookingShape=b=>({...b,
+  customer:{name:text(b.customer?.name),phone:text(b.customer?.phone),line:text(b.customer?.line)},
+  recipient:b.recipient&&typeof b.recipient==='object'?{name:text(b.recipient.name),phone:text(b.recipient.phone)}:{name:'',phone:''},
+  address:b.address&&typeof b.address==='object'?Object.fromEntries(['line','district','province','postcode','note','link'].filter(k=>b.address[k]!=null).map(k=>[k,text(b.address[k])])):null,
+  card:{message:text(b.card?.message)}});
 function reservationReference(db,date){const used=new Set(db.all('orders').map(order=>order.ref));let ref;do{ref='DEMO-'+date.replaceAll('-','').slice(2)+'-'+randomHex(3).toUpperCase();}while(used.has(ref));return ref;}
 
 async function dispatch(request,env,db,cookies,afterCommit,onRollback,responseHeaders){
@@ -108,9 +122,11 @@ async function dispatch(request,env,db,cookies,afterCommit,onRollback,responseHe
   if(p==='/api/uploads'&&method==='POST'){
     const customer=requireCustomer(db,request);if(request.headers.get('x-upload-consent')!=='yes')throw authError('Reference-photo consent required');
     if(db.all('assets').filter(asset=>asset.owner===customer.id&&!asset.orderId).length>=5)throw authError('Remove an unused reference before adding another',429);
-    const bytes=await readBytes(request,5*1024*1024),metadata=imageMetadata(bytes),id=crypto.randomUUID(),key='references/'+id;
+    sweepUnusedUploads(db,env,afterCommit);
+    // stored without location, camera and other metadata; a damaged file is refused
+    const {bytes,...metadata}=cleanImage(await readBytes(request,5*1024*1024)),id=crypto.randomUUID(),key='references/'+id;
     await env.BUCKET.put(key,bytes,{httpMetadata:{contentType:metadata.mime}});onRollback.push(()=>env.BUCKET.delete(key));
-    db.put('assets',id,{id,key,role:'reference',owner:customer.id,createdAt:now(),...metadata,contentHash:hash(bytes),version:1});return json({id,url:'/api/assets/'+id,version:1},201);
+    db.put('assets',id,{id,key,role:'reference',owner:customer.id,createdAt:now(),...metadata,size:bytes.length,contentHash:hash(bytes),version:1});return json({id,url:'/api/assets/'+id,version:1},201);
   }
   if(p.startsWith('/api/assets/')){
     if(!['GET','HEAD','DELETE'].includes(method))throw authError('Unsupported asset method',405);
@@ -121,7 +137,8 @@ async function dispatch(request,env,db,cookies,afterCommit,onRollback,responseHe
     return new Response(method==='HEAD'?null:object.body,{headers:{'Content-Type':asset.mime,'Cache-Control':'private, no-store','X-Content-Type-Options':'nosniff','Content-Security-Policy':"default-src 'none'; sandbox"}});
   }
   if(p==='/api/orders'&&method==='POST'){
-    const customer=requireCustomer(db,request),b=await readJSON(request);if(!b||typeof b!=='object')throw authError('Invalid order');
+    const customer=requireCustomer(db,request),raw=await readJSON(request);if(!raw||typeof raw!=='object')throw authError('Invalid order');
+    const b=bookingShape(raw);sweepUnusedUploads(db,env,afterCommit);
     const prior=db.get('orders',b.id);if(prior){if(prior.owner!==customer.id)throw authError('Request ID already used',409);return json(acknowledgment(prior));}
     if(db.all('orders').length>=300||db.all('orders').filter(order=>order.owner===customer.id&&Date.now()-Date.parse(order.createdAt)<3600000).length>=20)throw authError('Demo request limit reached',429);
     if(b.custom?.config){const config=previews.validate(b.custom.config);b.custom={...b.custom,config,style:config.style,flowers:config.flowers,fromProduct:config.sourceProduct||''};}
