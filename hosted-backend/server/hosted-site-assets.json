@@ -5,48 +5,48 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/calendar.js": {
-    "hash": "f00f37901ad1e65b1b8d232a298846fb11c3bf914b916223cc1d03f878c2a9a8",
-    "size": 8123,
+    "hash": "851b1b80018432cb01213eb38a8860b676378bc9b9d8a5f8839c7e213ba719db",
+    "size": 8122,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/footer.js": {
-    "hash": "7e5905b6b354adbe94fd4bf862fd32464db86a2c1c3527c9ffcc051fbdbba7ba",
-    "size": 4361,
+    "hash": "9a9aa6d02e6b5a1b0af4690df4536f0f2f868f687e3c3cc69cb3ea70d86cdb35",
+    "size": 4360,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/heart.js": {
-    "hash": "9f324d395bf531b49b898893cf2c1925b224368c609bcbec592f7564c2d955ad",
-    "size": 10019,
+    "hash": "032cafe9d9b2ed3acb79105ac8bc26d2958bfc56ad3d9246d5bfa1bdef6f3ac0",
+    "size": 10018,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/image.js": {
-    "hash": "aa1de46cb0c0052ef3325f4fc22da761054cdb624252a8b50f0853b8f3013294",
-    "size": 4780,
+    "hash": "c1009050869842b0393a43e8350027988ad3cfa3702ff57180a8c01dfbc5448a",
+    "size": 4779,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/lightbox.js": {
-    "hash": "a27f49196c10f660e4c95e8349681581a53a46f5e66abe9cab7c626caae56911",
-    "size": 7207,
+    "hash": "6b15d5c54b373017415e7feaf50b5abe67fe0c8b65878ba229a5ec923bff4e7a",
+    "size": 7206,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/nav.js": {
-    "hash": "e33a7d400ee7c9a162820f9e6f5208321f2d189e3f08c3a342e52b1b81e17d77",
-    "size": 7438,
+    "hash": "9c4effef0ef83549c3e1b1d7e28c5a68efd394e8e5f363b3c05769c65139a8c1",
+    "size": 7437,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/product-card.js": {
-    "hash": "2296a11d2c7fa7fbd6d9f91083afeafcc18705c1ac92c89eab115ebbb8bc105c",
-    "size": 3772,
+    "hash": "3d7d3bec793f146cc518e415a83a9f64c27e3696c53f09a86bc865d1f1b14e4f",
+    "size": 3771,
     "mime": "text/javascript; charset=utf-8"
   },
   "/components/ui.js": {
-    "hash": "59aca072af3f137d176c58a505b4dc90ceda1b27011c2fbcafaf9d1fbbe27f06",
-    "size": 16725,
+    "hash": "ccdd47b2bc10e9abc6909661d7ac3065629acc8b771d19b379601720a4e8a79e",
+    "size": 16724,
     "mime": "text/javascript; charset=utf-8"
   },
   "/core/booking-engine.js": {
-    "hash": "c65780810e53bfa85c000495ceaf6c91189f0575ec587f987cd9ce08cd1a9009",
-    "size": 12993,
+    "hash": "c0b7e036b7d3b21b7e928f8cefa98a6640a6dd2200059e99a2f25035a688510e",
+    "size": 12992,
     "mime": "text/javascript; charset=utf-8"
   },
   "/core/db.js": {
@@ -55,23 +55,23 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/core/i18n.js": {
-    "hash": "2e3a2cc6122e82a94fee03dd64afded426f9b489de760b1dda3a977907715284",
-    "size": 6619,
+    "hash": "f6528f4cd096782cf412da32b4fbbca3ce6d2b966522d048249548d25f15c97b",
+    "size": 6618,
     "mime": "text/javascript; charset=utf-8"
   },
   "/core/router.js": {
-    "hash": "dd573bbea4c648dfbef4e0fc5df92cd72cd8889b93763d43ff564799f1cd9448",
-    "size": 6854,
+    "hash": "75d8cff960c47c34f8d17d9b3491a8cabd227cdd14c23610a0c6f4192e6a5a01",
+    "size": 6853,
     "mime": "text/javascript; charset=utf-8"
   },
   "/core/store.js": {
-    "hash": "84393dc8276e9d8f33faa4a99055e42199f296aaa5a7f42709e92360d67e5427",
-    "size": 2116,
+    "hash": "b3b3cd29495f84ff960792ff904b366e51b31e7b0ac726decc1dcd9cd5da2ce6",
+    "size": 2115,
     "mime": "text/javascript; charset=utf-8"
   },
   "/core/util.js": {
-    "hash": "e6a430f1ac6f53508e92a5c7eb436b730824c2ff44891b8c7bb7453fe8f8ab39",
-    "size": 7864,
+    "hash": "760bfb012d3307a43ce6e3814879e9675f102abfb6bab597819c014d5b1fcf68",
+    "size": 7863,
     "mime": "text/javascript; charset=utf-8"
   },
   "/customizer.css": {
@@ -85,8 +85,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/catalog.js": {
-    "hash": "119baaa215b0c4da329dc564f770b5f4de4e604c491502f48047c0c702db9d96",
-    "size": 31191,
+    "hash": "8bc221c207b6938ad970bf20e5c89b42727a4a4176ea936afe5d71e7aefbe272",
+    "size": 31190,
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/hero.js": {
@@ -95,23 +95,23 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/images.js": {
-    "hash": "2f947203fac0c8efb62533be10203ad7cc1c4a55d134210ac4898f960f2d87bb",
-    "size": 38042,
+    "hash": "daae7f0e8558b514f11dad7d8c66c0b823995bd51c3d3b0540c4add909826448",
+    "size": 38043,
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/posts.js": {
-    "hash": "7c43e1c0a6a6d227e79a191369fa87bbd81b2eefc66f6198c97ac1b349e5c4ce",
-    "size": 22194,
+    "hash": "c767a09a87f6105124509de445269d6c1d57405fc8463993f3469da20504f46c",
+    "size": 22193,
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/settings.js": {
-    "hash": "c5be461c7f0fd94139348327125d7996659ba7cb9e46429543596c9b596abcb1",
-    "size": 6403,
+    "hash": "11e013bdb1b04deb54a7c7f9895bbf0705ea4b2c1283af44eff276b5fc2066d0",
+    "size": 6402,
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/strings.js": {
-    "hash": "dc8dbb659b99a83f6d7a5e8391bb536db34808c148a74ec3fe8afbd314d4227d",
-    "size": 83806,
+    "hash": "adabd19e271ee51fb54fe09ebeabfffee5c32564669550f9d1de94dfa8342148",
+    "size": 81520,
     "mime": "text/javascript; charset=utf-8"
   },
   "/favicon.svg": {
@@ -935,13 +935,13 @@
     "mime": "image/webp"
   },
   "/index.html": {
-    "hash": "4058b4a0e17e9c935e1959f8adfb08400d5966d7bd7dbaac45f1c99212cc63e6",
-    "size": 6249,
+    "hash": "763105033e23df68e967316e8a18ebcac8c80269866e127c2bcb221d8c71bc31",
+    "size": 6904,
     "mime": "text/html; charset=utf-8"
   },
   "/local-bridge.js": {
-    "hash": "76725475de24af796ef0b8edf1eff1d564a6ce54319ea7fb974a32a8da0ccf5c",
-    "size": 4909,
+    "hash": "c181641123d135b6f6f315588301be845ca0afde5f23c716a425ffeb4e8581d3",
+    "size": 4904,
     "mime": "text/javascript; charset=utf-8"
   },
   "/logo-intro.css": {
@@ -950,8 +950,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/logo-intro.js": {
-    "hash": "8924c296ef6066f4a6d1259cb182ff7eb98c0608765fff2f72de64c93a641bb1",
-    "size": 12654,
+    "hash": "7812a6955d6696f78b1c8cf3ad3122b9a3f2cc55742eb857c001e9f433a8ca0f",
+    "size": 8724,
     "mime": "text/javascript; charset=utf-8"
   },
   "/manifest.webmanifest": {
@@ -970,58 +970,58 @@
     "mime": "image/png"
   },
   "/pages/confirm.js": {
-    "hash": "f874f5e5fa765cd2163200df54809568a3739e84543a8dbbb8439695eaf1fee4",
-    "size": 10150,
+    "hash": "1d789b5052c7da03086b03070b68bcb08fff5895ea83ef1f4efb7dfaed5595a7",
+    "size": 10149,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/custom.js": {
-    "hash": "9d662ac38e973124c7c9ff7ba0678023ce2ba5b716dc10d9ca2ef3ce0265a2eb",
-    "size": 10849,
+    "hash": "da262a5b1da9b6bb29b87abdb93d2ee6e2f0037abd3da24080f3338965b908ea",
+    "size": 10848,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/flowers.js": {
-    "hash": "98e015a12591d47a667b6d6d37d823d2db8178b4b3b79709e174849a2772c3a9",
-    "size": 7071,
+    "hash": "25d97a146dd9da5456c32134702c3657196a452def2fba006f49c7619086970a",
+    "size": 7070,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/home.js": {
-    "hash": "582ab0a85fe33eb60b9f8e76344349e8f6de9a3f1f63117ac645c37e690b5989",
-    "size": 10269,
+    "hash": "921c73f8ac6c2e608bdae5733576dffd6f551e331312e9ef4bb14cd13718c544",
+    "size": 10268,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/instagram.js": {
-    "hash": "e2e1a908574e3cb9b1719883396d784ae6cac452f6a0d4cacb0b112e96d65705",
-    "size": 4995,
+    "hash": "f83483eb20f10361ab5e8fdb62e1dc6663a350e81777764b9507c9dcd9ba29db",
+    "size": 4994,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/misc.js": {
-    "hash": "eba7332aa810fe2d9962dcfd5f133c5b44d96a0bede96b4c2e9f299de2130c97",
-    "size": 7082,
+    "hash": "650601652be59c6565480285bc8d1cf699706f0138c5618e91ce52c083bd2cef",
+    "size": 7081,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/occasions.js": {
-    "hash": "633d3ced10905166b890d9dedd1849d77f8b5e83e7768dd782aed5d9e1df1ca4",
-    "size": 2682,
+    "hash": "0d6f30e0bd9bc3119efc52b8a83034f5b27e0e1a4f6133d5a482d452f00ae9ec",
+    "size": 2681,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/order.js": {
-    "hash": "f742dad5af1bd396e0890ee30436d002e8e643b5349d8ec5eeb0a4d784cb8fcb",
-    "size": 42264,
+    "hash": "ae328b6f3c03fbfcf2880594806e3701871466b335e8b9bc1115adc4c7ef4408",
+    "size": 42263,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/product.js": {
-    "hash": "c293d541ca53e2274303eb21d4fa5a7a14510e15f36434ff005c5dc23cf512a0",
-    "size": 6862,
+    "hash": "93dfa06dd25dc9be206cb133fdf70ac2ba9ba759cf7ad36cb7806a779d00355d",
+    "size": 6861,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/story.js": {
-    "hash": "f8fee7b08330485ca4e279817cbd01741f0464fd19559ca782f8246e9cea3657",
-    "size": 3099,
+    "hash": "46ec8c7d370b87268f76e861aa0663ca4b903fea1c9fecc13d180da15ce831d9",
+    "size": 3098,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/visit.js": {
-    "hash": "471a201ff10ba4571ff2bd7410ae8ff542d2093149977c79b9ad3457e310cfff",
-    "size": 6844,
+    "hash": "02d4c5b33d9b2ff705a734a4b9d3dd2e7330bf1101ec5e01fab821d2b3b6bb04",
+    "size": 6843,
     "mime": "text/javascript; charset=utf-8"
   },
   "/polish.css": {
@@ -1037,6 +1037,11 @@
   "/shared/config.mjs": {
     "hash": "44c5ce1c271c7180eed2d5824fa0a53cc30140643987b888253073f34b91dd74",
     "size": 9169,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/shared/opening-film.js": {
+    "hash": "a164b71d8b6330bace5bbbb7130bb4e3e20c18a46691ebaf29317cf62a067e94",
+    "size": 5605,
     "mime": "text/javascript; charset=utf-8"
   },
   "/shared/pricing-rules.mjs": {
@@ -1055,13 +1060,13 @@
     "mime": "application/json"
   },
   "/site.css": {
-    "hash": "7bab002c49ae19b5d1623007c768511ca3fc18cf63debc44d262309f3826cf1c",
-    "size": 96837,
+    "hash": "01820c29fd1fadfdb9ab2097aea2660b8b668ab14dd8c8c5392c7abf9a895463",
+    "size": 96836,
     "mime": "text/css; charset=utf-8"
   },
   "/storefront.js": {
-    "hash": "1d402b1132c0dd025f33a3b7b7dada24674e102c43944f621f74a22d4c89fa7c",
-    "size": 440910,
+    "hash": "b4db92eb17c4479d164feb1bfd55982b9c82bbe3029095fdd2d502300d1f73e7",
+    "size": 440425,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/admin.css": {
@@ -1070,8 +1075,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/studio/admin.mjs": {
-    "hash": "5f2163e75fa643ba1581fc1748c903ae85f50e36f634c30fe8646446f8994517",
-    "size": 60379,
+    "hash": "2aa7019d786726adab5576c258dc7cc0de81fc0501ce7ef0a7244d0007f8327f",
+    "size": 60231,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/app-shell.css": {
@@ -1080,13 +1085,13 @@
     "mime": "text/css; charset=utf-8"
   },
   "/studio/app-shell.mjs": {
-    "hash": "43a6b782b20b3325f40c27538d9f3f0e28d8c8fa063d050b3a4a6138e481fffd",
-    "size": 2607,
+    "hash": "5def73391115c5da43a5977195e301ddcf3504ff264f129e828208a96659bbee",
+    "size": 2551,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/i18n.mjs": {
-    "hash": "bf19dc780e42a536b03587e11119d712e243b9aff170f67937f944934d89835d",
-    "size": 66733,
+    "hash": "c69ac42b2d7fb121f84448bf0d12623d8da8f8a3fe840383f829120526bb5f8e",
+    "size": 65692,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/icons/app-192.png": {
@@ -1100,14 +1105,24 @@
     "mime": "image/png"
   },
   "/studio/index.html": {
-    "hash": "2bbd675031cebb45ce76bbd710a8098a3deecc51188637a4fa97135a1b3669b2",
-    "size": 1204,
+    "hash": "1987f0525e93124e301d2273fd6f4bca6bf1fd885566dfabc810ce865afa8fbf",
+    "size": 1860,
     "mime": "text/html; charset=utf-8"
   },
   "/studio/manifest.webmanifest": {
-    "hash": "8d29e48f86e28cdfa1566af7f4c8e71988a8fe93ac667f006b08c278bb775138",
-    "size": 654,
+    "hash": "82a483e61227158240aa39ab37eb2e29a9d050e8507464629f5072762b9fb376",
+    "size": 741,
     "mime": "application/manifest+json"
+  },
+  "/studio/opening.css": {
+    "hash": "47aff49166a8b4141b43e0895db037ef9647c4f398f64c83599c42daf3985ea9",
+    "size": 656,
+    "mime": "text/css; charset=utf-8"
+  },
+  "/studio/opening.js": {
+    "hash": "c6114b11f93bbf85479faaa817f695e1f8beeacc1db70dee03b19c632e7deda0",
+    "size": 2231,
+    "mime": "text/javascript; charset=utf-8"
   },
   "/studio/order-design.mjs": {
     "hash": "0727cf06631d302b8a7576ec1f42dd153cd21e6e45f4e78445dc79342a48ef28",
@@ -1125,8 +1140,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/upgrade.js": {
-    "hash": "8fb2ac3206049db79df257f11d4f2ac02a9f667f2b463000dd0ce20f264d2dbd",
-    "size": 12156,
+    "hash": "7f2a0031a85a53f37c16c507b4c0e455929d45ff3a82dcf335527c8b5bfdef77",
+    "size": 11259,
     "mime": "text/javascript; charset=utf-8"
   },
   "/window.svg": {
