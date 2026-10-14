@@ -181,7 +181,13 @@ async function dispatch(request,env,db,cookies,afterCommit,onRollback,responseHe
 }
 
 export async function handleHostedRequest(request,env,attempt=0){
-  const retryable=request.method==='POST'&&['/api/session','/api/preview','/api/demo-login','/api/admin/login'].includes(new URL(request.url).pathname),retryRequest=retryable&&attempt<2?request.clone():null;
+  /* Everything lives in one document, so two saves at the same moment collide and the second is refused.
+     Requests that are safe to repeat are tried again: bookings and payments carry their own id (a repeat
+     never duplicates them), edits carry the revision they were based on (a real conflict still answers
+     409), and nothing else was committed. Only the collision itself is retried, never a refusal. */
+  const path=new URL(request.url).pathname,method=request.method;
+  const retryable=(method==='POST'&&(['/api/session','/api/preview','/api/demo-login','/api/admin/login','/api/orders','/api/uploads'].includes(path)||/^\/api\/admin\/orders\/[^/]+\/payments$/.test(path)))||(method==='PATCH'&&/^\/api\/admin\/orders\/[^/]+$/.test(path));
+  const retryRequest=retryable&&attempt<5?request.clone():null;
   if(!contexts.has(request)){const denied=await gate(request,env);if(denied)return denied;}
   const {db}=contexts.get(request),cookies=[],afterCommit=[],onRollback=[],responseHeaders=new Headers();let committed=false;
   try{
@@ -192,7 +198,7 @@ export async function handleHostedRequest(request,env,attempt=0){
     return withApiCors(request,response);
   }catch(error){
     if(!committed)for(const action of onRollback)try{await action();}catch{}
-    if(error.status===409&&retryRequest)return handleHostedRequest(retryRequest,env,attempt+1);
+    if(error.commitConflict&&retryRequest){await new Promise(resolve=>setTimeout(resolve,15+Math.random()*40*(attempt+1)));return handleHostedRequest(retryRequest,env,attempt+1);}
     if(error.status===409&&!error.current){const match=new URL(request.url).pathname.match(/^\/api\/admin\/orders\/([^/]+)/);if(match){try{error.current=(await loadHostedJournal(env)).get('orders',match[1]);}catch{}}}
     return withApiCors(request,errorResponse(error));
   }finally{contexts.delete(request);}

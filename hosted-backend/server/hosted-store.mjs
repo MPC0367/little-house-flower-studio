@@ -19,7 +19,7 @@ export class HostedJournal {
     const payload=JSON.stringify(this.payload);
     if(new TextEncoder().encode(payload).length>1800000)throw authError('The demo has reached its storage limit. Please contact the demo administrator.',429);
     const result=await this.binding.prepare('UPDATE demo_state SET version = version + 1, payload = ? WHERE id = ? AND version = ?').bind(payload,'app',this.version).run();
-    if(result.meta?.changes!==1)throw authError('Another update was saved first. Please refresh and try again. Your entries have not been saved.',409);
+    if(result.meta?.changes!==1){const error=authError('Another update was saved first. Please refresh and try again. Your entries have not been saved.',409);error.commitConflict=true;throw error;}
     this.version++;this.dirty=false;
   }
 }

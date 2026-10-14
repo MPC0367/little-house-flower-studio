@@ -85,3 +85,12 @@ test('a booking keeps only the fields a booking has, and nothing claims a sync',
   assert.equal(order.syncState,'saved');
   const health=await request('/api/health');assert.equal(health.value.sync.lastSync,null);
 });
+
+test('six customers booking at the same moment are all saved (the shared document retries its own collisions)',async()=>{
+  const {env,request}=fixture();
+  const guests=await Promise.all(Array.from({length:6},()=>request('/api/session',{method:'POST',body:{}})));
+  const date=legacy.util.addDays(legacy.time.today(),4);
+  const results=await Promise.all(guests.map((g,i)=>request('/api/orders',{method:'POST',cookie:g.cookie,body:{id:'parallel-booking-00'+i,type:'product',items:[{productId:'white-rose',qty:1}],date,windowId:'p2',fulfil:'pickup',customer:{name:'Parallel '+i,phone:'0800000000',line:''},recipient:{name:'R',phone:'0800000000'},card:{message:''},lang:'th',consent:true}})));
+  assert.deepEqual(results.map(r=>r.status),[201,201,201,201,201,201],JSON.stringify(results.map(r=>r.value?.error||r.status)));
+  const db=await loadHostedJournal(env);assert.equal(db.all('orders').filter(o=>o.id.startsWith('parallel-booking-')).length,6);
+});
