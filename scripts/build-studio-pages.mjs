@@ -24,7 +24,6 @@ function rewrite(text,rel){
   text=text.replaceAll('../shared/','./shared/');
   // the narrow allowlists keep their exact meaning under the new prefixes
   text=text.replaceAll('^\\/img\\/','^\\/Little-House-Flower\\/img\\/').replaceAll('^\\/api\\/','^\\/little-house-flower-studio\\/api\\/');
-  if(rel==='app-shell.mjs')text=text.replace("&& !window.LHF_NATIVE_APP)","&& !window.LHF_NATIVE_APP && !window.LHF_PAGES_APP)");
   if(rel==='index.html'){
     text=text.replace(/<script[^>]+src="[^"]+"[^>]*><\/script>/g,'');
     text=text.replace('</head>',`<script defer src="${base}/pages-access.js?v=${release}"></script></head>`);

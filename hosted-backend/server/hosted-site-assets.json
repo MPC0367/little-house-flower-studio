@@ -1069,29 +1069,24 @@
     "size": 440425,
     "mime": "text/javascript; charset=utf-8"
   },
-  "/studio/admin.css": {
-    "hash": "108abbef2712e22c220852971b982c6d19c577dd12f76797b6ea248b31b466ba",
-    "size": 38207,
-    "mime": "text/css; charset=utf-8"
-  },
-  "/studio/admin.mjs": {
-    "hash": "2aa7019d786726adab5576c258dc7cc0de81fc0501ce7ef0a7244d0007f8327f",
-    "size": 60231,
+  "/studio/app.mjs": {
+    "hash": "3a2d1b6638ba07ca765dd0f682ad3b2a4fecca348b529268deec0a20644cfe4c",
+    "size": 16925,
     "mime": "text/javascript; charset=utf-8"
   },
-  "/studio/app-shell.css": {
-    "hash": "31d63568c7d64ba9564931bf17638b5f5c5d176e44280e8b0f6f8f9b138efa21",
-    "size": 880,
-    "mime": "text/css; charset=utf-8"
-  },
-  "/studio/app-shell.mjs": {
-    "hash": "5def73391115c5da43a5977195e301ddcf3504ff264f129e828208a96659bbee",
-    "size": 2551,
+  "/studio/calendar.mjs": {
+    "hash": "21b680e5f990c875830cb3c1b588f2cc42b6f6137e453b7f22dbc2b6376c2441",
+    "size": 4972,
     "mime": "text/javascript; charset=utf-8"
   },
-  "/studio/i18n.mjs": {
-    "hash": "c69ac42b2d7fb121f84448bf0d12623d8da8f8a3fe840383f829120526bb5f8e",
-    "size": 65692,
+  "/studio/earnings.mjs": {
+    "hash": "7b632635e1de087c398982d882ae90917f2068899389a2e9488975f1f3952d17",
+    "size": 13445,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/format.mjs": {
+    "hash": "e26ce9aec08e0eac67bc84d2e68e5b4d563717b43a9ff3abcce02e06e519982b",
+    "size": 4635,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/icons/app-192.png": {
@@ -1105,14 +1100,24 @@
     "mime": "image/png"
   },
   "/studio/index.html": {
-    "hash": "1987f0525e93124e301d2273fd6f4bca6bf1fd885566dfabc810ce865afa8fbf",
-    "size": 1860,
+    "hash": "6adffd8358364da287d070344de3004570822276bdba793678074d5ff05dd954",
+    "size": 1890,
     "mime": "text/html; charset=utf-8"
   },
   "/studio/manifest.webmanifest": {
-    "hash": "82a483e61227158240aa39ab37eb2e29a9d050e8507464629f5072762b9fb376",
-    "size": 741,
+    "hash": "a643556cb4abdc27b0b113cf429a1e2fe8b7c39f7f835ee212d8592cfe1b77ff",
+    "size": 742,
     "mime": "application/manifest+json"
+  },
+  "/studio/model.mjs": {
+    "hash": "711580b8ad35f4f28ae32087f8fc0463ddec787c1f2710036350f08715b45962",
+    "size": 7786,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/names.mjs": {
+    "hash": "e13d323dabd8977c520f9417bc9fad31abda6f608107a88a9255743677492d69",
+    "size": 2271,
+    "mime": "text/javascript; charset=utf-8"
   },
   "/studio/opening.css": {
     "hash": "47aff49166a8b4141b43e0895db037ef9647c4f398f64c83599c42daf3985ea9",
@@ -1124,14 +1129,54 @@
     "size": 2231,
     "mime": "text/javascript; charset=utf-8"
   },
-  "/studio/order-design.mjs": {
-    "hash": "0727cf06631d302b8a7576ec1f42dd153cd21e6e45f4e78445dc79342a48ef28",
-    "size": 10197,
+  "/studio/order.mjs": {
+    "hash": "5a80a47bbd40c169049bd0bc567c2768934d6eeadeccb8266aa0dd28d90336d1",
+    "size": 33094,
     "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/orders.mjs": {
+    "hash": "2e40bbf018c2dfa49fcc4b8b80da72564767798b6002148b2c81955bb1332fae",
+    "size": 9839,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/print.mjs": {
+    "hash": "75458713a6f19009e9dcc7efd7bc470707e2a3d2ccf706defe04d70c3e22efd2",
+    "size": 3592,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/settings.mjs": {
+    "hash": "1564f483f2025c2cd491595991ef5eb5fd3925612e6735bf71d1a349513093ac",
+    "size": 5472,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/source-demo.mjs": {
+    "hash": "d2d28e1d02782382191323dc4878e965d064df4078ed81e30d0bbd375c18caa2",
+    "size": 3249,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/source-sheet.mjs": {
+    "hash": "bbb1a6bc45149ce8a301a965215015a511b00e00f5e1a0652cdd47393168a029",
+    "size": 3632,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/studio.css": {
+    "hash": "33284f537c83f000ae178daa67971a240d3228c92b614021b34d0a6513897b4a",
+    "size": 35620,
+    "mime": "text/css; charset=utf-8"
   },
   "/studio/sw.js": {
     "hash": "cfbf40f8c6cd3542fb8694a3f029e5e81cfa278e214f55671750460c0be2384a",
     "size": 446,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/text.mjs": {
+    "hash": "d1a4f2796acf87236b2ab9263ec0d2ce88cab05a97c748f59d7bc412880183a7",
+    "size": 37579,
+    "mime": "text/javascript; charset=utf-8"
+  },
+  "/studio/ui.mjs": {
+    "hash": "f716c87b22b1c3845be91634db31d3a818ef4b9796f37e9efb98a2d3315ab06b",
+    "size": 8216,
     "mime": "text/javascript; charset=utf-8"
   },
   "/upgrade.css": {

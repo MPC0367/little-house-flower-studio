@@ -3,7 +3,7 @@
   "name": "Little House Flower · The Studio",
   "short_name": "LH Studio",
   "description": "Orders, handover dates and payments for Little House Flower.",
-  "start_url": "/studio/#today",
+  "start_url": "/studio/#orders",
   "scope": "/studio/",
   "display": "standalone",
   "display_override": [

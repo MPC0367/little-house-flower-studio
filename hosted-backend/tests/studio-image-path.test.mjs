@@ -6,7 +6,7 @@ globalThis.document={documentElement:{}};
 globalThis.location={origin:'https://demo.example'};
 globalThis.localStorage={getItem(){return null;},setItem(){}};
 
-const {safeOrderImagePath}=await import('../public/studio/order-design.mjs');
+const {safeOrderImagePath}=await import('../public/studio/model.mjs');
 
 test('Studio order images accept only exact same-origin image routes',()=>{
   const hosted='/api/preview-assets/hosted-composition-0123456789abcdef01234567';
