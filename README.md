@@ -23,6 +23,17 @@ This is a client demonstration with synthetic data. The Studio opens without a p
 - `scripts/build-github-pages.mjs`: writes the **website** files into the website repo (by default `../site`, the folder beside this one). It leaves the Studio out and writes the forwarding page at the website's old `/studio/` address.
 - `tests/github-pages-smoke.mjs`: the browser check written for the combined site. Its Studio steps still use the old address and need updating.
 
+## The Studio and the shop's Google Sheet
+
+The Studio (`hosted-backend/public/studio/`) works with either of two sources of orders:
+
+- **The demo back end** (default): synthetic orders on the hosted demo, as the published Studio shows.
+- **The shop's Google Sheet**, the way O2's own dashboard app works with its Sheet: the Sheet stays the record people can open and edit, and a Studio script (`google/studio.gs`, a separate Apps Script project that never touches the website's order script) is the only thing that writes to it for the Studio. Each person signs in with a personal key the owner issues; every write is logged in the Sheet's hidden `_Activity` tab. The script's own header explains set-up, keys and deployment. It has not been deployed to Google; deploying it and connecting the live Sheet are the owner's decisions.
+
+Locally, without Google: `node scripts/sheet-emulator.mjs` (preview `lhf-sheet`, http://127.0.0.1:5585/exec) runs the real `studio.gs` against a synthetic copy of the Sheet in `.emulator/` (git-ignored; `google/emulator/fixture.mjs` makes it, with test keys in `.emulator/keys.json`). Connect the Studio to it in Settings. `google/emulator/apps-script.mjs` stands in for the Apps Script services the script uses; it proves the logic and the contract, not Google's quotas or timing.
+
+Tests: `node --test tests/studio-sheet.test.mjs` (the Sheet script) and `cd hosted-backend && node --test tests/*.test.mjs` (the back end).
+
 ## Rebuilding
 
 ```

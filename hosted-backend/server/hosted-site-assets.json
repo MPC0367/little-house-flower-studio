@@ -1130,13 +1130,13 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/order.mjs": {
-    "hash": "5a80a47bbd40c169049bd0bc567c2768934d6eeadeccb8266aa0dd28d90336d1",
-    "size": 33094,
+    "hash": "7d38f7e91b2ae7cacba18f1b9e021c0088a52bef81661066e7e5c352219a6e72",
+    "size": 33352,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/orders.mjs": {
-    "hash": "2e40bbf018c2dfa49fcc4b8b80da72564767798b6002148b2c81955bb1332fae",
-    "size": 9839,
+    "hash": "fca0dc5d44b3d4e87601a6dace285a0f13392f5fa2ca4d209dceadcfc1eca8b7",
+    "size": 9901,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/print.mjs": {
@@ -1170,8 +1170,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/text.mjs": {
-    "hash": "d1a4f2796acf87236b2ab9263ec0d2ce88cab05a97c748f59d7bc412880183a7",
-    "size": 37579,
+    "hash": "59187f1ff9c9e2fdf1c64efecd883ce4ddb5d33b37581e4963e1e3e5cf04b45b",
+    "size": 37746,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/ui.mjs": {

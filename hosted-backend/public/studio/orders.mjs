@@ -76,7 +76,7 @@ export function mount(host,studio){
   function row(o){
     const tag=dayTag(o),img=orderImages(o).find(i=>i.role==='product'||i.role==='concept'||i.role==='composition');
     const thumb=img?h('img.thumb',{src:img.src,alt:'',loading:'lazy',decoding:'async',width:48,height:48,onError:e=>e.target.replaceWith(h('span.thumb.placeholder',icon('flower',{size:20})))}):h('span.thumb.placeholder',icon('flower',{size:20}));
-    const amount=o.status==='cancelled'?t('empty'):o.confirmedTotal!=null?satang(o.confirmedTotal):t('amount.quote');
+    const amount=o.status==='cancelled'?t('empty'):o.confirmedTotal!=null?satang(o.confirmedTotal):o.subtotal!=null?t('amount.from',{amount:satang(o.subtotal)}):t('amount.quote');
     return h('tr.order-row',{dataset:{id:o.id},class:o.status==='cancelled'?'is-cancelled':''},
       h('td.c-thumb',thumb),
       h('th.c-order',{scope:'row'},h('a.order-link',{href:'#orders/'+encodeURIComponent(o.id)},o.ref),h('span.order-customer',o.customer?.name||'')),

@@ -253,7 +253,7 @@ function createPanel(id,section){
     const items=(o.items||[]).length?h('ul.item-list',(o.items||[]).map(item=>h('li',
       h('span.item-name',pick(item.name)||item.name||''),
       item.qty!=null?h('span.item-qty',t('order.qty',{qty:item.qty})):null,
-      h('span.item-price',item.kind==='quote'||item.line==null?t('order.lineQuote'):baht(item.line))))):null;
+      item.kind==='text'?null:h('span.item-price',item.kind==='quote'||item.line==null?t('order.lineQuote'):baht(item.line))))):null;
     return h('section.order-section',{'aria-labelledby':'s-design'},
       h('h3.section-title',{id:'s-design'},t('order.design')),
       images.length?h('div.figures',images.map(imageFigure)):null,
@@ -269,6 +269,7 @@ function createPanel(id,section){
         field(t('order.estimate'),c.estimate?.kind==='published'&&c.estimate.low!=null?t('order.estimate.published',{amount:satang(c.estimate.low)}):t('order.estimate.quote')),
         c.banknoteValue?field(t('order.banknotes'),baht(c.banknoteValue)):null):null,
       c&&styleNote(c.style)?h('p.section-help',styleNote(c.style)):null,
+      !c&&(o.budget||o.subtotal!=null||o.quoteNeeded)?h('dl.kv-list',field(t('order.budget'),o.budget||null),field(t('order.subtotal'),o.subtotal!=null?satang(o.subtotal):null),field(t('order.quoteNeeded'),o.quoteNeeded||null)):null,
       c?.notes||o.customerNotes?h('div.brief',h('h4.sub-title',t('order.customerNotes')),h('p.prewrap',c?.notes||o.customerNotes)):null,
       !c&&o.colourNote?field(t('order.colourNote'),o.colourNote):null);
   }

@@ -175,6 +175,8 @@ const S={
   'order.customerNotes':['Customer\'s notes','หมายเหตุจากลูกค้า'],
   'order.colourNote':['Colour or feeling','สีหรือบรรยากาศ'],
   'order.budget':['Budget','งบประมาณ'],
+  'order.subtotal':['Total on the website','ยอดตามหน้าเว็บ'],
+  'order.quoteNeeded':['Price note','หมายเหตุราคา'],
   'order.estimate':['Estimate','ราคาประเมิน'],
   'order.estimate.published':['Published price {amount}','ราคาตามร้าน {amount}'],
   'order.estimate.quote':['The shop confirms the price','ร้านยืนยันราคา'],
