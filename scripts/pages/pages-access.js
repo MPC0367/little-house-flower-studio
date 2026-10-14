@@ -45,6 +45,8 @@
   });}
   async function start(){
     try{
+      // the opening film first, so it covers the Studio before the Studio draws; a failure to load it never stops the Studio
+      await loadScript('shared/opening-film.js').then(()=>loadScript('opening.js')).catch(()=>{});
       await loadScript('admin.mjs','module');await loadScript('app-shell.mjs','module');
     }catch(error){
       const target=document.getElementById('app')||document.getElementById('main');

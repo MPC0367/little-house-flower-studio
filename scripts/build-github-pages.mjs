@@ -10,7 +10,7 @@ const source=path.resolve(process.argv[2]||path.join(here,'hosted-backend/public
 const root=path.resolve(process.argv[3]||path.join(here,'..','site'));
 const studioURL='/little-house-flower-studio/';
 const base='/Little-House-Flower';
-const release='intro-film-20261014-3';
+const release='film-opening-20261015-1';
 const textTypes=new Set(['.html','.css','.js','.mjs','.json','.webmanifest','.txt']);
 const filenames=['site.css','upgrade.css','polish.css','customizer.css','customizer.mjs','logo-intro.css','hosted-context.js','storefront.js'];
 

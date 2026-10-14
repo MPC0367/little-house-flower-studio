@@ -30,6 +30,16 @@
 if (!location.hash || /^#\/?(?:\?|$)/.test(location.hash)) {
  const p=document.createElement('link');p.rel='preload';p.as='image';p.href='/img/hr_p11_box_congrats_1490__1200.webp';p.imageSrcset='/img/hr_p11_box_congrats_1490__1200-640w.webp 640w, /img/hr_p11_box_congrats_1490__1200.webp 900w';p.imageSizes='(min-width:1200px) 50vw, (min-width:900px) 41.667vw, 100vw';p.fetchPriority='high';document.head.append(p);
 }
+// Start the opening film's download too; the cover starts the film the moment it appears (shared/opening-film.js).
+// Same rule as the opening (logo-intro.js): every homepage load and the first page of a browser session, never with reduced motion.
+(function(){try{
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ var home=!location.hash||/^#\/?(?:\?|$)/.test(location.hash),seen=false;
+ try{seen=sessionStorage.getItem('lhf.logo.intro.v5')==='1';}catch(e){}
+ if(!home&&seen)return;
+ var v=document.createElement('video');v.muted=true;v.defaultMuted=true;v.playsInline=true;v.setAttribute('muted','');v.setAttribute('playsinline','');v.preload='auto';
+ v.src='/media/little-house-flower-loading-v5-1080p.mp4';window.LHF_OPENING_FILM=v;
+}catch(e){}})();
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

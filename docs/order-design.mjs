@@ -1,5 +1,5 @@
-import {t,getLanguage,locale} from './i18n.mjs?v=studio-20261014-1';
-import {styles,materials,finishes,palettes,ribbonLabels,sizeLabels,statusLabels,colorSwatches} from './shared/config.mjs?v=studio-20261014-1';
+import {t,getLanguage,locale} from './i18n.mjs?v=studio-20261015-1';
+import {styles,materials,finishes,palettes,ribbonLabels,sizeLabels,statusLabels,colorSwatches} from './shared/config.mjs?v=studio-20261015-1';
 const groups=new Set();
 window.addEventListener('lhf:languagechange',()=>{for(const ref of groups){const root=ref.deref();if(!root){groups.delete(ref);continue;}if(root.isConnected)root.refreshLanguage();}});
 const node=(tag,attrs={},...children)=>{const el=document.createElement(tag);for(const[k,v]of Object.entries(attrs))if(v!=null)el.setAttribute(k,v);for(const child of children.flat(Infinity))if(child!=null)el.append(child instanceof Node?child:document.createTextNode(String(child)));return el;};

@@ -1,0 +1,7 @@
+/* The Studio's opening film: the same cover as the website's (logo-intro.css), uncropped at every size. */
+.lhf-logo-intro{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;background:#f6f5f3;isolation:isolate;opacity:1;transition:opacity 180ms ease}
+.lhf-logo-intro.is-dismissing{opacity:0;pointer-events:none}
+.lhf-logo-intro:focus{outline:none}
+.lhf-logo-stage{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none;overflow:hidden}
+.lhf-logo-stage>video{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain}
+@media(prefers-reduced-motion:reduce){.lhf-logo-intro{transition:none}}

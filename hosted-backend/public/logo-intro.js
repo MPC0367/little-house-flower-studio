@@ -1,14 +1,9 @@
-/* Supplied v5 brand film. Kept separate from routing and shop operations. */
+/* The website's opening: the supplied v5 brand film over the page while it loads. Kept separate from routing and
+   shop operations. How the film plays (and why it is never a still picture) is in shared/opening-film.js.
+   Homepage loads always play it; other routes once per browser session; never with reduced motion. */
 (function(){
 'use strict';
 const SESSION_KEY='lhf.logo.intro.v5';
-const VIDEO='/media/little-house-flower-loading-v5-1080p.mp4';
-const POSTER='/media/little-house-flower-v5-poster-1080p.png';
-// The opening IS the supplied film (little-house-flower-loading-v5-1080p.mp4, 4.4s) and never lasts longer.
-// It plays once at its own speed, is never held, slowed or sped up, and the overlay closes when the film ends.
-// Whatever happens (slow network, page still loading), the overlay is gone FILM_SECONDS after it appeared.
-// The film's last second is a still 100% frame, so a slow start only trims stillness, never the drawing.
-const FILM_SECONDS=4.4,MAX_WAIT=FILM_SECONDS*1000,FADE=180;
 const local=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
 const query=new URLSearchParams(location.search);
 const forced=local&&query.get('intro')==='1';
@@ -29,44 +24,51 @@ function safeFallback(){
 function start({demo=false}={}){
  document.querySelector('#loader')?.remove();
  if(running)return running;
- if(matchMedia('(prefers-reduced-motion: reduce)').matches){markSeen();lastReport={reason:'reduced-motion',elapsed:0,milestones:{},progress:0};return null;}
+ const film=window.LHFOpeningFilm;
+ if(!film)return null;
+ if(matchMedia('(prefers-reduced-motion: reduce)').matches){film.discard();markSeen();lastReport={reason:'reduced-motion',elapsed:0,milestones:{},progress:0};return null;}
  // Homepage reloads always replay; other routes keep their once-per-session opening.
- if(!demo&&seen()&&LHF.router.parse(location.hash).path!=='/')return null;
+ if(!demo&&seen()&&LHF.router.parse(location.hash).path!=='/'){film.discard();return null;}
  const begun=performance.now(),milestones={shell:false,logo:false,criticalImage:false,route:false};
- const state={elapsed:0,timeline:0,progress:0,milestones,reason:null,demo,hold:null,media:'video',playback:'loading',duration:null};
+ const state={elapsed:0,timeline:0,progress:0,milestones,reason:null,demo,media:'video',playback:'waiting',startDelay:null,duration:film.FILM_MS/1000};
  const overlay=elem('div','lhf-logo-intro');overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('tabindex','-1');overlay.setAttribute('aria-label',tr('ยินดีต้อนรับสู่ลิตเติลเฮาส์ฟลาวเวอร์','Welcome to Little House Flower'));
  const stage=elem('div','lhf-logo-stage');
  // Keep the supplied artwork intact; the film's decorative percentage is not network readiness.
  stage.setAttribute('role','img');stage.setAttribute('aria-label','Little House Flower — Represent your love');
- const video=elem('video','lhf-logo-video'),poster=elem('img','lhf-logo-poster');
- video.muted=true;video.defaultMuted=true;video.autoplay=true;video.playsInline=true;video.preload='auto';video.controls=false;video.loop=false;video.setAttribute('muted','');video.setAttribute('playsinline','');video.setAttribute('aria-hidden','true');video.disablePictureInPicture=true;
- // The supplied poster is the final 100% frame. Reserve it for fallback to avoid a 100-to-0 flash.
- poster.alt='';poster.width=1920;poster.height=1080;poster.hidden=true;poster.src=POSTER;stage.append(video,poster);
  const number=elem('span','lhf-logo-progress','0%');number.setAttribute('role','progressbar');number.setAttribute('aria-valuemin','0');number.setAttribute('aria-valuemax','100');number.setAttribute('aria-valuenow','0');number.setAttribute('aria-label',tr('ความพร้อมของหน้าเว็บ','Page readiness'));
  const caption=elem('span','lhf-logo-progress-label',tr('กำลังเตรียมหน้าเว็บ','Preparing your visit'));
  const announce=elem('span','lhf-logo-sr',tr('กำลังเตรียมหน้าเว็บ','Preparing the page'));announce.setAttribute('role','status');announce.setAttribute('aria-live','polite');
  overlay.append(stage,number,caption,announce);
  const previous=document.activeElement;
  const background=[...document.body.children].map(el=>[el,el.inert]);
- let finished=false,dismissing=false,readyAt=null,raf=null,timer=null,startupTimer=null,observer=null,showValue=0,lastFrame=performance.now(),criticalStarted=false,criticalCleanup=null,fallbackAt=null,playbackEnded=false,lastVideoTime=0,lastPlaybackAt=performance.now();
+ let finished=false,dismissing=false,observer=null,criticalStarted=false,criticalCleanup=null,player=null;
  function finish(reason){
-  if(finished)return;finished=true;state.reason=reason;state.elapsed=performance.now()-begun;
-  clearTimeout(timer);clearTimeout(startupTimer);cancelAnimationFrame(raf);observer?.disconnect();criticalCleanup?.();window.removeEventListener('error',onError);window.removeEventListener('unhandledrejection',onError);video.pause();video.removeAttribute('src');video.load();overlay.remove();
+  if(finished)return;finished=true;
+  player?.stop();
+  const f=player?.state;
+  state.reason=reason;state.elapsed=performance.now()-begun;
+  state.timeline=f?.timeline??0;state.playback=f?.playback??'none';state.startDelay=f?.startDelay??null;
+  // 'video' only if the film actually moved on screen; otherwise the page opened without an opening
+  state.media=f?.startDelay!=null?'video':'none';
+  observer?.disconnect();criticalCleanup?.();window.removeEventListener('error',onError);window.removeEventListener('unhandledrejection',onError);overlay.remove();
   background.forEach(([el,inert])=>{if(el.isConnected)el.inert=inert;});
   if(previous&&previous!==document.body&&previous.isConnected&&!previous.inert){previous.focus({preventScroll:true});}
   else {const entry=document.querySelector('#skiplink');entry?.focus({preventScroll:true});}
   // the page goes on loading behind the opening; only if it is still empty a while later does it offer Retry and LINE
   if(!milestones.route)setTimeout(safeFallback,6000);
-  markSeen();running=null;const {seek,resume,...report}=state;lastReport=structuredClone(report);document.dispatchEvent(new CustomEvent('lhf:intro-dismissed',{detail:lastReport}));
+  markSeen();running=null;lastReport=structuredClone(state);document.dispatchEvent(new CustomEvent('lhf:intro-dismissed',{detail:lastReport}));
  }
- function dismiss(reason){if(finished||dismissing)return;dismissing=true;overlay.classList.add('is-dismissing');setTimeout(()=>finish(reason),FADE);}
+ function dismiss(reason){if(finished||dismissing)return;dismissing=true;overlay.classList.add('is-dismissing');setTimeout(()=>finish(reason),film.FADE_MS);}
  function onError(){safeFallback();finish('application-error');}
  overlay.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();overlay.focus({preventScroll:true});}});
  background.forEach(([el])=>{el.inert=true;});document.body.append(overlay);overlay.focus({preventScroll:true});running=state;
- // Arm cleanup before asynchronous work so failed assets or other scripts cannot trap focus.
- timer=setTimeout(()=>dismiss(milestones.route?'film-length':'film-length-page-still-loading'),MAX_WAIT-FADE);
  window.addEventListener('error',onError);window.addEventListener('unhandledrejection',onError);
- function mark(name){if(finished||milestones[name])return;milestones[name]=true;state.progress=(milestones.shell?40:0)+(milestones.logo?20:0)+(milestones.criticalImage?20:0)+(milestones.route?20:0);if(state.progress===100&&readyAt===null){readyAt=performance.now();announce.textContent=tr('หน้าเว็บพร้อมแล้ว','Page ready');caption.textContent=tr('ยินดีต้อนรับ','Welcome');}}
+ function mark(name){
+  if(finished||milestones[name])return;milestones[name]=true;
+  state.progress=(milestones.shell?40:0)+(milestones.logo?20:0)+(milestones.criticalImage?20:0)+(milestones.route?20:0);
+  number.textContent=state.progress+'%';number.setAttribute('aria-valuenow',String(state.progress));
+  if(state.progress===100){announce.textContent=tr('หน้าเว็บพร้อมแล้ว','Page ready');caption.textContent=tr('ยินดีต้อนรับ','Welcome');}
+ }
  function criticalImage(){
   if(criticalStarted)return;criticalStarted=true;
   // The inline LQIP is already decoded, but is not the critical photograph.
@@ -87,53 +89,14 @@ function start({demo=false}={}){
   if(main?.children.length&&main.dataset.route){mark('route');criticalImage();}
  }
  observer=new MutationObserver(check);observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['data-route']});check();
- function usePoster(reason){
-  if(finished||state.media==='poster')return;
-  state.media='poster';state.playback=reason;fallbackAt=performance.now();clearTimeout(startupTimer);video.pause();video.hidden=true;video.removeAttribute('src');video.load();poster.hidden=false;
-  const settle=()=>{if(finished)return;if(!poster.naturalWidth){poster.hidden=true;stage.append(elem('span','lhf-logo-text-fallback','Little House Flower'));}mark('logo');};
-  if(poster.complete)settle();else{poster.addEventListener('load',settle,{once:true});poster.addEventListener('error',settle,{once:true});}
- }
- function play(){
-  if(finished||state.media!=='video')return;
-  try{const promise=video.play();promise?.catch(()=>usePoster('blocked'));}catch{usePoster('blocked');}
- }
- function syncPlayback(now){
-  if(state.media!=='video'||state.hold!==null||!Number.isFinite(video.duration))return;
-  // always the film's own speed, from start to end, without pausing for the page
-  if(video.playbackRate!==1)video.playbackRate=1;
- }
- video.addEventListener('loadedmetadata',()=>{if(!finished)state.duration=video.duration;});
- video.addEventListener('loadeddata',()=>{if(!finished&&state.media==='video')mark('logo');});
- video.addEventListener('playing',()=>{if(finished||state.media!=='video')return;clearTimeout(startupTimer);state.playback='playing';lastPlaybackAt=performance.now();});
- video.addEventListener('ended',()=>{if(finished||state.media!=='video')return;playbackEnded=true;state.playback='ended';mark('logo');});
- video.addEventListener('error',()=>usePoster('error'));
- // A blocked request or a play() promise that never settles must not cover the shop indefinitely.
- startupTimer=setTimeout(()=>usePoster('stalled'),1800);
- video.src=VIDEO;play();
- function tick(now){
-  if(finished)return;state.elapsed=now-begun;
-  const dt=Math.min(50,now-lastFrame);lastFrame=now;
-  syncPlayback(now);
-  state.timeline=video.currentTime*1000;
-  if(state.media==='video'&&state.playback==='playing'&&!playbackEnded&&state.hold===null){
-   if(video.currentTime!==lastVideoTime){lastVideoTime=video.currentTime;lastPlaybackAt=now;}
-   else if(now-lastPlaybackAt>1800)usePoster('stalled');
-  }
-  showValue=Math.min(state.progress,showValue+dt*.24);const display=Math.round(showValue);number.textContent=display+'%';number.setAttribute('aria-valuenow',String(display));
-  overlay.dataset.timeline=String(Math.round(state.timeline));overlay.dataset.ready=String(state.progress===100);overlay.dataset.media=state.media;
-  // the film ended: the opening ends with it, ready or not
-  if(playbackEnded&&state.hold===null)dismiss('film-ended');
-  // no film could play: the poster stands in until the page is ready, and never past the film's length (the timer)
-  else if(state.media==='poster'&&readyAt!==null&&now-fallbackAt>=350&&state.hold===null)dismiss('ready');
-  raf=requestAnimationFrame(tick);
- }
- raf=requestAnimationFrame(tick);
- state.seek=ms=>{state.hold=Math.max(0,Math.min((Number.isFinite(video.duration)?video.duration:FILM_SECONDS)*1000,Number(ms)||0));video.pause();video.currentTime=state.hold/1000;state.timeline=state.hold;};
- state.resume=()=>{state.hold=null;lastPlaybackAt=performance.now();play();};
+ // The film decides when the cover goes: at its end, or at once if it cannot play. The page loads behind it.
+ player=film.run(stage,{onEnd:reason=>dismiss(reason)});
+ player.video.addEventListener('loadeddata',()=>mark('logo'),{once:true});
+ if(player.video.readyState>=2)mark('logo');
  return state;
 }
 LHF.localIntro=()=>start({demo:forced});
 // Local-only inspection tooling. No route change, data mutation or live request.
-LHF.logoIntro={replay(){return local?start({demo:true}):null;},get report(){return lastReport;},get state(){return running;},setFrame(ms){if(local&&running){running.seek(ms);return true;}return false;},resume(){if(local&&running)running.resume();}};
+LHF.logoIntro={replay(){return local?start({demo:true}):null;},get report(){return lastReport;},get state(){return running;}};
 document.addEventListener('lhf:replay-intro',()=>{if(local)LHF.logoIntro.replay();});
 })();

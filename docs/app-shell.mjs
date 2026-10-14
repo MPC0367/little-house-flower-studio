@@ -1,4 +1,4 @@
-import {t} from './i18n.mjs?v=studio-20261014-1';
+import {t} from './i18n.mjs?v=studio-20261015-1';
 // Installation does not cache orders, customer details or private images.
 let installPrompt=null;
 window.addEventListener('beforeinstallprompt',event=>{event.preventDefault();installPrompt=event;});
