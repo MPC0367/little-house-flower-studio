@@ -58,8 +58,11 @@ LHF.pages.flowers = function (params, query) {
     try { history.replaceState(history.state, '', R.href('/flowers', { view: state.view, category: state.category, occasion: state.occasion, color: state.color, search:state.search, sort:state.sort })); } catch (e) {}
     U.empty(body);
     if (!items.length) { body.appendChild(h('div.empty', t('flowers.empty'), h('div.empty-actions', ui.btn(LHF.i18n.lang==='th'?'ล้างทั้งหมด':'Clear all filters', { onClick:()=>{resetFilters();searchInput.focus({preventScroll:true});} })), h('div', { style: { marginTop: '12px' } }, ui.btn(t('nav.custom'), { className: 'btn-primary', href: R.href('/custom') })))); return; }
-    if (state.view === 'cards') body.appendChild(LHF.cards.grid(items));
-    else body.appendChild(h('div.ledger', items.map(LHF.cards.ledgerRow)));
+    const draw = (some) => state.view === 'cards' ? LHF.cards.grid(some) : h('div.ledger', some.map(LHF.cards.ledgerRow));
+    /* sorted by price: the flowers without a published price are their own group, never ranked as if they had one */
+    const quoted = items.filter((p) => LHF.engine.priceKind(p) === 'quote'), priced = items.filter((p) => LHF.engine.priceKind(p) !== 'quote');
+    if (state.sort !== 'featured' && quoted.length && priced.length) body.append(draw(priced), h('h2.h4.sort-group', t('price.quote') + ' · ' + quoted.length), draw(quoted));
+    else body.appendChild(draw(items));
     ui.reveal(body);
   }
   sync();

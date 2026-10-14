@@ -45,7 +45,13 @@ LHF.sink=(function(){
 
 
 function accept(booking,result){if(result.ok){if(result.receipt)Object.assign(booking,result.receipt);else for(const key of ['ref','windowId','windowLabel'])if(result[key]!=null)booking[key]=result[key];booking.revision=result.revision;booking.syncState=result.syncState;}return result;}
-async function deliver(booking,opts={}){if(opts.hp)return {ok:false};await LHF.localSession;try{const recovered=await LHF.localAPI('/api/orders/submission/'+booking.id);if(recovered.ok)return accept(booking,recovered);}catch(e){if(e.status!==404)return {ok:false,reason:e.message};}try{return accept(booking,await LHF.localAPI('/api/orders', {...booking,consent:true},{signal:AbortSignal.timeout(12000)}));}catch(e){return {ok:false,reason:e.message};}}
+async function deliver(booking,opts={}){if(opts.hp)return {ok:false};await LHF.localSession;try{const recovered=await LHF.localAPI('/api/orders/submission/'+booking.id);if(recovered.ok)return accept(booking,recovered);}catch(e){if(e.status!==404)return {ok:false,offline:!e.status,reason:e.message};}try{return accept(booking,await LHF.localAPI('/api/orders', {...booking,consent:true},{signal:AbortSignal.timeout(12000)}));}catch(e){
+ // refused by the shop's system (a 4xx answer): it was not saved
+ if(e.status&&e.status<500&&e.status!==408&&e.status!==429)return {ok:false,reason:e.message};
+ // no answer, or a server error: it may have been saved. Ask once more by this booking's own id before saying anything
+ try{const again=await LHF.localAPI('/api/orders/submission/'+booking.id,undefined,{signal:AbortSignal.timeout(8000)});if(again.ok)return accept(booking,again);}catch(e2){if(e2.status===404)return {ok:false,reason:e.message};}
+ return {ok:false,unknown:true,reason:e.message};
+}}
 return {deliver,summary,totalLabel,lineUrl,start(){},send(){},status:()=>({configured:true,blocked:false,queued:0})};
 })();
 LHF.pages.custom=async function(params,query){const {renderCustomizer}=await import('/customizer.mjs');return renderCustomizer(params,query);};

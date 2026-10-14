@@ -971,7 +971,7 @@ LHF.data.pricesCurrent = LHF.i18n.shopNow().iso <= LHF.data.policies.priceValidU
 
 /* The privacy notice at /privacy (PDPA). The controller is the shop; the date is
    shown on the page, so change it whenever the notice changes. */
-LHF.data.privacy = { updated: '2026-09-29', retentionMonths: 12 };
+LHF.data.privacy = { updated: '2026-10-15', retentionMonths: 12 };
 
 /* Booking defaults. These are operating defaults, NOT published facts; the site
    has no per-device overrides for them. */
@@ -1333,6 +1333,9 @@ LHF.data.strings = {
   'book.fail.title': { th: 'คำจองนี้ยังไม่ถึงร้านค่ะ', en: 'Your reservation hasn’t reached the shop yet' },
   'book.fail.body': { th: 'ระบบส่งคำจองไปที่ร้านไม่สำเร็จ แต่ข้อมูลที่กรอกไว้ยังอยู่ครบค่ะ กดส่งอีกครั้ง ส่งคำจองทาง LINE (มีข้อความเตรียมไว้ให้แล้ว) หรือโทรหาร้านได้เลยนะคะ', en: 'We couldn’t get it to the shop, but everything you entered is still here. Try again, send the reservation on LINE (the message is written for you), or call us.' },
   'book.fail.retry': { th: 'ส่งอีกครั้ง', en: 'Try again' },
+  'book.unknown.title': { th: 'ยังยืนยันไม่ได้ว่าคำจองถึงร้านหรือยังค่ะ', en: 'We couldn’t confirm your reservation reached the shop' },
+  'book.unknown.body': { th: 'ระบบของร้านไม่ตอบกลับทันเวลา คำจองอาจถึงร้านแล้วก็ได้ กด ตรวจสอบอีกครั้ง ก่อนส่งทาง LINE หรือโทร เพื่อไม่ให้จองซ้ำค่ะ ข้อมูลที่กรอกไว้ยังอยู่ครบ', en: 'The shop’s system didn’t answer in time, so your reservation may already be there. Press Check again before sending it on LINE or calling, so it isn’t booked twice. Everything you typed is still here.' },
+  'book.unknown.retry': { th: 'ตรวจสอบอีกครั้ง', en: 'Check again' },
   'book.fail.line': { th: 'ส่งคำจองทาง LINE', en: 'Send it on LINE' },
   'book.fail.call': { th: 'โทร {phone}', en: 'Call {phone}' },
   'cal.prevMonth': { th: 'เดือนก่อนหน้า', en: 'Previous month' },
@@ -1480,6 +1483,7 @@ LHF.data.strings = {
   'notfound.title': { th: 'ไม่พบหน้านี้ค่ะ', en: 'Nothing at this door.' },
   'notfound.sub': { th: 'กลับไปหน้าบ้านกันนะคะ', en: 'Head back to the house.' },
   'notfound.home': { th: 'กลับหน้าแรก', en: 'Back home' },
+  'notfound.flowers': { th: 'ดูดอกไม้ทั้งหมด', en: 'See all flowers' },
   'error.title': { th: 'มีบางอย่างผิดพลาดค่ะ', en: 'Something went wrong.' },
   'nav.main': { th: 'เมนูหลัก', en: 'Main' },
   'nav.home': { th: 'Little House Flower หน้าแรก', en: 'Little House Flower home' },
@@ -1595,17 +1599,17 @@ LHF.data.strings = {
   'privacy.what.2': { th: 'ชื่อ เบอร์โทร และที่อยู่ของผู้รับ พร้อมจุดสังเกตสำหรับคนส่ง (เฉพาะคำจองที่ให้ร้านส่ง)', en: 'The recipient’s name, phone number and address, with any note for the rider (delivery orders only)' },
   'privacy.what.3': { th: 'ข้อความที่ให้ร้านเขียนในการ์ด', en: 'The message for the card' },
   'privacy.what.4': { th: 'ช่อที่เลือก วันและช่วงเวลาที่ต้องการ งบ และรายละเอียดที่คุณเขียนถึงร้าน', en: 'What you order, the day and time you need it, your budget and any details you write to us' },
-  'privacy.what.photo': { th: "รูปอ้างอิงจะอัปโหลดเมื่อคุณยินยอม และเปิดดูได้จากรายละเอียดออเดอร์ในระบบจัดการร้าน รูปจะไม่ถูกส่งให้ผู้ให้บริการ AI", en: "Reference photos are uploaded with your acknowledgment and can be viewed in the Studio order details. They are not sent to an AI provider." },
+  'privacy.what.photo': { th: "ถ้าคุณเลือกแนบรูปอ้างอิงและกดยินยอม รูปจะถูกอัปโหลดไปเก็บในพื้นที่ส่วนตัวของร้านทางออนไลน์ เปิดดูได้เฉพาะพนักงานของร้านที่ลงชื่อเข้าใช้ ไม่ถูกส่งให้ผู้ให้บริการ AI และจะเก็บไว้จนกว่าร้านจะลบ ถ้าต้องการให้ลบ ทัก LINE หรือโทรหาร้านได้เลยค่ะ", en: "If you attach a reference photo and agree, it is uploaded to the shop’s private online storage. Only signed-in shop staff can open it. It is not sent to an AI provider, and it is kept until the shop deletes it: message us on LINE or call, and we will delete it." },
   'privacy.why.h': { th: 'ทางร้านใช้ข้อมูลเพื่ออะไร', en: 'What we use it for' },
   'privacy.why.p': { th: 'เพื่อจัดเตรียมและส่งดอกไม้ตามคำจองของคุณ และเพื่อติดต่อคุณและผู้รับเกี่ยวกับคำจองนั้นเท่านั้นค่ะ', en: 'Only to prepare and deliver your order, and to contact you and the recipient about it.' },
   'privacy.where.h': { th: 'ข้อมูลไปอยู่ที่ไหน', en: 'Where it goes' },
-  'privacy.where.p': { th: "คำจองและรูปอ้างอิงเก็บไว้ในระบบออนไลน์ ยังไม่ได้เชื่อมต่อ Google Sheets การแจ้งเตือนอัตโนมัติ หรือบริการจัดส่ง", en: "Reservations and reference images are stored online. Google Sheets, automatic notifications and courier services are not connected." },
+  'privacy.where.p': { th: "คำจองและรูปอ้างอิงเก็บไว้ในระบบออนไลน์ของร้าน ตอนนี้ยังไม่ได้เชื่อมต่อ Google Sheets หรือการแจ้งเตือนอัตโนมัติ สำหรับคำจองที่ให้ร้านส่ง ร้านจะให้ชื่อ เบอร์โทร และที่อยู่ของผู้รับแก่ผู้ให้บริการขนส่ง เช่น Lalamove เพื่อนำดอกไม้ไปส่งค่ะ", en: "Reservations and reference photos are kept in the shop’s online system; Google Sheets and automatic notifications are not connected. For delivery orders, the shop gives the recipient’s name, phone number and address to a delivery service, such as Lalamove, so the flowers can be delivered." },
   'privacy.where.fonts': { th: 'เว็บไซต์นี้โหลดตัวอักษรจาก Google Fonts ทุกครั้งที่เปิดหน้าเว็บ เบราว์เซอร์ของคุณจึงติดต่อเซิร์ฟเวอร์ของ Google ซึ่งจะเห็นหมายเลข IP ของคุณค่ะ', en: 'This website loads its fonts from Google Fonts, so each time you open a page your browser contacts Google’s servers, which see your IP address.' },
   'privacy.where.map': { th: 'หน้าติดต่อร้านมีแผนที่จาก OpenStreetMap เมื่อเปิดหน้านั้น เบราว์เซอร์ของคุณจะโหลดภาพแผนที่จากเซิร์ฟเวอร์ของ OpenStreetMap และโค้ดแผนที่ (Leaflet) จาก cdnjs ซึ่งจะเห็นหมายเลข IP ของคุณเช่นกันค่ะ', en: 'The contact page shows a map from OpenStreetMap. When you open it, your browser loads map images from OpenStreetMap’s servers and the map code (Leaflet) from cdnjs, which also see your IP address.' },
   'privacy.device.h': { th: 'ข้อมูลบนเครื่องของคุณ', en: 'On your device' },
   'privacy.device.p': { th: 'ระหว่างกรอกคำจอง เบราว์เซอร์จะเก็บสิ่งที่คุณพิมพ์และรูปอ้างอิงที่เลือกไว้ในเครื่องนี้ เพื่อไม่ให้ข้อมูลหายถ้าปิดหน้าไปก่อน เมื่อส่งคำจองแล้ว ข้อมูลที่กรอกจะถูกลบออกจากเครื่อง ถ้ากรอกค้างไว้โดยไม่ได้ส่ง ชื่อ เบอร์โทร ที่อยู่ ข้อความการ์ด และรูปอ้างอิงจะถูกลบเองหลัง 36 ชั่วโมง หลังส่งคำจอง เครื่องนี้เก็บเพียงสรุปคำจอง (หมายเลขคำจอง วันที่ และรายการดอกไม้ ไม่มีชื่อ เบอร์โทร ที่อยู่ หรือข้อความการ์ด) ไว้ 30 วัน เพื่อให้เปิดดูหน้าคำจองได้อีก และจำภาษาที่คุณเลือกไว้ ข้อมูลส่วนนี้อยู่ในเครื่องของคุณเท่านั้น ลบได้ทุกเมื่อโดยล้างข้อมูลเว็บไซต์ในเบราว์เซอร์ค่ะ', en: 'While you fill in a booking, your browser keeps what you type, and any reference photo you choose, on this device so nothing is lost if you close the page. Once the booking is sent, those details are cleared from the device. If a booking is left unsent, the names, phone numbers, address, card message and photo are removed after 36 hours. After sending, this device keeps only a summary (booking number, date and flowers, with no names, phone numbers, address or card message) for 30 days so you can open the booking page again, and it remembers your language. This copy stays on your device; clear this site’s data in your browser to remove it at any time.' },
   'privacy.keep.h': { th: 'เก็บไว้นานแค่ไหน', en: 'How long we keep it' },
-  'privacy.keep.p': { th: "ฉบับร่างและใบสรุปแบบย่อเก็บในเบราว์เซอร์ ส่วนคำจองและรูปอ้างอิงเก็บในระบบออนไลน์ หากต้องการสอบถามเรื่องข้อมูล กรุณาติดต่อทางร้านค่ะ", en: "Drafts and minimal receipts are stored in your browser. Reservations and reference images are stored online. Please contact the shop with questions about your information." },
+  'privacy.keep.p': { th: "ฉบับร่างและใบสรุปแบบย่อเก็บอยู่ในเบราว์เซอร์ของคุณ ส่วนคำจองและรูปอ้างอิงในระบบออนไลน์ของร้าน ตอนนี้ระบบยังไม่ลบให้อัตโนมัติ ถ้าต้องการให้ลบข้อมูลของคุณ ทัก LINE หรือโทรหาร้านได้ทุกเมื่อ ร้านจะลบให้ค่ะ", en: "Drafts and short receipts stay in your browser. Reservations and reference photos in the shop’s online system are not yet deleted automatically: message us on LINE or call at any time, and we will delete your details." },
   'privacy.rights.h': { th: 'สิทธิของคุณ', en: 'Your rights' },
   'privacy.rights.p': { th: 'คุณขอดู ขอแก้ไข หรือขอให้ลบข้อมูลของคุณ และถอนความยินยอมได้ทุกเมื่อ ทัก LINE {line} หรือโทร {phone} ได้เลยค่ะ หากเห็นว่าข้อมูลถูกใช้ไม่ถูกต้อง ร้องเรียนต่อสำนักงานคณะกรรมการคุ้มครองข้อมูลส่วนบุคคลได้', en: 'You can ask to see, correct or delete your data, and withdraw your consent, at any time: message us on LINE {line} or call {phone}. If you think your data has been misused, you can complain to Thailand’s Personal Data Protection Committee.' },
 
@@ -3111,8 +3115,11 @@ LHF.pages.flowers = function (params, query) {
     try { history.replaceState(history.state, '', R.href('/flowers', { view: state.view, category: state.category, occasion: state.occasion, color: state.color, search:state.search, sort:state.sort })); } catch (e) {}
     U.empty(body);
     if (!items.length) { body.appendChild(h('div.empty', t('flowers.empty'), h('div.empty-actions', ui.btn(LHF.i18n.lang==='th'?'ล้างทั้งหมด':'Clear all filters', { onClick:()=>{resetFilters();searchInput.focus({preventScroll:true});} })), h('div', { style: { marginTop: '12px' } }, ui.btn(t('nav.custom'), { className: 'btn-primary', href: R.href('/custom') })))); return; }
-    if (state.view === 'cards') body.appendChild(LHF.cards.grid(items));
-    else body.appendChild(h('div.ledger', items.map(LHF.cards.ledgerRow)));
+    const draw = (some) => state.view === 'cards' ? LHF.cards.grid(some) : h('div.ledger', some.map(LHF.cards.ledgerRow));
+    /* sorted by price: the flowers without a published price are their own group, never ranked as if they had one */
+    const quoted = items.filter((p) => LHF.engine.priceKind(p) === 'quote'), priced = items.filter((p) => LHF.engine.priceKind(p) !== 'quote');
+    if (state.sort !== 'featured' && quoted.length && priced.length) body.append(draw(priced), h('h2.h4.sort-group', t('price.quote') + ' · ' + quoted.length), draw(quoted));
+    else body.appendChild(draw(items));
     ui.reveal(body);
   }
   sync();
@@ -3175,7 +3182,8 @@ LHF.pages.product = function (params) {
       h('div.spec-row', h('dt', t('lead.label')), h('dd', p.availability === 'quote' ? t('lead.ask') : (p.leadNote ? t('lead.handmade') : t('lead.days1')))),
       p.notes ? h('div.spec-row', h('dt', t('product.notes')), h('dd', pick(p.notes))) : null),
     C.customisable(p) ? h('div.notice', ui.heartTag('sm flat'), h('span', t('product.customise'))) : null,
-    h('div.product-actions', h('div.row', primaryBtn, ui.btn(LHF.i18n.lang === 'th' ? 'ปรับแบบนี้เป็นของคุณ' : 'Customize this design', {href:R.href('/custom',{product:p.id})}), ui.btn('LINE', { href: LHF.data.shop.lineUrl, target: '_blank', icon: 'line' })), h('div.product-source', p.source && p.source.date ? h('a.link', { href: p.source.url, target: '_blank', rel: 'noopener' }, t('product.source', { date: LHF.i18n.fmtDate(p.source.date, 'short') })) : null)),
+    /* Customize only where it adds something: the main button already opens the builder for quote-only and seasonal products, and some products are not customisable */
+    h('div.product-actions', h('div.row', primaryBtn, p.availability === 'available' && C.customisable(p) ? ui.btn(LHF.i18n.lang === 'th' ? 'ปรับแบบนี้เป็นของคุณ' : 'Customize this design', {href:R.href('/custom',{product:p.id})}) : null, ui.btn('LINE', { href: LHF.data.shop.lineUrl, target: '_blank', icon: 'line' })), h('div.product-source', p.source && p.source.date ? h('a.link', { href: p.source.url, target: '_blank', rel: 'noopener' }, t('product.source', { date: LHF.i18n.fmtDate(p.source.date, 'short') })) : null)),
     igPosts.length ? h('div', h('div.eyebrow', { style: { marginBottom: '8px' } }, t('product.onInstagram')), h('div.ig-strip', igPosts.map((post) => h('a', { href: post.url, target: '_blank', rel: 'noopener', 'aria-label': pick(post.label) }, LHF.img.el(post.images[0], { alt: '' }))))) : null);
   refreshPrice();
 
@@ -3448,6 +3456,7 @@ LHF.pages.order = function (params, query) {
   if (query.step && query.step !== step) { try { history.replaceState(null, '', R.href('/order', { step })); } catch (e) { /* the address just stays */ } }
   let loadMap = {};
   let sending = false;
+  let outcomeUnknown = false;   // the last send got no answer: it may have reached the shop
   let flash = '';   // a message for the top of the next step shown
   let errSeq = 0;
   const page = h('div.page.page-enter', h('div.wrap.section-tight'));
@@ -3773,13 +3782,15 @@ LHF.pages.order = function (params, query) {
     /* Honest failure: the order has not reached the shop. Everything typed stays;
        the customer can send again (same reference), send the whole order on LINE
        as a written message, or call. */
-    function showFailure(booking) {
+    function showFailure(booking, unknown) {
       U.empty(fail);
+      /* unknown: the shop's system did not answer, so the booking may have arrived. Checking again
+         looks it up by its own id first and never sends it twice */
       fail.append(
-        h('h3.h4', t('book.fail.title')),
-        h('p.small', t('book.fail.body')),
+        h('h3.h4', t(unknown ? 'book.unknown.title' : 'book.fail.title')),
+        h('p.small', t(unknown ? 'book.unknown.body' : 'book.fail.body')),
         h('div.send-fail-acts',
-          ui.btn(t('book.fail.retry'), { className: 'btn-primary', onClick: submit }),
+          ui.btn(t(unknown ? 'book.unknown.retry' : 'book.fail.retry'), { className: 'btn-primary', onClick: submit }),
           ui.btn(t('book.fail.line'), { href: LHF.sink.lineUrl(LHF.sink.summary(booking)), target: '_blank', icon: 'line' }),
           ui.btn(t('book.fail.call', { phone: LHF.data.shop.phoneDisplay }), { href: 'tel:' + LHF.data.shop.phoneTel, icon: 'phone' })));
       fail.hidden = false;
@@ -3846,7 +3857,9 @@ LHF.pages.order = function (params, query) {
         } else {
           /* sent first; confirmed only when the shop's script answers ok */
           const res = await LHF.sink.deliver(booking, { hp: hp.value });
-          if (!res.ok) { sending = false; setBusy(false); showFailure(booking); return; }
+          /* still unknown if the earlier try was unknown and this check could not reach the shop either */
+          if (!res.ok) { sending = false; setBusy(false); outcomeUnknown = !!res.unknown || (!!res.offline && outcomeUnknown); showFailure(booking, outcomeUnknown); return; }
+          outcomeUnknown = false;
           /* the receipt copy on this phone is a convenience: the order has reached
              the shop, so a browser that refuses storage changes nothing */
           try { saved = await LHF.db.createBooking(booking, null); } catch (e) { saved = booking; }
@@ -3913,7 +3926,8 @@ LHF.pages.confirm = function (params) {
   const holder = h('div.done', h('p.muted', '…'));
   wrap.appendChild(holder);
   const q = (R.current && R.current.query) || {};
-  const refHint = /^LH\d{6}-[A-Z0-9]{4}$/.test(q.ref || '') ? q.ref : '';
+  // the shop's references (LH…) and the demo server's (DEMO-…)
+  const refHint = /^(?:LH\d{6}-[A-Z0-9]{4}|DEMO-\d{6}-[A-F0-9]{6})$/.test(q.ref || '') ? q.ref : '';
   const cached = LHF.store.get('lastOrder');
   (cached && cached.id === params.id ? Promise.resolve(cached) : LHF.db.getBooking(params.id)).then(render).catch(() => render(null));
   return page;
@@ -3936,7 +3950,8 @@ LHF.pages.confirm = function (params) {
         /* what happens next, in order: a list that never pretends to move */
         h('ol.dotlist.done-steps', [t('done.step1'), t('done.step2'), t(b.fulfil === 'delivery' ? 'done.step3.delivery' : 'done.step3.pickup', { when })].map((s, i) => h('li', h('span.n', '0' + (i + 1)), h('span', s))))),
       receipt(b, when),
-      LHF.designSnapshot ? LHF.designSnapshot(b.custom) : null,
+      /* a catalogue booking has no design: add nothing (an empty value was printed as the word "null") */
+      ...[LHF.designSnapshot ? LHF.designSnapshot(b.custom) : null].filter(Boolean),
       h('div.done-actions',
         ui.btn(t('done.calendar'), { icon: 'calendar', onClick: () => ics(b) }),
         ui.btn(t('done.copy'), { icon: 'copy', onClick: () => copy(text) }),
@@ -4110,7 +4125,10 @@ LHF.pages.privacy = function () {
 
 LHF.pages.notfound = function () {
   const h = LHF.util.h, t = (k) => LHF.i18n.t(k), ui = LHF.ui, R = LHF.router;
-  return h('div.page.page-enter', h('div.wrap.section', h('div.final', ui.heartTag('lg'), h('h1.h1', t('notfound.title')), h('p.lede', t('notfound.sub')), ui.btn(t('notfound.home'), { className: 'btn-primary', href: R.href('/') }))));
+  return h('div.page.page-enter', h('div.wrap.section', h('div.final', ui.heartTag('lg'), h('h1.h1', t('notfound.title')), h('p.lede', t('notfound.sub')),
+    /* a broken link still leads somewhere useful: home, every flower, or the shop itself */
+    h('div.hero-ctas', ui.btn(t('notfound.home'), { className: 'btn-primary', href: R.href('/') }), ui.btn(t('notfound.flowers'), { href: R.href('/flowers') }),
+      ui.btn('LINE ' + LHF.data.shop.lineId, { href: LHF.data.shop.lineUrl, target: '_blank', icon: 'line' }), ui.btn(LHF.data.shop.phoneDisplay, { href: 'tel:' + LHF.data.shop.phoneTel, icon: 'phone' })))));
 };
 LHF.pages.error = function (e) {
   const h = LHF.util.h, t = (k) => LHF.i18n.t(k), ui = LHF.ui, R = LHF.router;
@@ -4213,7 +4231,13 @@ LHF.sink=(function(){
 
 
 function accept(booking,result){if(result.ok){if(result.receipt)Object.assign(booking,result.receipt);else for(const key of ['ref','windowId','windowLabel'])if(result[key]!=null)booking[key]=result[key];booking.revision=result.revision;booking.syncState=result.syncState;}return result;}
-async function deliver(booking,opts={}){if(opts.hp)return {ok:false};await LHF.localSession;try{const recovered=await LHF.localAPI('/api/orders/submission/'+booking.id);if(recovered.ok)return accept(booking,recovered);}catch(e){if(e.status!==404)return {ok:false,reason:e.message};}try{return accept(booking,await LHF.localAPI('/api/orders', {...booking,consent:true},{signal:AbortSignal.timeout(12000)}));}catch(e){return {ok:false,reason:e.message};}}
+async function deliver(booking,opts={}){if(opts.hp)return {ok:false};await LHF.localSession;try{const recovered=await LHF.localAPI('/api/orders/submission/'+booking.id);if(recovered.ok)return accept(booking,recovered);}catch(e){if(e.status!==404)return {ok:false,offline:!e.status,reason:e.message};}try{return accept(booking,await LHF.localAPI('/api/orders', {...booking,consent:true},{signal:AbortSignal.timeout(12000)}));}catch(e){
+ // refused by the shop's system (a 4xx answer): it was not saved
+ if(e.status&&e.status<500&&e.status!==408&&e.status!==429)return {ok:false,reason:e.message};
+ // no answer, or a server error: it may have been saved. Ask once more by this booking's own id before saying anything
+ try{const again=await LHF.localAPI('/api/orders/submission/'+booking.id,undefined,{signal:AbortSignal.timeout(8000)});if(again.ok)return accept(booking,again);}catch(e2){if(e2.status===404)return {ok:false,reason:e.message};}
+ return {ok:false,unknown:true,reason:e.message};
+}}
 return {deliver,summary,totalLabel,lineUrl,start(){},send(){},status:()=>({configured:true,blocked:false,queued:0})};
 })();
 LHF.pages.custom=async function(params,query){const {renderCustomizer}=await import('/customizer.mjs');return renderCustomizer(params,query);};
@@ -4243,23 +4267,21 @@ Object.assign(LHF.data.strings,{
  'done.elsewhere.sub':{ th: "กรุณาเปิดจากเบราว์เซอร์ที่ใช้สร้างคำจอง หรือกลับไปสร้างคำจองใหม่ค่ะ", en: "Open it in the browser session that created it, or return to create a new reservation." },
  'done.next.title':{ th: "ขั้นตอนถัดไป", en: "Next steps" },
  'done.photo':{ th: "บันทึกรูปอ้างอิงไว้กับคำจองแล้ว", en: "Your reference image is saved with the reservation." },
- 'done.photo.line':{ th: "แนบรูปอ้างอิงไว้กับคำจองแล้ว", en: "Reference image included in the reservation" },
- 'privacy.what.photo':{ th: "รูปอ้างอิงจะอัปโหลดเมื่อคุณยินยอม และเปิดดูได้จากรายละเอียดออเดอร์ในระบบจัดการร้าน รูปจะไม่ถูกส่งให้ผู้ให้บริการ AI", en: "Reference photos are uploaded with your acknowledgment and can be viewed in the Studio order details. They are not sent to an AI provider." },
- 'privacy.where.p':{ th: "คำจองและรูปอ้างอิงเก็บไว้ในระบบออนไลน์ ยังไม่ได้เชื่อมต่อ Google Sheets การแจ้งเตือนอัตโนมัติ หรือบริการจัดส่ง", en: "Reservations and reference images are stored online. Google Sheets, automatic notifications and courier services are not connected." },
- 'privacy.keep.p':{ th: "ฉบับร่างและใบสรุปแบบย่อเก็บในเบราว์เซอร์ ส่วนคำจองและรูปอ้างอิงเก็บในระบบออนไลน์ หากต้องการสอบถามเรื่องข้อมูล กรุณาติดต่อทางร้านค่ะ", en: "Drafts and minimal receipts are stored in your browser. Reservations and reference images are stored online. Please contact the shop with questions about your information." }
+ 'done.photo.line':{ th: "แนบรูปอ้างอิงไว้กับคำจองแล้ว", en: "Reference image included in the reservation" }
 });
 const originalHome=LHF.pages.home;
 LHF.pages.home=function(){const page=originalHome();const media=page.querySelector('.hero-media'),layer=media.querySelector('.hero-scale'),caption=media.querySelector('.hero-caption');
  const slides=LHF.heroSlides.map(s=>[s.key,s.product,s.desktop,s.mobile]);let idx=0,playing=!LHF.util.reducedMotion(),hover=false,focused=false,busy=false,closed=false;
- const controls=h('div.hero-controls',{'aria-label':tr('ภาพดอกไม้','Flower photographs')});const pos=h('span.hero-position','01 / 04');const prev=h('button',{type:'button','aria-label':tr('ภาพก่อนหน้า','Previous photograph'),onClick:()=>{playing=false;paint();change(-1);}},'←'),next=h('button',{type:'button','aria-label':tr('ภาพถัดไป','Next photograph'),onClick:()=>{playing=false;paint();change(1);}},'→'),pause=h('button',{type:'button',onClick:()=>{playing=!playing;paint();}},'');controls.append(prev,pos,next,pause);media.append(controls);
- function paint(){pause.textContent=playing?tr('หยุด','Pause'):tr('เล่น','Play');pause.setAttribute('aria-label',playing?tr('หยุดภาพอัตโนมัติ','Pause slideshow'):tr('เล่นภาพอัตโนมัติ','Play slideshow'));pause.setAttribute('aria-pressed',String(!playing));}
- function describe(){const [key,pid]=slides[idx];const p=LHF.catalog.byId(pid)||LHF.catalog.products.find(p=>p.image===key);caption.textContent=p?LHF.i18n.pick(p.name)+' · '+LHF.ui.priceLabel(p):LHF.img.alt(key);pos.textContent=String(idx+1).padStart(2,'0')+' / 04';}
- async function change(dir){if(busy||closed)return;busy=true;try{for(let attempt=0;attempt<4;attempt++){const n=(idx+dir*(attempt+1)+4)%4;const im=new Image();im.src=LHF.img.src(slides[n][0]);try{await im.decode();if(closed)return;const pic=LHF.img.pic(slides[n][0],{eager:true});position(pic,n);const previous=layer.firstElementChild;layer.append(pic);pic.classList.add('hero-frame-enter');idx=n;describe();setTimeout(()=>previous?.remove(),800);break;}catch{}}}finally{busy=false;}}
+ const controls=h('div.hero-controls',{role:'group','aria-label':tr('ภาพดอกไม้','Flower photographs')});const pos=h('span.hero-position','01 / 04');const prev=h('button',{type:'button','aria-label':tr('ภาพก่อนหน้า','Previous photograph'),onClick:()=>{playing=false;paint();change(-1);}},'←'),next=h('button',{type:'button','aria-label':tr('ภาพถัดไป','Next photograph'),onClick:()=>{playing=false;paint();change(1);}},'→'),pause=h('button',{type:'button',onClick:()=>{playing=!playing;if(playing){focused=false;hover=false;}paint();}},'');controls.append(prev,pos,next,pause);media.append(controls);
+ function paint(){pause.textContent=playing?tr('หยุด','Pause'):tr('เล่น','Play');pause.setAttribute('aria-label',playing?tr('หยุดภาพอัตโนมัติ','Pause slideshow'):tr('เล่นภาพอัตโนมัติ','Play slideshow'));}
+ function describe(){const [key,pid]=slides[idx];const p=LHF.catalog.byId(pid)||LHF.catalog.products.find(p=>p.image===key);const size=p?LHF.ui.sizeLabel(p):'';caption.textContent=p?LHF.i18n.pick(p.name)+' · '+LHF.ui.priceLabel(p)+(size?' · '+size:''):LHF.img.alt(key);pos.textContent=String(idx+1).padStart(2,'0')+' / 04';}
+ async function change(dir){if(busy||closed)return;busy=true;try{for(let attempt=0;attempt<4;attempt++){const n=(idx+dir*(attempt+1)+4)%4;try{if(!await preload(n))throw new Error('unavailable');if(closed)return;const pic=LHF.img.pic(slides[n][0],{eager:true});position(pic,n);const previous=layer.firstElementChild;layer.append(pic);pic.classList.add('hero-frame-enter');idx=n;describe();setTimeout(()=>previous?.remove(),800);break;}catch{}}}finally{busy=false;}}
  function position(pic,n){pic.style.setProperty('--hero-desktop-pos',slides[n][2]);pic.style.setProperty('--hero-mobile-pos',slides[n][3]);} position(layer.firstElementChild,0);
- const prefetched=new Map();function preload(n){if(prefetched.has(n))return prefetched.get(n);const im=new Image(),m=LHF.img.meta(slides[n][0]);im.decoding='async';im.fetchPriority='low';im.sizes=Math.ceil(media.getBoundingClientRect().width||innerWidth)+'px';if(m.srcset)im.srcset=m.srcset;im.src=m.src;const task=im.decode().catch(()=>null);prefetched.set(n,task);return task;}
- const first=layer.querySelector('img.hi');const stageNext=()=>{if(closed)return;preload(1).then(()=>{if(closed)return;setTimeout(()=>{if(!closed){preload(2);preload(3);}},1500);});};if(first?.complete&&first.naturalWidth)setTimeout(stageNext,1000);else first?.addEventListener('load',()=>setTimeout(stageNext,1000),{once:true});
+ const prefetched=new Map();function preload(n){if(prefetched.has(n))return prefetched.get(n);const im=new Image(),m=LHF.img.meta(slides[n][0]);im.decoding='async';im.fetchPriority='low';im.sizes=Math.ceil(media.getBoundingClientRect().width||innerWidth)+'px';if(m.srcset)im.srcset=m.srcset;im.src=m.src;const task=im.decode().then(()=>true,()=>(prefetched.delete(n),false));prefetched.set(n,task);return task;}
+ const first=layer.querySelector('img.hi');const stageNext=()=>{if(closed)return;preload(1).then(()=>{if(closed)return;setTimeout(()=>{if(!closed){preload(2);preload(3);}},1500);});};if(first?.complete&&first.naturalWidth)setTimeout(stageNext,1000);else first?.addEventListener('load',()=>setTimeout(stageNext,1000),{once:true});first?.addEventListener('error',()=>change(1),{once:true});if(first?.complete&&!first.naturalWidth&&first.getAttribute('src'))change(1);
  const timer=setInterval(()=>{if(playing&&!hover&&!focused&&!document.hidden&&!LHF.logoIntro?.state)change(1);},6000);media.addEventListener('mouseenter',()=>hover=true);media.addEventListener('mouseleave',()=>hover=false);controls.addEventListener('focusin',()=>focused=true);controls.addEventListener('focusout',()=>focused=false);LHF.router.onLeave(()=>{closed=true;clearInterval(timer);});paint();describe();return page;};
-LHF.router.after(()=>{document.querySelectorAll('.nav-main a').forEach(a=>{if(a.classList.contains('is-active'))a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});});
+// the current page, from the route itself (the highlight class is set by a later hook, so copying it lagged one page behind)
+LHF.router.after(cur=>{const section=cur.path.split('/').slice(0,2).join('/');document.querySelectorAll('.nav-main a').forEach(a=>{const href=(a.getAttribute('href')||'').replace('#','');if(href!=='/'&&href===section)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});});
 })();
 LHF.designRows=function(c){
  if(!c?.config)return [];const th=LHF.i18n.lang==='th',t=(a,b)=>th?a:b,I=LHF.i18n;
@@ -4450,7 +4472,7 @@ function start({demo=false}={}){
   observer?.disconnect();criticalCleanup?.();window.removeEventListener('error',onError);window.removeEventListener('unhandledrejection',onError);overlay.remove();
   background.forEach(([el,inert])=>{if(el.isConnected)el.inert=inert;});
   if(previous&&previous!==document.body&&previous.isConnected&&!previous.inert){previous.focus({preventScroll:true});}
-  else {const entry=document.querySelector('#skiplink');entry?.focus({preventScroll:true});}
+  // otherwise focus goes back to the top of the page: the first Tab lands on the skip link, which no longer pops up over the page for every visitor
   // the page goes on loading behind the opening; only if it is still empty a while later does it offer Retry and LINE
   if(!milestones.route)setTimeout(safeFallback,6000);
   markSeen();running=null;lastReport=structuredClone(state);document.dispatchEvent(new CustomEvent('lhf:intro-dismissed',{detail:lastReport}));

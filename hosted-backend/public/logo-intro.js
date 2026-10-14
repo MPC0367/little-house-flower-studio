@@ -53,7 +53,7 @@ function start({demo=false}={}){
   observer?.disconnect();criticalCleanup?.();window.removeEventListener('error',onError);window.removeEventListener('unhandledrejection',onError);overlay.remove();
   background.forEach(([el,inert])=>{if(el.isConnected)el.inert=inert;});
   if(previous&&previous!==document.body&&previous.isConnected&&!previous.inert){previous.focus({preventScroll:true});}
-  else {const entry=document.querySelector('#skiplink');entry?.focus({preventScroll:true});}
+  // otherwise focus goes back to the top of the page: the first Tab lands on the skip link, which no longer pops up over the page for every visitor
   // the page goes on loading behind the opening; only if it is still empty a while later does it offer Retry and LINE
   if(!milestones.route)setTimeout(safeFallback,6000);
   markSeen();running=null;lastReport=structuredClone(state);document.dispatchEvent(new CustomEvent('lhf:intro-dismissed',{detail:lastReport}));

@@ -33,6 +33,7 @@ LHF.pages.order = function (params, query) {
   if (query.step && query.step !== step) { try { history.replaceState(null, '', R.href('/order', { step })); } catch (e) { /* the address just stays */ } }
   let loadMap = {};
   let sending = false;
+  let outcomeUnknown = false;   // the last send got no answer: it may have reached the shop
   let flash = '';   // a message for the top of the next step shown
   let errSeq = 0;
   const page = h('div.page.page-enter', h('div.wrap.section-tight'));
@@ -358,13 +359,15 @@ LHF.pages.order = function (params, query) {
     /* Honest failure: the order has not reached the shop. Everything typed stays;
        the customer can send again (same reference), send the whole order on LINE
        as a written message, or call. */
-    function showFailure(booking) {
+    function showFailure(booking, unknown) {
       U.empty(fail);
+      /* unknown: the shop's system did not answer, so the booking may have arrived. Checking again
+         looks it up by its own id first and never sends it twice */
       fail.append(
-        h('h3.h4', t('book.fail.title')),
-        h('p.small', t('book.fail.body')),
+        h('h3.h4', t(unknown ? 'book.unknown.title' : 'book.fail.title')),
+        h('p.small', t(unknown ? 'book.unknown.body' : 'book.fail.body')),
         h('div.send-fail-acts',
-          ui.btn(t('book.fail.retry'), { className: 'btn-primary', onClick: submit }),
+          ui.btn(t(unknown ? 'book.unknown.retry' : 'book.fail.retry'), { className: 'btn-primary', onClick: submit }),
           ui.btn(t('book.fail.line'), { href: LHF.sink.lineUrl(LHF.sink.summary(booking)), target: '_blank', icon: 'line' }),
           ui.btn(t('book.fail.call', { phone: LHF.data.shop.phoneDisplay }), { href: 'tel:' + LHF.data.shop.phoneTel, icon: 'phone' })));
       fail.hidden = false;
@@ -431,7 +434,9 @@ LHF.pages.order = function (params, query) {
         } else {
           /* sent first; confirmed only when the shop's script answers ok */
           const res = await LHF.sink.deliver(booking, { hp: hp.value });
-          if (!res.ok) { sending = false; setBusy(false); showFailure(booking); return; }
+          /* still unknown if the earlier try was unknown and this check could not reach the shop either */
+          if (!res.ok) { sending = false; setBusy(false); outcomeUnknown = !!res.unknown || (!!res.offline && outcomeUnknown); showFailure(booking, outcomeUnknown); return; }
+          outcomeUnknown = false;
           /* the receipt copy on this phone is a convenience: the order has reached
              the shop, so a browser that refuses storage changes nothing */
           try { saved = await LHF.db.createBooking(booking, null); } catch (e) { saved = booking; }

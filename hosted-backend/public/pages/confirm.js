@@ -13,7 +13,8 @@ LHF.pages.confirm = function (params) {
   const holder = h('div.done', h('p.muted', '…'));
   wrap.appendChild(holder);
   const q = (R.current && R.current.query) || {};
-  const refHint = /^LH\d{6}-[A-Z0-9]{4}$/.test(q.ref || '') ? q.ref : '';
+  // the shop's references (LH…) and the demo server's (DEMO-…)
+  const refHint = /^(?:LH\d{6}-[A-Z0-9]{4}|DEMO-\d{6}-[A-F0-9]{6})$/.test(q.ref || '') ? q.ref : '';
   const cached = LHF.store.get('lastOrder');
   (cached && cached.id === params.id ? Promise.resolve(cached) : LHF.db.getBooking(params.id)).then(render).catch(() => render(null));
   return page;
@@ -36,7 +37,8 @@ LHF.pages.confirm = function (params) {
         /* what happens next, in order: a list that never pretends to move */
         h('ol.dotlist.done-steps', [t('done.step1'), t('done.step2'), t(b.fulfil === 'delivery' ? 'done.step3.delivery' : 'done.step3.pickup', { when })].map((s, i) => h('li', h('span.n', '0' + (i + 1)), h('span', s))))),
       receipt(b, when),
-      LHF.designSnapshot ? LHF.designSnapshot(b.custom) : null,
+      /* a catalogue booking has no design: add nothing (an empty value was printed as the word "null") */
+      ...[LHF.designSnapshot ? LHF.designSnapshot(b.custom) : null].filter(Boolean),
       h('div.done-actions',
         ui.btn(t('done.calendar'), { icon: 'calendar', onClick: () => ics(b) }),
         ui.btn(t('done.copy'), { icon: 'copy', onClick: () => copy(text) }),

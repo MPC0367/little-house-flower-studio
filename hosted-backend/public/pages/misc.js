@@ -59,7 +59,10 @@ LHF.pages.privacy = function () {
 
 LHF.pages.notfound = function () {
   const h = LHF.util.h, t = (k) => LHF.i18n.t(k), ui = LHF.ui, R = LHF.router;
-  return h('div.page.page-enter', h('div.wrap.section', h('div.final', ui.heartTag('lg'), h('h1.h1', t('notfound.title')), h('p.lede', t('notfound.sub')), ui.btn(t('notfound.home'), { className: 'btn-primary', href: R.href('/') }))));
+  return h('div.page.page-enter', h('div.wrap.section', h('div.final', ui.heartTag('lg'), h('h1.h1', t('notfound.title')), h('p.lede', t('notfound.sub')),
+    /* a broken link still leads somewhere useful: home, every flower, or the shop itself */
+    h('div.hero-ctas', ui.btn(t('notfound.home'), { className: 'btn-primary', href: R.href('/') }), ui.btn(t('notfound.flowers'), { href: R.href('/flowers') }),
+      ui.btn('LINE ' + LHF.data.shop.lineId, { href: LHF.data.shop.lineUrl, target: '_blank', icon: 'line' }), ui.btn(LHF.data.shop.phoneDisplay, { href: 'tel:' + LHF.data.shop.phoneTel, icon: 'phone' })))));
 };
 LHF.pages.error = function (e) {
   const h = LHF.util.h, t = (k) => LHF.i18n.t(k), ui = LHF.ui, R = LHF.router;

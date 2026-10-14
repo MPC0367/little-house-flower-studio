@@ -34,6 +34,8 @@ Locally, without Google: `node scripts/sheet-emulator.mjs` (preview `lhf-sheet`,
 
 Tests: `node --test tests/studio-sheet.test.mjs` (the Sheet script) and `cd hosted-backend && node --test tests/*.test.mjs` (the back end).
 
+Browser checks against the local stack (serve-pages on 5590, the hosted back end on 5580, and for the Sheet the emulator on 5585), each with `LHF_PLAYWRIGHT_MODULE=<path to @playwright/test/index.mjs>`: `tests/opening-film.mjs`, `tests/studio-journey.mjs`, `tests/studio-sheet-journey.mjs`, `tests/site-fixes.mjs`, `tests/github-pages-smoke.mjs`. They write synthetic bookings to the LOCAL back end only.
+
 ## Rebuilding
 
 ```

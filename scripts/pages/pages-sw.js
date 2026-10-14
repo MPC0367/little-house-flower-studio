@@ -39,12 +39,18 @@ async function updateTokens(headers,sentDemo,{clear=false}={}){
     transaction.oncomplete=()=>resolve();transaction.onerror=()=>reject(transaction.error);transaction.onabort=()=>reject(transaction.error||new Error('Browser storage is unavailable'));
   });
 }
+// one address the site or the API gave; a responsive image list ("/img/a-640.webp 640w, /img/a.webp 1200w") is
+// rewritten entry by entry, or its pictures 404 on GitHub Pages
+function sitePath(value){
+  if(/^\/api\/[^\s]*$/.test(value))return BASE.slice(0,-1)+value;
+  if(/^\/(?:img|media)\/[^\s]*$/.test(value))return WEBSITE+value;
+  if(/^img\/[^\s]*$/.test(value))return WEBSITE+'/'+value;
+  return value;
+}
 function sitePaths(value){
   if(typeof value==='string'){
-    if(/^\/api\/[^\s]*$/.test(value))return BASE.slice(0,-1)+value;
-    if(/^\/(?:img|media)\/[^\s]*$/.test(value))return WEBSITE+value;
-    if(/^img\/[^\s]*$/.test(value))return WEBSITE+'/'+value;
-    return value;
+    if(/^\S+\s+\d+(?:\.\d+)?[wx](?:\s*,\s*\S+\s+\d+(?:\.\d+)?[wx])+$/.test(value.trim()))return value.trim().split(/\s*,\s*/).map(part=>{const [url,size]=part.split(/\s+/);return sitePath(url)+' '+size;}).join(', ');
+    return sitePath(value);
   }
   if(Array.isArray(value))return value.map(sitePaths);
   if(value&&typeof value==='object')return Object.fromEntries(Object.entries(value).map(([key,item])=>[key,sitePaths(item)]));

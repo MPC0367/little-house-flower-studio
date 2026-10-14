@@ -80,8 +80,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/customizer.mjs": {
-    "hash": "5abb79e3989aac43a987b4dcaf99478b3c68f8aa064f608cc5b4a78dbf98092c",
-    "size": 38424,
+    "hash": "931af7c1429f99b87733d42bb0fa9fb6c2b56469b39c226009d9c177b1f01b5d",
+    "size": 39197,
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/catalog.js": {
@@ -105,13 +105,13 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/settings.js": {
-    "hash": "11e013bdb1b04deb54a7c7f9895bbf0705ea4b2c1283af44eff276b5fc2066d0",
+    "hash": "fa47b2dbfcdd9beb1dd9d941c02ef3f130c66d2e0019696773f9f2566e680fd2",
     "size": 6402,
     "mime": "text/javascript; charset=utf-8"
   },
   "/data/strings.js": {
-    "hash": "adabd19e271ee51fb54fe09ebeabfffee5c32564669550f9d1de94dfa8342148",
-    "size": 81520,
+    "hash": "c602bab1ddc9343a2edea429870d315476b6cd43ac370cf5afa706d713107a39",
+    "size": 83820,
     "mime": "text/javascript; charset=utf-8"
   },
   "/favicon.svg": {
@@ -940,8 +940,8 @@
     "mime": "text/html; charset=utf-8"
   },
   "/local-bridge.js": {
-    "hash": "c181641123d135b6f6f315588301be845ca0afde5f23c716a425ffeb4e8581d3",
-    "size": 4904,
+    "hash": "3b7ec0ccc0e29bac4e629f0d212f12e086284cd059dee04f4c9e126d79a8b81c",
+    "size": 5446,
     "mime": "text/javascript; charset=utf-8"
   },
   "/logo-intro.css": {
@@ -950,8 +950,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/logo-intro.js": {
-    "hash": "7812a6955d6696f78b1c8cf3ad3122b9a3f2cc55742eb857c001e9f433a8ca0f",
-    "size": 8724,
+    "hash": "811af1c90e3443bc39774b821d3b0943e836ce531ffd43574fc0570510176345",
+    "size": 8780,
     "mime": "text/javascript; charset=utf-8"
   },
   "/manifest.webmanifest": {
@@ -970,8 +970,8 @@
     "mime": "image/png"
   },
   "/pages/confirm.js": {
-    "hash": "1d789b5052c7da03086b03070b68bcb08fff5895ea83ef1f4efb7dfaed5595a7",
-    "size": 10149,
+    "hash": "4b4134d309e0838789bf5bd6bf4b88e200285916ec086dbd174e2480f302a7e1",
+    "size": 10372,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/custom.js": {
@@ -980,8 +980,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/flowers.js": {
-    "hash": "25d97a146dd9da5456c32134702c3657196a452def2fba006f49c7619086970a",
-    "size": 7070,
+    "hash": "d820059318918213ad2c4318080d482ee877fef7af4227f0794c2880899916e9",
+    "size": 7522,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/home.js": {
@@ -995,8 +995,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/misc.js": {
-    "hash": "650601652be59c6565480285bc8d1cf699706f0138c5618e91ce52c083bd2cef",
-    "size": 7081,
+    "hash": "e5b93b6f6aa42729323f303d04d5e3c823c1b66da702707aaefaeb98666956be",
+    "size": 7464,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/occasions.js": {
@@ -1005,13 +1005,13 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/order.js": {
-    "hash": "ae328b6f3c03fbfcf2880594806e3701871466b335e8b9bc1115adc4c7ef4408",
-    "size": 42263,
+    "hash": "623ee9eacb6f8de862f26eb4e2783f53d61cf6bac1f5bcc1f2578b87db6cdafa",
+    "size": 42859,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/product.js": {
-    "hash": "93dfa06dd25dc9be206cb133fdf70ac2ba9ba759cf7ad36cb7806a779d00355d",
-    "size": 6861,
+    "hash": "5b401726ca64ff8afb164672416a0fbcc4e3e7d69561ad4132ce6c58955ddf90",
+    "size": 7091,
     "mime": "text/javascript; charset=utf-8"
   },
   "/pages/story.js": {
@@ -1025,8 +1025,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/polish.css": {
-    "hash": "ff75bb09e3f14157a0aa253cbe2c953f076a6147180f045f99cec41177003eaa",
-    "size": 4312,
+    "hash": "fbda869c6f274a7c4caa98599978c074581b555f4ddc54c9c4aefcb8ccb6bd92",
+    "size": 4854,
     "mime": "text/css; charset=utf-8"
   },
   "/robots.txt": {
@@ -1065,8 +1065,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/storefront.js": {
-    "hash": "b4db92eb17c4479d164feb1bfd55982b9c82bbe3029095fdd2d502300d1f73e7",
-    "size": 440425,
+    "hash": "5aa1ad5625e55aedfb5015ad5a3b49aa0e80a98e84ce3ba0fd42235e19ec24d9",
+    "size": 444067,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/app.mjs": {
@@ -1180,13 +1180,13 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/upgrade.css": {
-    "hash": "20e49afffb5dcb38f19575fda84af5ca28fa0cecfd646246dc4ca001bcc86a51",
-    "size": 6278,
+    "hash": "8bc4a2398348085da47fc023ff172803966449d63a3acfee0609be8b3cb406fd",
+    "size": 6488,
     "mime": "text/css; charset=utf-8"
   },
   "/upgrade.js": {
-    "hash": "7f2a0031a85a53f37c16c507b4c0e455929d45ff3a82dcf335527c8b5bfdef77",
-    "size": 11259,
+    "hash": "1b76797e179570217c16296a9a0832effd5707c3b6499f41621c00949162a260",
+    "size": 10119,
     "mime": "text/javascript; charset=utf-8"
   },
   "/window.svg": {

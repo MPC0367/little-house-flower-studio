@@ -50,7 +50,8 @@ LHF.pages.product = function (params) {
       h('div.spec-row', h('dt', t('lead.label')), h('dd', p.availability === 'quote' ? t('lead.ask') : (p.leadNote ? t('lead.handmade') : t('lead.days1')))),
       p.notes ? h('div.spec-row', h('dt', t('product.notes')), h('dd', pick(p.notes))) : null),
     C.customisable(p) ? h('div.notice', ui.heartTag('sm flat'), h('span', t('product.customise'))) : null,
-    h('div.product-actions', h('div.row', primaryBtn, ui.btn(LHF.i18n.lang === 'th' ? 'ปรับแบบนี้เป็นของคุณ' : 'Customize this design', {href:R.href('/custom',{product:p.id})}), ui.btn('LINE', { href: LHF.data.shop.lineUrl, target: '_blank', icon: 'line' })), h('div.product-source', p.source && p.source.date ? h('a.link', { href: p.source.url, target: '_blank', rel: 'noopener' }, t('product.source', { date: LHF.i18n.fmtDate(p.source.date, 'short') })) : null)),
+    /* Customize only where it adds something: the main button already opens the builder for quote-only and seasonal products, and some products are not customisable */
+    h('div.product-actions', h('div.row', primaryBtn, p.availability === 'available' && C.customisable(p) ? ui.btn(LHF.i18n.lang === 'th' ? 'ปรับแบบนี้เป็นของคุณ' : 'Customize this design', {href:R.href('/custom',{product:p.id})}) : null, ui.btn('LINE', { href: LHF.data.shop.lineUrl, target: '_blank', icon: 'line' })), h('div.product-source', p.source && p.source.date ? h('a.link', { href: p.source.url, target: '_blank', rel: 'noopener' }, t('product.source', { date: LHF.i18n.fmtDate(p.source.date, 'short') })) : null)),
     igPosts.length ? h('div', h('div.eyebrow', { style: { marginBottom: '8px' } }, t('product.onInstagram')), h('div.ig-strip', igPosts.map((post) => h('a', { href: post.url, target: '_blank', rel: 'noopener', 'aria-label': pick(post.label) }, LHF.img.el(post.images[0], { alt: '' }))))) : null);
   refreshPrice();
 

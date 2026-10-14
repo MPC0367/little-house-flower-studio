@@ -60,3 +60,12 @@
 }
 @media(prefers-reduced-motion:reduce){.rv-wait{opacity:1;transform:none;transition:none}.pcard:hover{transform:none}}
 @media(prefers-reduced-motion:reduce){.pic .lq,.pic .hi{transition:none!important}}
+
+/* the "price on request" group when the catalogue is sorted by price */
+.sort-group{margin:32px 0 12px;padding-top:16px;border-top:1px solid var(--line,#dedbd2)}
+/* cards without a photo keep the photo cards' shape but may grow taller when their words need it
+   (Thai at 320 px was clipped, hiding the Instagram button); overflow:hidden stopped the box growing */
+.pcard-noimg{overflow:visible}
+
+/* filter chips are at least 44 px wide as well as high (the Instagram "Reels" chip was 41 px) */
+.chip{min-width:44px;justify-content:center}

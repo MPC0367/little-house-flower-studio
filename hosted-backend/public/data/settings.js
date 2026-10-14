@@ -54,7 +54,7 @@ LHF.data.pricesCurrent = LHF.i18n.shopNow().iso <= LHF.data.policies.priceValidU
 
 /* The privacy notice at /privacy (PDPA). The controller is the shop; the date is
    shown on the page, so change it whenever the notice changes. */
-LHF.data.privacy = { updated: '2026-09-29', retentionMonths: 12 };
+LHF.data.privacy = { updated: '2026-10-15', retentionMonths: 12 };
 
 /* Booking defaults. These are operating defaults, NOT published facts; the site
    has no per-device overrides for them. */
