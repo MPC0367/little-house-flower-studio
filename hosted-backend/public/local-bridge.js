@@ -1,5 +1,5 @@
-/* Local-only adapter. No production endpoint or notification fallback. */
-LHF.localAPI=async function(path,body,options={}){const r=await fetch(path,{...options,method:options.method||(body?'POST':'GET'),headers:{'Content-Type':'application/json','X-CSRF':'local-preview',...(options.headers||{})},...(body?{body:JSON.stringify(body)}:{})});const data=await r.json();if(!r.ok){const e=new Error(data.error||'Local service unavailable');e.status=r.status;throw e;}return data;};
+/* Hosted demo adapter. No production endpoint or notification fallback. */
+LHF.localAPI=async function(path,body,options={}){const r=await fetch(path,{...options,method:options.method||(body?'POST':'GET'),headers:{'Content-Type':'application/json','X-CSRF':'local-preview',...(options.headers||{})},...(body?{body:JSON.stringify(body)}:{})});const data=await r.json();if(!r.ok){const e=new Error(data.error||'Service unavailable');e.status=r.status;throw e;}return data;};
 LHF.localSession=LHF.localAPI('/api/session',{}).catch(()=>null);
 LHF.sink=(function(){
   function summary(b) {
