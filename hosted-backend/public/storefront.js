@@ -4323,11 +4323,11 @@ LHF.sink.summary=function(b){const text=originalSummary(b);return b.custom?.conf
 const SESSION_KEY='lhf.logo.intro.v5';
 const VIDEO='/media/little-house-flower-loading-v5-1080p.mp4';
 const POSTER='/media/little-house-flower-v5-poster-1080p.png';
-const MAX_WAIT=6500;
-// The supplied film reaches its baked-in 100% at about 3.3s. Hold at ~96% while the page loads.
-// The film reaches its own 100% frame at 3.3s; the rest is a still frame. It always plays at its own
-// pace and the opening closes on that frame, so a visit sees about 3.3 seconds of film.
-const MIN_ANIMATION=3000,READY_FINISH=650,HOLD_FRACTION=3/4.4,COMPLETE_AT=3.3;
+// The opening IS the supplied film (little-house-flower-loading-v5-1080p.mp4, 4.4s) and never lasts longer.
+// It plays once at its own speed, is never held, slowed or sped up, and the overlay closes when the film ends.
+// Whatever happens (slow network, page still loading), the overlay is gone FILM_SECONDS after it appeared.
+// The film's last second is a still 100% frame, so a slow start only trims stillness, never the drawing.
+const FILM_SECONDS=4.4,MAX_WAIT=FILM_SECONDS*1000,FADE=180;
 const local=['127.0.0.1','localhost','[::1]'].includes(location.hostname);
 const query=new URLSearchParams(location.search);
 const forced=local&&query.get('intro')==='1';
@@ -4374,14 +4374,16 @@ function start({demo=false}={}){
   background.forEach(([el,inert])=>{if(el.isConnected)el.inert=inert;});
   if(previous&&previous!==document.body&&previous.isConnected&&!previous.inert){previous.focus({preventScroll:true});}
   else {const entry=document.querySelector('#skiplink');entry?.focus({preventScroll:true});}
+  // the page goes on loading behind the opening; only if it is still empty a while later does it offer Retry and LINE
+  if(!milestones.route)setTimeout(safeFallback,6000);
   markSeen();running=null;const {seek,resume,...report}=state;lastReport=structuredClone(report);document.dispatchEvent(new CustomEvent('lhf:intro-dismissed',{detail:lastReport}));
  }
- function dismiss(reason){if(finished||dismissing)return;dismissing=true;overlay.classList.add('is-dismissing');setTimeout(()=>finish(reason),180);}
+ function dismiss(reason){if(finished||dismissing)return;dismissing=true;overlay.classList.add('is-dismissing');setTimeout(()=>finish(reason),FADE);}
  function onError(){safeFallback();finish('application-error');}
  overlay.addEventListener('keydown',e=>{if(e.key==='Tab'){e.preventDefault();overlay.focus({preventScroll:true});}});
  background.forEach(([el])=>{el.inert=true;});document.body.append(overlay);overlay.focus({preventScroll:true});running=state;
  // Arm cleanup before asynchronous work so failed assets or other scripts cannot trap focus.
- timer=setTimeout(()=>{safeFallback();finish(milestones.route?'budget':'route-unavailable');},MAX_WAIT);
+ timer=setTimeout(()=>dismiss(milestones.route?'film-length':'film-length-page-still-loading'),MAX_WAIT-FADE);
  window.addEventListener('error',onError);window.addEventListener('unhandledrejection',onError);
  function mark(name){if(finished||milestones[name])return;milestones[name]=true;state.progress=(milestones.shell?40:0)+(milestones.logo?20:0)+(milestones.criticalImage?20:0)+(milestones.route?20:0);if(state.progress===100&&readyAt===null){readyAt=performance.now();announce.textContent=tr('หน้าเว็บพร้อมแล้ว','Page ready');caption.textContent=tr('ยินดีต้อนรับ','Welcome');}}
  function criticalImage(){
@@ -4416,24 +4418,16 @@ function start({demo=false}={}){
  }
  function syncPlayback(now){
   if(state.media!=='video'||state.hold!==null||!Number.isFinite(video.duration))return;
-  if(readyAt===null){
-   const holdAt=video.duration*HOLD_FRACTION;
-   if(video.currentTime>=holdAt){video.pause();if(video.currentTime>holdAt)video.currentTime=holdAt;state.playback='waiting-for-page';}
-   return;
-  }
-  if(playbackEnded)return;
-  // Never sped up: once the page is ready the film simply carries on at its own pace.
-  
+  // always the film's own speed, from start to end, without pausing for the page
   if(video.playbackRate!==1)video.playbackRate=1;
-  if(state.playback==='waiting-for-page'){state.playback='playing';lastPlaybackAt=now;play();}
  }
  video.addEventListener('loadedmetadata',()=>{if(!finished)state.duration=video.duration;});
  video.addEventListener('loadeddata',()=>{if(!finished&&state.media==='video')mark('logo');});
  video.addEventListener('playing',()=>{if(finished||state.media!=='video')return;clearTimeout(startupTimer);state.playback='playing';lastPlaybackAt=performance.now();});
- video.addEventListener('ended',()=>{if(finished||state.media!=='video')return;if(readyAt===null){video.currentTime=video.duration*HOLD_FRACTION;video.pause();state.playback='waiting-for-page';return;}playbackEnded=true;state.playback='ended';mark('logo');});
+ video.addEventListener('ended',()=>{if(finished||state.media!=='video')return;playbackEnded=true;state.playback='ended';mark('logo');});
  video.addEventListener('error',()=>usePoster('error'));
  // A blocked request or a play() promise that never settles must not cover the shop indefinitely.
- startupTimer=setTimeout(()=>usePoster('stalled'),2500);
+ startupTimer=setTimeout(()=>usePoster('stalled'),1800);
  video.src=VIDEO;play();
  function tick(now){
   if(finished)return;state.elapsed=now-begun;
@@ -4446,13 +4440,14 @@ function start({demo=false}={}){
   }
   showValue=Math.min(state.progress,showValue+dt*.24);const display=Math.round(showValue);number.textContent=display+'%';number.setAttribute('aria-valuenow',String(display));
   overlay.dataset.timeline=String(Math.round(state.timeline));overlay.dataset.ready=String(state.progress===100);overlay.dataset.media=state.media;
-  const filmDone=playbackEnded||state.media==='video'&&video.currentTime>=COMPLETE_AT;
-  const artworkDone=filmDone&&state.elapsed>=MIN_ANIMATION||state.media==='poster'&&now-fallbackAt>=350&&state.elapsed>=MIN_ANIMATION;
-  if(artworkDone&&readyAt!==null&&state.hold===null)dismiss('ready');
+  // the film ended: the opening ends with it, ready or not
+  if(playbackEnded&&state.hold===null)dismiss('film-ended');
+  // no film could play: the poster stands in until the page is ready, and never past the film's length (the timer)
+  else if(state.media==='poster'&&readyAt!==null&&now-fallbackAt>=350&&state.hold===null)dismiss('ready');
   raf=requestAnimationFrame(tick);
  }
  raf=requestAnimationFrame(tick);
- state.seek=ms=>{state.hold=Math.max(0,Math.min((Number.isFinite(video.duration)?video.duration:4.4)*1000,Number(ms)||0));video.pause();video.currentTime=state.hold/1000;state.timeline=state.hold;};
+ state.seek=ms=>{state.hold=Math.max(0,Math.min((Number.isFinite(video.duration)?video.duration:FILM_SECONDS)*1000,Number(ms)||0));video.pause();video.currentTime=state.hold/1000;state.timeline=state.hold;};
  state.resume=()=>{state.hold=null;lastPlaybackAt=performance.now();play();};
  return state;
 }
