@@ -354,6 +354,7 @@ h4.sub-title{margin:14px 0 8px;font-size:14px}
 .calendar-controls,.earnings-controls{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px}
 .date-nav{display:flex;align-items:center;gap:4px}
 .date-label{margin:0 6px;min-width:150px;text-align:center;font-weight:600}
+@media (max-width:480px){.date-nav{width:100%}.date-label{flex:1;min-width:0;margin:0 2px}}
 .calendar-alert{margin:0 0 16px;padding:12px 14px;border:1px solid var(--rose);border-radius:var(--radius-lg);background:var(--surface)}
 .calendar-alert .sub-title{color:var(--rose)}
 .days{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
@@ -381,6 +382,63 @@ h4.sub-title{margin:14px 0 8px;font-size:14px}
 .job-meta .chip{font-size:12px;padding:1px 8px 1px 6px}
 @media (max-width:1180px){.days{grid-template-columns:repeat(auto-fill,minmax(200px,1fr))}}
 @media (max-width:640px){.days{grid-template-columns:1fr}.day-column{min-height:0}}
+
+/* month grid, laid out like the O2 dashboard's calendar: weekday columns, the date at the top of each box,
+   its handovers under it as "time · customer". Narrow screens show a dot per handover; the day list reads them. */
+.cal-key{display:flex;flex-wrap:wrap;align-items:center;gap:6px 8px;margin:0 0 12px}
+.cal-key-label{font-size:13px;font-weight:600;color:var(--ink-2);margin-right:2px}
+.cal-key .chip{font-size:12px;padding:1px 8px 1px 6px}
+.month{container:month/inline-size}
+.month-head,.month-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.month-head{margin:0 0 6px;padding:0 2px}
+.month-head span{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2)}
+.month-grid{list-style:none;margin:0;padding:0}
+.mcell{min-width:0;min-height:124px;padding:4px 5px 6px;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);display:flex;flex-direction:column;gap:3px}
+.mcell.is-out{background:transparent;border-style:dashed}
+.mcell.is-out .mcell-number{color:var(--muted)}
+.mcell.is-selected{border-color:var(--ink);box-shadow:inset 0 0 0 1px var(--ink)}
+.mcell-date{display:flex;align-items:center;gap:6px;width:100%;min-height:32px;margin:0;padding:2px 4px;border:0;border-radius:4px;background:transparent;color:inherit;font:inherit;text-align:left;cursor:pointer;transition:background-color 100ms ease-out}
+.mcell-date:hover{background:var(--paper-2)}
+.mcell-date:active{background:var(--line)}
+.mcell-number{display:inline-grid;place-items:center;min-width:26px;height:26px;padding:0 4px;border-radius:999px;font:500 16px/1 var(--font-display)}
+.mcell.is-today .mcell-number{background:var(--eucalyptus);color:var(--surface)}
+.mcell-count{margin-left:auto;font-size:12px;color:var(--muted)}
+.mcell-dots{display:none}
+.mcell-list{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:minmax(0,1fr);gap:3px;min-width:0}
+.mentry-link{display:flex;align-items:baseline;gap:6px;min-width:0;min-height:24px;padding:3px 6px;border-radius:4px;border-left:3px solid var(--control);background:var(--paper-2);text-decoration:none;font-size:12px;line-height:1.35}
+.mentry-link:hover{box-shadow:inset 0 0 0 1px var(--control)}
+.mentry-time{flex:none;font-weight:600;color:var(--ink-2)}
+.mentry-text{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mentry.tone-new .mentry-link{background:var(--heart-soft);border-left-color:var(--heart)}
+.mentry.tone-alert .mentry-link{background:var(--surface);border:1px solid var(--rose);border-left-width:3px;color:var(--rose)}
+.mentry.tone-making .mentry-link{background:var(--amber-soft);border-left-color:#c79b55}
+.mentry.tone-ready .mentry-link{background:var(--eucalyptus-soft);border-left-color:var(--eucalyptus)}
+.mentry.tone-out .mentry-link{background:var(--surface);border:1px solid var(--ink);border-left-width:3px}
+.mentry.tone-done .mentry-link,.mentry.tone-cancelled .mentry-link{background:transparent;color:var(--muted);border-left-color:var(--line)}
+.mentry.tone-cancelled .mentry-text{text-decoration:line-through}
+.mcell-more{align-self:flex-start;min-height:24px;margin:0;padding:0 6px;border:0;background:transparent;font:inherit;font-size:12px;font-weight:600;color:var(--ink-2);text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+.month-hint{display:none;margin:8px 0 0;font-size:13px;color:var(--ink-2)}
+.mdot{width:7px;height:7px;border-radius:50%;background:var(--control)}
+.mdot.tone-new{background:var(--heart)}.mdot.tone-alert{background:var(--rose)}.mdot.tone-making{background:#c79b55}
+.mdot.tone-ready{background:var(--eucalyptus)}.mdot.tone-out{background:var(--ink)}
+.mdot.tone-done,.mdot.tone-cancelled{background:transparent;border:1.5px solid var(--muted)}
+.day-agenda{margin:18px 0 0}
+.day-agenda .sub-title{display:flex;flex-wrap:wrap;align-items:baseline;gap:0 4px}
+.agenda-count{font-weight:400;color:var(--ink-2)}
+@media (pointer:coarse){.mentry-link{min-height:44px;align-items:center}.mcell-more{min-height:44px}.mcell-date{min-height:44px}}
+/* medium boxes (a laptop with the sidebar): the time above the name, so the name has the box's width */
+@container month (min-width:701px) and (max-width:979px){
+  .mentry-link{flex-direction:column;align-items:stretch;gap:0}
+}
+@container month (max-width:700px){
+  .month-head,.month-grid{gap:2px}
+  .month-head span{text-align:center;letter-spacing:.02em}
+  .mcell{min-height:0;padding:0}
+  .mcell-list,.mcell-more,.mcell-count{display:none}
+  .mcell-date{flex-direction:column;justify-content:flex-start;gap:4px;min-height:54px;padding:6px 0;border-radius:inherit;text-align:center}
+  .mcell-dots{display:flex;flex-wrap:wrap;justify-content:center;gap:3px;max-width:34px}
+  .month-hint{display:block}
+}
 
 /* ---------- earnings ---------- */
 .headline{padding:18px 20px;border-radius:var(--radius-lg);background:var(--surface);border:1px solid var(--line);margin:0 0 14px}

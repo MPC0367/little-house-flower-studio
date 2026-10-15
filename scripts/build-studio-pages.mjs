@@ -12,7 +12,7 @@ const source=path.resolve(process.argv[2]||path.join(here,'hosted-backend/public
 const out=path.join(here,'docs');
 const base='/little-house-flower-studio';
 const website='/Little-House-Flower';
-const release='studio-20261015-2';
+const release='studio-20261015-7';
 const textTypes=new Set(['.html','.css','.js','.mjs','.json','.webmanifest','.txt']);
 
 function rewrite(text,rel){

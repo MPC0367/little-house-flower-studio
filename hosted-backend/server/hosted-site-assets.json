@@ -1075,8 +1075,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/calendar.mjs": {
-    "hash": "21b680e5f990c875830cb3c1b588f2cc42b6f6137e453b7f22dbc2b6376c2441",
-    "size": 4972,
+    "hash": "a6bfba7b80d57116486737d84af10b87d9bcf52dc85acb9424d6bf21673e503c",
+    "size": 10299,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/earnings.mjs": {
@@ -1160,8 +1160,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/studio.css": {
-    "hash": "cf21e801ce126edec9a6ce7e89375b828a4c2a7a860e636ccf98a83eac28982c",
-    "size": 36278,
+    "hash": "25715fc13d32367cb3fac96c0b69bd09a9b1f9021c526d592ee12c83161c58a4",
+    "size": 41145,
     "mime": "text/css; charset=utf-8"
   },
   "/studio/sw.js": {
@@ -1170,8 +1170,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/text.mjs": {
-    "hash": "59187f1ff9c9e2fdf1c64efecd883ce4ddb5d33b37581e4963e1e3e5cf04b45b",
-    "size": 37746,
+    "hash": "96f1e54cba57e3d25ecd1abc5d075251dabcdf48f0a807cc846856402344e761",
+    "size": 38322,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/ui.mjs": {

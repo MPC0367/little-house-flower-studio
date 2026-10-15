@@ -1,11 +1,11 @@
 /* The Studio: Little House Flower's staff app. Orders first, then the production calendar and
    earnings; settings are secondary. One shared state, refreshed in the background while someone is
    using it, so every screen shows the same orders. */
-import {t,lang,setLang} from './text.mjs?v=studio-20261015-2';
-import {h,clear,icon,announce,modal,o2Credit} from './ui.mjs?v=studio-20261015-2';
-import {time,today,longDay} from './format.mjs?v=studio-20261015-2';
-import {demoSource} from './source-demo.mjs?v=studio-20261015-2';
-import {sheetSource,savedSheet,forgetSheet} from './source-sheet.mjs?v=studio-20261015-2';
+import {t,lang,setLang} from './text.mjs?v=studio-20261015-7';
+import {h,clear,icon,announce,modal,o2Credit} from './ui.mjs?v=studio-20261015-7';
+import {time,today,longDay} from './format.mjs?v=studio-20261015-7';
+import {demoSource} from './source-demo.mjs?v=studio-20261015-7';
+import {sheetSource,savedSheet,forgetSheet} from './source-sheet.mjs?v=studio-20261015-7';
 
 const ACTIVE_MS=5000,IDLE_MS=30000,IDLE_AFTER=60000,STALE_AFTER=30000,BACKOFF=[5000,10000,20000,40000,60000];
 const FILTERS_KEY='lhf.studio.filters.v1';
@@ -119,10 +119,10 @@ export function go(section,order=null){
 
 /* ---------- the shell ---------- */
 const views={
-  orders:()=>import('./orders.mjs?v=studio-20261015-2'),
-  calendar:()=>import('./calendar.mjs?v=studio-20261015-2'),
-  earnings:()=>import('./earnings.mjs?v=studio-20261015-2'),
-  settings:()=>import('./settings.mjs?v=studio-20261015-2'),
+  orders:()=>import('./orders.mjs?v=studio-20261015-7'),
+  calendar:()=>import('./calendar.mjs?v=studio-20261015-7'),
+  earnings:()=>import('./earnings.mjs?v=studio-20261015-7'),
+  settings:()=>import('./settings.mjs?v=studio-20261015-7'),
 };
 let mounted=null,mountedSection=null,shell=null;
 
@@ -218,14 +218,14 @@ async function applyRoute(){
     mounted=module.mount(host,studio);mountedSection=section;
     document.title=t('nav.'+section)+' · '+t('app.shop')+' · '+t('app.name');
   }
-  const detail=await import('./order.mjs?v=studio-20261015-2');
+  const detail=await import('./order.mjs?v=studio-20261015-7');
   if(token!==routeToken)return;
   if(order&&section!=='settings')detail.showOrder(order,section);else detail.hideOrder();
 }
 window.addEventListener('hashchange',applyRoute);
 window.addEventListener('lhf:languagechange',()=>{
   buildShell();mounted?.unmount?.();mounted=null;mountedSection=null;applyRoute();
-  import('./order.mjs?v=studio-20261015-2').then(m=>m.refreshLanguage?.());
+  import('./order.mjs?v=studio-20261015-7').then(m=>m.refreshLanguage?.());
 });
 
 /* ---------- sign-in (only when the demo server is password-protected) ---------- */

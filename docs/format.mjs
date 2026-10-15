@@ -2,7 +2,7 @@
    Money from the back end comes in two units: order amounts and payments are integer satang
    (confirmedTotal, deliveryFee, payments, revenue); catalogue line items are whole baht
    (items[].unit and items[].line). Each formatter says which one it takes. */
-import {lang} from './text.mjs?v=studio-20261015-2';
+import {lang} from './text.mjs?v=studio-20261015-7';
 
 const TZ='Asia/Bangkok';
 // Thai staff read dates in the Buddhist year (th-TH's own calendar); English in the Gregorian one

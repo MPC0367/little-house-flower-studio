@@ -1,12 +1,12 @@
 /* Settings: where the orders live and how the Studio reaches them, plus the few things a person can
    change. Connecting the shop's Google Sheet works like O2's own dashboard: the owner gives each
    person the Studio script's address and a personal key; the key stays on that person's device. */
-import {t,lang,setLang} from './text.mjs?v=studio-20261015-2';
-import {h,clear,icon,toast} from './ui.mjs?v=studio-20261015-2';
-import {moment} from './format.mjs?v=studio-20261015-2';
-import {studio,connect} from './app.mjs?v=studio-20261015-2';
-import {demoSource} from './source-demo.mjs?v=studio-20261015-2';
-import {sheetSource,saveSheet,forgetSheet,validScriptURL,savedSheet} from './source-sheet.mjs?v=studio-20261015-2';
+import {t,lang,setLang} from './text.mjs?v=studio-20261015-7';
+import {h,clear,icon,toast} from './ui.mjs?v=studio-20261015-7';
+import {moment} from './format.mjs?v=studio-20261015-7';
+import {studio,connect} from './app.mjs?v=studio-20261015-7';
+import {demoSource} from './source-demo.mjs?v=studio-20261015-7';
+import {sheetSource,saveSheet,forgetSheet,validScriptURL,savedSheet} from './source-sheet.mjs?v=studio-20261015-7';
 
 export function mount(host){
   const body=h('div.settings-body');

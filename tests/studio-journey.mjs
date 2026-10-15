@@ -92,7 +92,8 @@ await A.waitForFunction(()=>document.querySelector('h1')?.textContent==='คำ�
 ok('Thai: the whole Studio switches',(await A.locator('.sidebar').textContent()).includes('ปฏิทินงาน'));
 await A.getByRole('button',{name:'EN'}).first().click();
 // calendar, earnings, settings
-await A.goto(URL+'#calendar');await A.waitForSelector('.day-column');
+await A.goto(URL+'#calendar');await A.waitForSelector('.month-grid');   // the month grid is the first view (tests/studio-calendar.mjs)
+await A.locator('.calendar-controls .segment').nth(1).click();await A.waitForSelector('.day-column');
 ok('calendar week has 7 days',await A.locator('.day-column').count()===7);
 await A.goto(URL+'#earnings');await A.waitForSelector('.headline-value',{timeout:10000});
 ok('earnings headline',(await A.locator('.headline-label').textContent())==='Money received');

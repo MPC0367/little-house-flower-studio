@@ -6,3 +6,6 @@ node_modules/
 
 # local Google Sheet emulator state (synthetic workbook and test keys)
 .emulator/
+
+# screenshots and results from tests/github-pages-smoke.mjs
+.qa/
