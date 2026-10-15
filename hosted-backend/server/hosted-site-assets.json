@@ -950,8 +950,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/logo-intro.js": {
-    "hash": "811af1c90e3443bc39774b821d3b0943e836ce531ffd43574fc0570510176345",
-    "size": 8780,
+    "hash": "eb1c71b803f1614474e904697331313f0673fc91a73ee34b70d93b901922b41d",
+    "size": 8820,
     "mime": "text/javascript; charset=utf-8"
   },
   "/manifest.webmanifest": {
@@ -1040,8 +1040,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/shared/opening-film.js": {
-    "hash": "a164b71d8b6330bace5bbbb7130bb4e3e20c18a46691ebaf29317cf62a067e94",
-    "size": 5605,
+    "hash": "7a6dad532c413545fd54ed7fc6ba585a818076a9b52d5935d94962b83d55e974",
+    "size": 6268,
     "mime": "text/javascript; charset=utf-8"
   },
   "/shared/pricing-rules.mjs": {
@@ -1065,8 +1065,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/storefront.js": {
-    "hash": "5aa1ad5625e55aedfb5015ad5a3b49aa0e80a98e84ce3ba0fd42235e19ec24d9",
-    "size": 444067,
+    "hash": "cfc3f496f3084953df1eb0c5b868223408317bfcc56f528ac65fb47cf6d8899d",
+    "size": 444770,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/app.mjs": {
@@ -1125,8 +1125,8 @@
     "mime": "text/css; charset=utf-8"
   },
   "/studio/opening.js": {
-    "hash": "c6114b11f93bbf85479faaa817f695e1f8beeacc1db70dee03b19c632e7deda0",
-    "size": 2231,
+    "hash": "c6d2b2947927ae383897a9917077955d7d463c7a0aed8e209c28e052b63044ec",
+    "size": 2252,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/order.mjs": {

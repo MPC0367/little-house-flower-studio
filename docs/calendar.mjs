@@ -1,11 +1,11 @@
 /* The production calendar: what has to be ready, day by day, by handover window. Overdue work and
    orders without a date are listed first so nothing slips. Statuses here are the shop's record,
    not courier tracking. */
-import {t} from './text.mjs?v=studio-20261015-1';
-import {h,clear,icon,chip} from './ui.mjs?v=studio-20261015-1';
-import {today,addDays,weekStart,day,longDay,weekdayShort,dayNumber} from './format.mjs?v=studio-20261015-1';
-import {statusLabel,itemSummary,isOverdue,ACTIVE} from './model.mjs?v=studio-20261015-1';
-import {STATUS_TONE} from './orders.mjs?v=studio-20261015-1';
+import {t} from './text.mjs?v=studio-20261015-2';
+import {h,clear,icon,chip} from './ui.mjs?v=studio-20261015-2';
+import {today,addDays,weekStart,day,longDay,weekdayShort,dayNumber} from './format.mjs?v=studio-20261015-2';
+import {statusLabel,itemSummary,isOverdue,ACTIVE} from './model.mjs?v=studio-20261015-2';
+import {STATUS_TONE} from './orders.mjs?v=studio-20261015-2';
 
 const KEY='lhf.studio.calendar.v1';
 function load(){try{return {mode:'week',date:today(),showDone:false,...JSON.parse(sessionStorage.getItem(KEY)||'{}')};}catch{return {mode:'week',date:today(),showDone:false};}}

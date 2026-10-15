@@ -1,5 +1,5 @@
 /* Small building blocks for the Studio's screens: elements, icons, announcements, dialogs. */
-import {t} from './text.mjs?v=studio-20261015-1';
+import {t} from './text.mjs?v=studio-20261015-2';
 
 /** h('button.btn.primary', {onClick, type:'button', 'aria-label':…}, child, …) */
 export function h(spec,attrs,...children){

@@ -4315,9 +4315,10 @@ LHF.sink.summary=function(b){const text=originalSummary(b);return b.custom?.conf
 /* Source: /shared/opening-film.js */
 /* The opening film, shared by the website (logo-intro.js) and the Studio (studio/opening.js).
    The opening IS the supplied film, little-house-flower-loading-v5-1080p.mp4 (4.4 s, the owner's file, unchanged).
-   - It plays once, from its first frame, at its own speed: never held, slowed, sped up or looped.
-   - It is never on screen longer than the film: the cover's fade runs over the film's last, still 100% frame
-     and the cover is gone when the film ends.
+   - It plays once, from its first frame, a little faster than its own speed (SPEED, the owner's "a little faster",
+     15 Oct 2026: 4.4 s of film in about 3.5 s on screen); every frame is shown, never held, slowed or looped.
+   - It is never on screen longer than the film takes at that speed (SCREEN_MS): the cover's fade runs over the
+     film's last, still 100% frame and the cover is gone when the film ends.
    - It is never replaced by a picture. Until the film moves the cover is plain paper in the film's own colour.
      If it cannot start within START_WAIT_MS of the page being visible (a device that refuses video by itself,
      a slow network, a missing file) or stops moving, the cover closes and the page shows without an opening.
@@ -4326,9 +4327,10 @@ LHF.sink.summary=function(b){const text=originalSummary(b);return b.custom?.conf
 'use strict';
 const FILM='/media/little-house-flower-loading-v5-1080p.mp4';
 const FILM_MS=4400,START_WAIT_MS=2000,STALL_MS=1200,FADE_MS=180;
+const SPEED=1.25,SCREEN_MS=FILM_MS/SPEED;   // FILM_MS is the film's own length; SCREEN_MS the time it is on screen
 
 function configure(video){
-  video.muted=true;video.defaultMuted=true;video.playsInline=true;video.preload='auto';
+  video.muted=true;video.defaultMuted=true;video.defaultPlaybackRate=SPEED;video.playbackRate=SPEED;video.playsInline=true;video.preload='auto';
   video.autoplay=false;video.loop=false;video.controls=false;video.disablePictureInPicture=true;
   video.setAttribute('muted','');video.setAttribute('playsinline','');video.setAttribute('aria-hidden','true');video.setAttribute('tabindex','-1');
   return video;
@@ -4347,10 +4349,11 @@ function discard(){
 
 function run(stage,{onEnd}={}){
   const video=element();video.classList.add('lhf-logo-video');stage.append(video);
-  const state={playback:'waiting',reason:null,timeline:0,startDelay:null,duration:FILM_MS/1000};
+  const state={playback:'waiting',reason:null,timeline:0,startDelay:null,duration:FILM_MS/1000,speed:null};
   let over=false,began=null,startedAt=null,lastTime=-1,lastMove=0,waitTimer=null,endTimer=null,safety=null,poll=null,lastAttempt=-Infinity;
   const now=()=>performance.now();
-  const filmMs=()=>Number.isFinite(video.duration)&&video.duration>0?video.duration*1000:FILM_MS;
+  const filmMs=()=>Number.isFinite(video.duration)&&video.duration>0?video.duration*1000:FILM_MS;   // film time
+  const fadeFilm=FADE_MS*SPEED;   // the fade's length in film time
 
   function close(reason){
     if(over)return false;over=true;state.reason=reason;state.timeline=video.currentTime*1000;
@@ -4363,6 +4366,7 @@ function run(stage,{onEnd}={}){
     if(over||document.hidden)return;
     lastAttempt=now();
     let promise;
+    if(video.playbackRate!==SPEED)video.playbackRate=SPEED;   // some browsers reset it when the file loads
     try{promise=video.play();}catch(error){promise=Promise.reject(error);}
     Promise.resolve(promise).catch(error=>{
       if(over||startedAt!==null)return;
@@ -4378,14 +4382,15 @@ function run(stage,{onEnd}={}){
     const t=video.currentTime;state.timeline=t*1000;
     if(startedAt===null){
       if(t>0&&!video.paused){
-        startedAt=now()-t*1000;state.startDelay=startedAt-began;state.playback='playing';lastTime=t;lastMove=now();
+        if(video.playbackRate!==SPEED)video.playbackRate=SPEED;
+        startedAt=now()-t*1000/SPEED;state.startDelay=startedAt-began;state.playback='playing';state.speed=video.playbackRate;lastTime=t;lastMove=now();
         clearTimeout(waitTimer);
         // the wall clock agrees with the film: whatever the network does, the cover is gone when the film's length is up
-        endTimer=setTimeout(()=>end('film-length'),Math.max(0,filmMs()-FADE_MS-t*1000));
+        endTimer=setTimeout(()=>end('film-length'),Math.max(0,(filmMs()-t*1000)/SPEED-FADE_MS));
       }else if(video.paused&&video.readyState>=2&&now()-lastAttempt>250)attempt();
       return;
     }
-    if(video.ended||t*1000>=filmMs()-FADE_MS){state.playback='ended';end('film-ended');return;}
+    if(video.ended||t*1000>=filmMs()-fadeFilm){state.playback='ended';end('film-ended');return;}
     if(t!==lastTime){lastTime=t;lastMove=now();}
     else if(now()-lastMove>STALL_MS){state.playback='stalled';end('film-stalled');}
   }
@@ -4393,7 +4398,7 @@ function run(stage,{onEnd}={}){
     if(began!==null||over)return;
     began=now();
     waitTimer=setTimeout(()=>{if(startedAt===null){state.playback=video.error?'error':'not-started';end('film-not-started');}},START_WAIT_MS);
-    safety=setTimeout(()=>end('film-limit'),START_WAIT_MS+FILM_MS);
+    safety=setTimeout(()=>end('film-limit'),START_WAIT_MS+SCREEN_MS);
     poll=setInterval(check,50);
     attempt();
   }
@@ -4411,7 +4416,7 @@ function run(stage,{onEnd}={}){
   return {video,state,stop(){close('stopped');video.pause();video.removeAttribute('src');video.load();}};
 }
 
-window.LHFOpeningFilm=Object.freeze({FILM,FILM_MS,START_WAIT_MS,FADE_MS,run,discard});
+window.LHFOpeningFilm=Object.freeze({FILM,FILM_MS,SPEED,SCREEN_MS,START_WAIT_MS,FADE_MS,run,discard});
 })();
 
 ;
@@ -4449,7 +4454,7 @@ function start({demo=false}={}){
  // Homepage reloads always replay; other routes keep their once-per-session opening.
  if(!demo&&seen()&&LHF.router.parse(location.hash).path!=='/'){film.discard();return null;}
  const begun=performance.now(),milestones={shell:false,logo:false,criticalImage:false,route:false};
- const state={elapsed:0,timeline:0,progress:0,milestones,reason:null,demo,media:'video',playback:'waiting',startDelay:null,duration:film.FILM_MS/1000};
+ const state={elapsed:0,timeline:0,progress:0,milestones,reason:null,demo,media:'video',playback:'waiting',startDelay:null,speed:null,duration:film.SCREEN_MS/1000};
  const overlay=elem('div','lhf-logo-intro');overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('tabindex','-1');overlay.setAttribute('aria-label',tr('ยินดีต้อนรับสู่ลิตเติลเฮาส์ฟลาวเวอร์','Welcome to Little House Flower'));
  const stage=elem('div','lhf-logo-stage');
  // Keep the supplied artwork intact; the film's decorative percentage is not network readiness.
@@ -4466,7 +4471,7 @@ function start({demo=false}={}){
   player?.stop();
   const f=player?.state;
   state.reason=reason;state.elapsed=performance.now()-begun;
-  state.timeline=f?.timeline??0;state.playback=f?.playback??'none';state.startDelay=f?.startDelay??null;
+  state.timeline=f?.timeline??0;state.playback=f?.playback??'none';state.startDelay=f?.startDelay??null;state.speed=f?.speed??null;
   // 'video' only if the film actually moved on screen; otherwise the page opened without an opening
   state.media=f?.startDelay!=null?'video':'none';
   observer?.disconnect();criticalCleanup?.();window.removeEventListener('error',onError);window.removeEventListener('unhandledrejection',onError);overlay.remove();

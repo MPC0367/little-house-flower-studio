@@ -1,9 +1,9 @@
 /* Paper for the flower bench: a work ticket with everything needed to make and hand over an order,
    and the free message card. Built in a print-only layer; the screen is never printed. */
-import {t,pick} from './text.mjs?v=studio-20261015-1';
-import {h,clear} from './ui.mjs?v=studio-20261015-1';
-import {satang,baht,longDay,moment} from './format.mjs?v=studio-20261015-1';
-import {statusLabel,paymentLabel,designRows,occasionName,provinceName} from './model.mjs?v=studio-20261015-1';
+import {t,pick} from './text.mjs?v=studio-20261015-2';
+import {h,clear} from './ui.mjs?v=studio-20261015-2';
+import {satang,baht,longDay,moment} from './format.mjs?v=studio-20261015-2';
+import {statusLabel,paymentLabel,designRows,occasionName,provinceName} from './model.mjs?v=studio-20261015-2';
 
 function layer(kind,...children){
   let root=document.getElementById('print-root');

@@ -30,7 +30,7 @@ function start({demo=false}={}){
  // Homepage reloads always replay; other routes keep their once-per-session opening.
  if(!demo&&seen()&&LHF.router.parse(location.hash).path!=='/'){film.discard();return null;}
  const begun=performance.now(),milestones={shell:false,logo:false,criticalImage:false,route:false};
- const state={elapsed:0,timeline:0,progress:0,milestones,reason:null,demo,media:'video',playback:'waiting',startDelay:null,duration:film.FILM_MS/1000};
+ const state={elapsed:0,timeline:0,progress:0,milestones,reason:null,demo,media:'video',playback:'waiting',startDelay:null,speed:null,duration:film.SCREEN_MS/1000};
  const overlay=elem('div','lhf-logo-intro');overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('tabindex','-1');overlay.setAttribute('aria-label',tr('ยินดีต้อนรับสู่ลิตเติลเฮาส์ฟลาวเวอร์','Welcome to Little House Flower'));
  const stage=elem('div','lhf-logo-stage');
  // Keep the supplied artwork intact; the film's decorative percentage is not network readiness.
@@ -47,7 +47,7 @@ function start({demo=false}={}){
   player?.stop();
   const f=player?.state;
   state.reason=reason;state.elapsed=performance.now()-begun;
-  state.timeline=f?.timeline??0;state.playback=f?.playback??'none';state.startDelay=f?.startDelay??null;
+  state.timeline=f?.timeline??0;state.playback=f?.playback??'none';state.startDelay=f?.startDelay??null;state.speed=f?.speed??null;
   // 'video' only if the film actually moved on screen; otherwise the page opened without an opening
   state.media=f?.startDelay!=null?'video':'none';
   observer?.disconnect();criticalCleanup?.();window.removeEventListener('error',onError);window.removeEventListener('unhandledrejection',onError);overlay.remove();

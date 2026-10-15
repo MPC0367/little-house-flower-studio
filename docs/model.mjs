@@ -1,10 +1,10 @@
 /* What an order means to the Studio: its status and the steps it may take next, payment states,
    the saved views and filters of the order list, and which pictures may be shown.
    The status steps come from shared/config.mjs, the same rules the server enforces. */
-import {nextStatuses,styles,materials,finishes,palettes,ribbonLabels,sizeLabels,styleNotes} from './shared/config.mjs?v=studio-20261015-1';
-import {t,pick,lang} from './text.mjs?v=studio-20261015-1';
-import {today,addDays} from './format.mjs?v=studio-20261015-1';
-import {flowerNames,occasionNames,provinceNames} from './names.mjs?v=studio-20261015-1';
+import {nextStatuses,styles,materials,finishes,palettes,ribbonLabels,sizeLabels,styleNotes} from './shared/config.mjs?v=studio-20261015-2';
+import {t,pick,lang} from './text.mjs?v=studio-20261015-2';
+import {today,addDays} from './format.mjs?v=studio-20261015-2';
+import {flowerNames,occasionNames,provinceNames} from './names.mjs?v=studio-20261015-2';
 
 export const STATUSES=['new','confirmed','preparing','ready','out','done','cancelled','review'];
 export const ACTIVE=s=>!['done','cancelled'].includes(s);

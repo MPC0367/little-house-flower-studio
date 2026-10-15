@@ -1,11 +1,11 @@
 /* Orders: the queue to act on. Saved views and their counts are worked out from the same filtered
    list that is shown. While someone is looking, rows keep their places: new orders wait behind a
    notice, and a row whose status changed is updated where it is. */
-import {t} from './text.mjs?v=studio-20261015-1';
-import {h,clear,icon,chip} from './ui.mjs?v=studio-20261015-1';
-import {satang,day,today} from './format.mjs?v=studio-20261015-1';
-import {VIEWS,inView,matchesFilters,sortOrders,filtersActive,statusLabel,paymentLabel,itemSummary,dayTag,orderImages,ACTIVE,isOverdue} from './model.mjs?v=studio-20261015-1';
-import {go,releaseHeld} from './app.mjs?v=studio-20261015-1';
+import {t} from './text.mjs?v=studio-20261015-2';
+import {h,clear,icon,chip} from './ui.mjs?v=studio-20261015-2';
+import {satang,day,today} from './format.mjs?v=studio-20261015-2';
+import {VIEWS,inView,matchesFilters,sortOrders,filtersActive,statusLabel,paymentLabel,itemSummary,dayTag,orderImages,ACTIVE,isOverdue} from './model.mjs?v=studio-20261015-2';
+import {go,releaseHeld} from './app.mjs?v=studio-20261015-2';
 
 export const STATUS_TONE={new:'new',review:'alert',confirmed:'calm',preparing:'making',ready:'ready',out:'out',done:'done',cancelled:'cancelled'};
 export const PAY_TONE={unpaid:'quiet',['part-paid']:'making',paid:'ready',['part-refunded']:'alert',refunded:'alert'};

@@ -2,13 +2,13 @@
    Edits are made against the revision that was loaded; the server refuses a stale one (409) and
    the Studio then shows the record next to the edit and lets the person choose. Nothing is ever
    overwritten silently, and nothing is sent to a customer from here. */
-import {t,pick,lang} from './text.mjs?v=studio-20261015-1';
-import {h,clear,icon,chip,modal,askReason,toast,announce,copyText} from './ui.mjs?v=studio-20261015-1';
-import {satang,baht,parseBaht,longDay,moment,localInput,fromLocalInput} from './format.mjs?v=studio-20261015-1';
-import {statusLabel,nextSteps,canCancel,stepLabel,correctionTargets,paymentLabel,orderImages,designRows,styleNote,occasionName,provinceName} from './model.mjs?v=studio-20261015-1';
-import {STATUS_TONE,PAY_TONE} from './orders.mjs?v=studio-20261015-1';
-import {studio,go} from './app.mjs?v=studio-20261015-1';
-import {printTicket,printCard} from './print.mjs?v=studio-20261015-1';
+import {t,pick,lang} from './text.mjs?v=studio-20261015-2';
+import {h,clear,icon,chip,modal,askReason,toast,announce,copyText} from './ui.mjs?v=studio-20261015-2';
+import {satang,baht,parseBaht,longDay,moment,localInput,fromLocalInput} from './format.mjs?v=studio-20261015-2';
+import {statusLabel,nextSteps,canCancel,stepLabel,correctionTargets,paymentLabel,orderImages,designRows,styleNote,occasionName,provinceName} from './model.mjs?v=studio-20261015-2';
+import {STATUS_TONE,PAY_TONE} from './orders.mjs?v=studio-20261015-2';
+import {studio,go} from './app.mjs?v=studio-20261015-2';
+import {printTicket,printCard} from './print.mjs?v=studio-20261015-2';
 
 const EDITABLE=['notes','needsDetails','deliveryIssue'];
 let panel=null;

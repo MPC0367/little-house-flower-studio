@@ -4,7 +4,7 @@
    issued; every write is logged in the Sheet's _Activity tab.
    Requests are POSTed as text/plain (no preflight); Apps Script answers with JSON after a redirect.
    The key travels in the body, never in the address. */
-import {ApiError} from './source-demo.mjs?v=studio-20261015-1';
+import {ApiError} from './source-demo.mjs?v=studio-20261015-2';
 
 const STORE='lhf.studio.sheet.v1';
 export function savedSheet(){

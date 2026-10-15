@@ -23,7 +23,7 @@ function start(){
     player?.stop();const f=player?.state;
     overlay.remove();
     background.forEach(([el,inert])=>{if(el.isConnected)el.inert=inert;});
-    window.LHFStudioOpening={reason,elapsed:performance.now()-begun,timeline:f?.timeline??0,playback:f?.playback??'none',startDelay:f?.startDelay??null,media:f?.startDelay!=null?'video':'none'};
+    window.LHFStudioOpening={reason,elapsed:performance.now()-begun,timeline:f?.timeline??0,playback:f?.playback??'none',startDelay:f?.startDelay??null,speed:f?.speed??null,media:f?.startDelay!=null?'video':'none'};
     document.dispatchEvent(new CustomEvent('lhf:studio-opening-dismissed',{detail:window.LHFStudioOpening}));
   }
   function dismiss(reason){if(finished||dismissing)return;dismissing=true;overlay.classList.add('is-dismissing');setTimeout(()=>finish(reason),film.FADE_MS);}

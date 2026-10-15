@@ -6,6 +6,8 @@
 const {chromium,webkit,devices}=await import(process.env.LHF_PLAYWRIGHT_MODULE||'@playwright/test');
 const B=(process.env.LHF_TEST_URL||'http://127.0.0.1:5590').replace(/\/$/,'');
 const SITE=B+'/Little-House-Flower/?lang=en#/', STUDIO=B+'/little-house-flower-studio/';
+// the film (4.4 s) plays a little faster than its own speed (the owner, 15 Oct 2026): 1.25×, about 3.5 s on screen
+const SPEED=1.25,SCREEN_MS=4400/SPEED;
 const results=[];let fails=0;
 const ok=(name,cond,detail)=>{results.push((cond?'PASS ':'FAIL ')+name+(detail?'  '+detail:''));if(!cond)fails++;};
 function init({refuse=false,abortFirst=false,hidden=0}={}){
@@ -42,9 +44,9 @@ const envs=[['Chrome desktop',chromium,D],['Safari desktop',webkit,D],['Safari i
 for(const [n,t,o] of envs){
   const r=await run('home '+n,t,o,SITE,{samples:true});
   const moving=r.frames.filter(Boolean);const distinct=new Set(moving.map(f=>f.sum)).size;
-  ok(n+': film plays',r.rep?.media==='video'&&['film-ended','film-length'].includes(r.rep?.reason),JSON.stringify({reason:r.rep?.reason,media:r.rep?.media,startDelay:Math.round(r.rep?.startDelay??-1),timeline:Math.round(r.rep?.timeline??-1),cover:r.cover}));
+  ok(n+': film plays, every frame, at 1.25×',r.rep?.media==='video'&&['film-ended','film-length'].includes(r.rep?.reason)&&r.rep?.speed===SPEED&&r.rep?.timeline>=4000,JSON.stringify({reason:r.rep?.reason,media:r.rep?.media,speed:r.rep?.speed,startDelay:Math.round(r.rep?.startDelay??-1),timeline:Math.round(r.rep?.timeline??-1),cover:r.cover}));
   ok(n+': the picture changes while it plays (not a still)',distinct>=3,'film times '+moving.map(f=>f.t.toFixed(2)).join(', '));
-  ok(n+': film on screen no longer than the film',r.rep&&r.cover!=null&&r.cover-(r.rep.startDelay||0)<=4400+120,'cover '+r.cover+' ms, wait '+Math.round(r.rep?.startDelay??0)+' ms');
+  ok(n+': on screen about 3.5 s, no longer than the film at that speed',r.rep&&r.cover!=null&&r.cover-(r.rep.startDelay||0)<=SCREEN_MS+120,'cover '+r.cover+' ms, wait '+Math.round(r.rep?.startDelay??0)+' ms');
   ok(n+': no still picture, page released, no errors',r.posterImgs===0&&r.poster===0&&r.inertMain===false&&!r.overlayLeft&&r.errs.length===0,JSON.stringify({posterImgs:r.posterImgs,posterRequests:r.poster,errs:r.errs.slice(0,2)}));
   if(n==='Chrome desktop')ok('film background matches the cover (#f6f5f3)',!!moving[0]&&moving[0].corner.every((v,k)=>Math.abs(v-[246,245,243][k])<=4),'film corner rgb '+JSON.stringify(moving[0]?.corner));
 }
@@ -75,7 +77,7 @@ ok('Reduced motion: no opening and no film download',r.overlays===0&&r.mp4===0&&
 for(const [n,t,o] of [['Chrome desktop',chromium,D],['Safari iPhone',webkit,devices['iPhone 13']]]){
   r=await run('studio '+n,t,o,STUDIO,{reportVar:'studio',samples:true});
   const distinct=new Set(r.frames.filter(Boolean).map(f=>f.sum)).size;
-  ok('Studio '+n+': film plays and moves',r.rep?.media==='video'&&distinct>=3&&['film-ended','film-length'].includes(r.rep?.reason),JSON.stringify({reason:r.rep?.reason,timeline:Math.round(r.rep?.timeline??-1),startDelay:Math.round(r.rep?.startDelay??-1),cover:r.cover}));
+  ok('Studio '+n+': film plays and moves at 1.25×, about 3.5 s',r.rep?.media==='video'&&distinct>=3&&['film-ended','film-length'].includes(r.rep?.reason)&&r.rep?.speed===SPEED&&r.cover-(r.rep.startDelay||0)<=SCREEN_MS+120,JSON.stringify({reason:r.rep?.reason,speed:r.rep?.speed,timeline:Math.round(r.rep?.timeline??-1),startDelay:Math.round(r.rep?.startDelay??-1),cover:r.cover}));
   ok('Studio '+n+': Studio usable afterwards, no still, no errors',r.inertMain===false&&!r.overlayLeft&&r.posterImgs===0&&r.errs.length===0,JSON.stringify({errs:r.errs.slice(0,2)}));
 }
 r=await run('studio refused',webkit,devices['iPhone 13'],STUDIO,{reportVar:'studio',init:{refuse:true}});
