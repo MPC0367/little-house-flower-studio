@@ -136,3 +136,14 @@ export function askReason({title,body,confirmLabel,danger=false,extra=null}){
 
 /** A labelled chip for a status or payment state; colour is never the only signal. */
 export function chip(text,tone){return h('span.chip',{class:'tone-'+tone},h('span.chip-dot',{'aria-hidden':'true'}),text);}
+
+/* The O2 studio credit (assets/brand/o2-credit.html). Per the studio's rule it sits on the screens a
+   visitor sees before the Studio opens (sign-in, connection trouble), never inside the working app.
+   One name in every language; unlisted site, so noreferrer. */
+const O2_MARK="M56.99 99.51A50 50 0 0 1 33.88 2.67L38 10.97A40.84 40.84 0 0 0 52.65 90.75ZM42.27 0.6A50 50 0 0 1 66.45 97.22L62.34 88.93A40.84 40.84 0 0 0 46.59 9.31ZM157.94 74.78L148.9 74.77C147.72 72.56 147.05 70.73 145.23 68.89C138.08 61.67 125.49 63.06 119.44 70.92L118.43 72.68C116.33 76.4 116.59 78.85 116.23 82.89C113.81 83.15 109.39 83.26 107.04 82.84C106.96 80.45 106.94 77.98 107.43 75.63C109.72 64.58 119.41 55.88 130.73 55.04C140.97 54.28 151.46 58.93 156.12 68.39C157.1 70.38 158.02 72.54 157.94 74.78ZM148.84 83.59C151.04 83.14 155.75 83.23 158.04 83.51C157.97 85.63 157.24 87.64 156.34 89.53C153.35 95.79 148.24 98.9 142.26 101.9C137.63 104.22 133.19 106.96 128.53 109.23C126.42 110.25 120.74 112.92 119.24 114.34C116.45 116.97 117.29 117.47 116.13 119.2L114.32 121.49C112.04 121.8 109.41 121.77 107.13 121.51C106.19 114 111.68 108.04 117.74 104.62C124.34 100.89 131.24 97.68 137.85 93.97C143.08 91.03 146.6 89.67 148.84 83.59ZM121.53 120.51C124.54 119.99 135.15 120.36 138.93 120.36C142.92 120.36 154.81 119.99 157.91 120.49L157.85 129.51C154.88 129.77 151.82 129.6 148.83 129.59L135.02 129.59C130.67 129.59 119.91 129.95 116.29 129.48C117.52 126.27 119.99 123.58 121.53 120.51Z";
+export function o2Credit(){
+  const svg=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  svg.setAttribute('class','o2-credit__mark');svg.setAttribute('viewBox','0 0 158.1 129.7');svg.setAttribute('aria-hidden','true');svg.setAttribute('focusable','false');
+  const path=document.createElementNS('http://www.w3.org/2000/svg','path');path.setAttribute('fill','currentColor');path.setAttribute('d',O2_MARK);svg.append(path);
+  return h('a.o2-credit',{href:'https://o2-designstudio.com/',target:'_blank',rel:'noopener noreferrer',lang:'en','aria-label':'Website by O2 Design Studio (opens in a new tab)'},h('span.o2-credit__lockup',svg,'Design Studio'));
+}

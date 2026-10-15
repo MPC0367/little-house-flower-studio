@@ -1070,8 +1070,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/app.mjs": {
-    "hash": "3a2d1b6638ba07ca765dd0f682ad3b2a4fecca348b529268deec0a20644cfe4c",
-    "size": 16925,
+    "hash": "5d1f9fbc65ebaccb0cd57aa4ef692cfce29d819345d7c5184fe3e8f1120d9db4",
+    "size": 17039,
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/calendar.mjs": {
@@ -1160,8 +1160,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/studio.css": {
-    "hash": "33284f537c83f000ae178daa67971a240d3228c92b614021b34d0a6513897b4a",
-    "size": 35620,
+    "hash": "cf21e801ce126edec9a6ce7e89375b828a4c2a7a860e636ccf98a83eac28982c",
+    "size": 36278,
     "mime": "text/css; charset=utf-8"
   },
   "/studio/sw.js": {
@@ -1175,8 +1175,8 @@
     "mime": "text/javascript; charset=utf-8"
   },
   "/studio/ui.mjs": {
-    "hash": "f716c87b22b1c3845be91634db31d3a818ef4b9796f37e9efb98a2d3315ab06b",
-    "size": 8216,
+    "hash": "993f216dcbc96ffeca73e8a9a895f263117f138e91897e4df9db0dae68c88b38",
+    "size": 10349,
     "mime": "text/javascript; charset=utf-8"
   },
   "/upgrade.css": {

@@ -2,7 +2,7 @@
    earnings; settings are secondary. One shared state, refreshed in the background while someone is
    using it, so every screen shows the same orders. */
 import {t,lang,setLang} from './text.mjs';
-import {h,clear,icon,announce,modal} from './ui.mjs';
+import {h,clear,icon,announce,modal,o2Credit} from './ui.mjs';
 import {time,today,longDay} from './format.mjs';
 import {demoSource} from './source-demo.mjs';
 import {sheetSource,savedSheet,forgetSheet} from './source-sheet.mjs';
@@ -242,7 +242,7 @@ function showSignIn(){
     h('h1.signin-title',t('signin.title')),
     h('label.field-label',{for:field.id},t('signin.password')),field,error,
     h('button.btn.primary.wide',{type:'submit'},t('signin.submit')),languageSwitch());
-  clear(app,h('main.signin-page',{id:'workspace'},form));
+  clear(app,h('main.signin-page',{id:'workspace'},form,h('footer.signin-foot',o2Credit())));
   field.focus();
 }
 
@@ -264,7 +264,7 @@ async function start({useDemo=false}={}){
       clear(app,h('main.signin-page',{id:'workspace'},h('div.signin',h('span.brand-mark.large',{'aria-hidden':'true'},'LH'),
         h('h1.signin-title',t('settings.connect')),h('p.field-error',{role:'alert'},error.message),
         h('button.btn.primary.wide',{type:'button',onClick:()=>start()},t('sync.retry')),
-        h('button.btn.quiet.wide',{type:'button',onClick:()=>{forgetSheet();start({useDemo:true});}},t('settings.disconnect')),languageSwitch())));
+        h('button.btn.quiet.wide',{type:'button',onClick:()=>{forgetSheet();start({useDemo:true});}},t('settings.disconnect')),languageSwitch()),h('footer.signin-foot',o2Credit())));
       return;
     }
   }
@@ -275,7 +275,7 @@ async function start({useDemo=false}={}){
   }catch(error){
     const app=document.getElementById('app');
     clear(app,h('main.signin-page',{id:'workspace'},h('div.signin',h('span.brand-mark.large',{'aria-hidden':'true'},'LH'),h('h1.signin-title',t('orders.error')),h('p',error.message),
-      h('button.btn.primary',{type:'button',onClick:()=>start()},t('sync.retry')))));
+      h('button.btn.primary',{type:'button',onClick:()=>start()},t('sync.retry'))),h('footer.signin-foot',o2Credit())));
   }
 }
 function debounce(fn,ms){let id;return (...args)=>{clearTimeout(id);id=setTimeout(()=>fn(...args),ms);};}
